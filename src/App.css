@@ -250,3 +250,17 @@ input , textarea , select {
   background: var(--green-light);
   color: var(--green-dark);
 }
+
+/* FOOTER STYLES */
+
+Footer {
+  position: fixed,
+  bottom,
+}
+
+/* RECIPE IN PROGRESS STYLES */
+
+.checked {
+  text-decoration: line-through;
+  color:rgb(172, 172, 172)
+}
