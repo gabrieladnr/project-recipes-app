@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { Route, Switch } from 'react-router-dom';
 import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,6 +15,11 @@ function App() {
       >
         Glass
       </object>
+      <div>
+        <Switch>
+          <Route path="/" exact component={ Login } />
+        </Switch>
+      </div>
     </div>
   );
 }
