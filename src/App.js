@@ -3,6 +3,7 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
       </object>
       <div>
         <Switch>
-          <Route path="/" exact component={ Login } />
+          {/* <Route path="/" exact component={ Login } /> */}
         </Switch>
       </div>
+      <Footer />
     </div>
   );
 }
