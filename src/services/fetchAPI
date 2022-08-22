@@ -1,0 +1,13 @@
+// import { mealAPI, cocktailAPI } from "../services/fetchAPI";
+
+export async function mealAPI() {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const data = await response.json();
+  return data.meals;
+}
+
+export async function cocktailAPI() {
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  const data = await response.json();
+  return data.drinks;
+}
