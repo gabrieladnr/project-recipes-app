@@ -19,7 +19,7 @@ class Header extends Component {
   }
 
   render() {
-    const { history } = this.props;
+    const { history, searchBool, tittle } = this.props;
     const { search } = this.state;
     return (
       <header>
@@ -32,17 +32,25 @@ class Header extends Component {
             history.push('/profile');
           } }
         />
-        <h1 data-testid="page-title">Header</h1>
-        <input
-          data-testid="search-top-btn"
-          type="image"
-          value={ search }
-          src={ searchIcon }
-          alt="searchIcon"
-          onClick={ this.handleClickSearch }
-        />
+        <h1 data-testid="page-title">{tittle}</h1>
         {
-          // search && (componente search)
+          searchBool === 'true' && (
+            <>
+              <input
+                data-testid="search-top-btn"
+                type="image"
+                value={ search }
+                src={ searchIcon }
+                alt="searchIcon"
+                onClick={ this.handleClickSearch }
+              />
+              {
+                search === true && (
+                  <input type="text" data-testid="search-input" />
+                )
+              }
+            </>
+          )
         }
       </header>
     );
@@ -50,6 +58,8 @@ class Header extends Component {
 }
 
 Header.propTypes = {
+  searchBool: PropTypes.string.isRequired,
+  tittle: PropTypes.string.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
