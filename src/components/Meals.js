@@ -11,8 +11,7 @@ class Meals extends React.Component {
     disptachMealsCategory();
   }
 
-  // renderiza as primeiras 12 receitas de comida da API
-
+  // renderiza os cards das primeiras 12 receitas de comida da API
   renderMeals() {
     const { meals } = this.props;
     const maxMealsNumber = 12;
@@ -35,7 +34,7 @@ class Meals extends React.Component {
       <div>
         <h3>Food Recipes</h3>
         <FilterMeals />
-        {/* <div>{this.renderMeals()}</div> */}
+        <div>{this.renderMeals()}</div>
       </div>
     );
   }
