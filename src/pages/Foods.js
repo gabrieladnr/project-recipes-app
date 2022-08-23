@@ -26,6 +26,11 @@ class Foods extends React.Component {
                   alt="card-thumb"
                   className="thumb-card"
                 />
+                {/* o que eu pensei seria trocar essa função por renderizar Recipes aqui
+              Recipes renderiza Meals/Cocktails, que renderizam as 12 receitas
+              Recipes renderiza também FilterCocktails/FilterMeals, que renderizam os filtros por categoria
+              // o que teria que ser feito dentro do Recipes seria uma renderização condicional
+               de acordo com a rota /foods/drinks */}
               </div>
             );
           })
