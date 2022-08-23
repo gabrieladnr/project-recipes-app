@@ -23,6 +23,7 @@ class SearchBar extends React.Component {
     // console.log(response);
     if (history.location.pathname === '/drinks') {
       // adiciona o filtro ao reducer drinks e altera a rota para a devida rota.
+      // console.log(response);
       dispatchFilteredDrinks(response);
       // abaixo alteramos a rota devidamente. Quando houver 1 elemento apenas e quando não houver 1 elemento apenas
       if (response.drinks?.length === 1) {
@@ -30,6 +31,7 @@ class SearchBar extends React.Component {
       }
     } else {
       // adiciona o filtro ao reducer foods e altera a rota para a devida rota.
+      console.log(response);
       dispatchFilteredFoods(response);
       if (response.meals?.length === 1) {
         history.push(`/foods/${response.meals[0].idMeal}`);
@@ -57,6 +59,7 @@ class SearchBar extends React.Component {
   getListProducts = async () => {
     const { searchInput, filter } = this.state;
     const { history } = this.props;
+    console.log(history.location.pathname);
     switch (filter) {
     case 'ingrediente':
       if (history.location.pathname === '/drinks') {
