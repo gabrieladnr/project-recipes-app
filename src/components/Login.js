@@ -1,6 +1,5 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { connect } from 'react-redux';
 import rockGlass from '../images/rockGlass.svg';
 
 class Login extends React.Component {
@@ -106,4 +105,4 @@ Login.propTypes = {
   }).isRequired,
 };
 
-export default connect(null, null)(Login);
+export default Login;
