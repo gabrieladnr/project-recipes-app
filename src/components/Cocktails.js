@@ -14,7 +14,6 @@ class Cocktails extends React.Component {
   }
 
   // renderiza as primeiras 12 receitas de bebidas da API
-
   renderCocktails() {
     const { drinks } = this.props;
     const maxCocktailsNumber = 12;
