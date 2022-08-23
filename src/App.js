@@ -10,8 +10,8 @@ import FoodInProgress from './pages/FoodInProgress';
 import Drink from './pages/Drink';
 import DrinkInProgress from './pages/DrinkInProgress';
 import Login from './components/Login';
-import Foods from './pages/Foods';
-import Drinks from './pages/Drinks';
+import Recipes from './components/Recipes';
+import ProductDescription from './components/ProductDescription';
 
 function App() {
   return (
@@ -19,8 +19,8 @@ function App() {
       <div>
         <Switch>
           <Route path="/" exact component={ Login } />
-          <Route path="/foods" exact component={ Foods } />
-          <Route path="/drinks" exact component={ Drinks } />
+          <Route path="/foods" exact component={ Recipes } />
+          <Route path="/drinks" exact component={ Recipes } />
           <Route path="/foods/:id" component={ Food } />
           <Route path="/drinks/:id" component={ Drink } />
           <Route path="/foods/:id/in-progress" component={ FoodInProgress } />

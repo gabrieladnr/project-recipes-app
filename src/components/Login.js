@@ -93,7 +93,6 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  enterTheWallet: propTypes.func.isRequired,
   history: propTypes.shape({
     push: propTypes.func,
   }).isRequired,
