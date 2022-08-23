@@ -3,85 +3,85 @@ export const mockDrinksOne = {
     {
       strDrink: 'Mudslinger',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/hepk6h1504885554.jpg',
-      idDrink: '16041'
+      idDrink: '16041',
     },
     {
       strDrink: 'Smut',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/rx8k8e1504365812.jpg',
-      idDrink: '17141'
+      idDrink: '17141',
     },
     {
       strDrink: 'Mudslinger',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/hepk6h1504885554.jpg',
-      idDrink: '16041'
+      idDrink: '16041',
     },
     {
       strDrink: 'Smut',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/rx8k8e1504365812.jpg',
-      idDrink: '17141'
+      idDrink: '17141',
     },
     {
       strDrink: 'Mudslinger',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/hepk6h1504885554.jpg',
-      idDrink: '16041'
+      idDrink: '16041',
     },
     {
       strDrink: 'Smut',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/rx8k8e1504365812.jpg',
-      idDrink: '17141'
+      idDrink: '17141',
     },
     {
       strDrink: 'Mudslinger',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/hepk6h1504885554.jpg',
-      idDrink: '16041'
+      idDrink: '16041',
     },
     {
       strDrink: 'Smut',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/rx8k8e1504365812.jpg',
-      idDrink: '17141'
+      idDrink: '17141',
     },
     {
       strDrink: 'Mudslinger',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/hepk6h1504885554.jpg',
-      idDrink: '16041'
+      idDrink: '16041',
     },
     {
       strDrink: 'Smut',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/rx8k8e1504365812.jpg',
-      idDrink: '17141'
+      idDrink: '17141',
     },
     {
       strDrink: 'Mudslinger',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/hepk6h1504885554.jpg',
-      idDrink: '16041'
+      idDrink: '16041',
     },
     {
       strDrink: 'Smut',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/rx8k8e1504365812.jpg',
-      idDrink: '17141'
+      idDrink: '17141',
     },
     {
       strDrink: 'Mudslinger',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/hepk6h1504885554.jpg',
-      idDrink: '16041'
+      idDrink: '16041',
     },
     {
       strDrink: 'Smut',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/rx8k8e1504365812.jpg',
-      idDrink: '17141'
+      idDrink: '17141',
     },
     {
       strDrink: 'Mudslinger',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/hepk6h1504885554.jpg',
-      idDrink: '16041'
+      idDrink: '16041',
     },
     {
       strDrink: 'Smut',
       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/rx8k8e1504365812.jpg',
-      idDrink: '17141'
+      idDrink: '17141',
     },
-  ]
-}
+  ],
+};
 
 export const mockDrinksTwo = {
   drinks: [
@@ -136,10 +136,10 @@ export const mockDrinksTwo = {
       strImageSource: null,
       strImageAttribution: null,
       strCreativeCommonsConfirmed: 'No',
-      dateModified: '2016-04-28 19:24:18'
-    }
-  ]
-}
+      dateModified: '2016-04-28 19:24:18',
+    },
+  ],
+};
 
 export const mockDrinksThree = {
   drinks: [
@@ -194,7 +194,7 @@ export const mockDrinksThree = {
       strImageSource: null,
       strImageAttribution: null,
       strCreativeCommonsConfirmed: 'No',
-      dateModified: '2016-11-12 15:09:58'
+      dateModified: '2016-11-12 15:09:58',
     },
     {
       idDrink: '11987',
@@ -247,10 +247,10 @@ export const mockDrinksThree = {
       strImageSource: null,
       strImageAttribution: null,
       strCreativeCommonsConfirmed: 'No',
-      dateModified: '2016-11-12 15:06:34'
+      dateModified: '2016-11-12 15:06:34',
     },
-  ]
-}
+  ],
+};
 
 export const mockMealsOne = {
   meals: [
@@ -260,16 +260,16 @@ export const mockMealsOne = {
       strDrinkAlternate: null,
       strCategory: 'Breakfast',
       strArea: 'Canadian',
-      strInstructions: "Before you do anything, freeze your bacon slices that way when you're ready to prep, it'll be so much easier to chop!\r\n" +
-        'Wash the potatoes and cut medium dice into square pieces. To prevent any browning, place the already cut potatoes in a bowl filled with water.\r\n' +
-        'In the meantime, heat 1-2 tablespoons of oil in a large skillet over medium-high heat. Tilt the skillet so the oil spreads evenly.\r\n' +
-        'Once the oil is hot, drain the potatoes and add to the skillet. Season with salt, pepper, and Old Bay as needed.\r\n' +
-        'Cook for 10 minutes, stirring the potatoes often, until brown. If needed, add a tablespoon more of oil.\r\n' +
-        'Chop up the bacon and add to the potatoes. The bacon will start to render and the fat will begin to further cook the potatoes. Toss it up a bit! The bacon will take 5-6 minutes to crisp.\r\n' +
-        'Once the bacon is cooked, reduce the heat to medium-low, add the minced garlic and toss. Season once more. Add dried or fresh parsley. Control heat as needed.\r\n' +
-        'Let the garlic cook until fragrant, about one minute.\r\n' +
-        'Just before serving, drizzle over the maple syrup and toss. Let that cook another minute, giving the potatoes a caramelized effect.\r\n' +
-        'Serve in a warm bowl with a sunny side up egg!',
+      strInstructions: 'Before you do anything, freeze your bacon slices that way when you\'re ready to prep, it\'ll be so much easier to chop!\r\n'
+        + 'Wash the potatoes and cut medium dice into square pieces. To prevent any browning, place the already cut potatoes in a bowl filled with water.\r\n'
+        + 'In the meantime, heat 1-2 tablespoons of oil in a large skillet over medium-high heat. Tilt the skillet so the oil spreads evenly.\r\n'
+        + 'Once the oil is hot, drain the potatoes and add to the skillet. Season with salt, pepper, and Old Bay as needed.\r\n'
+        + 'Cook for 10 minutes, stirring the potatoes often, until brown. If needed, add a tablespoon more of oil.\r\n'
+        + 'Chop up the bacon and add to the potatoes. The bacon will start to render and the fat will begin to further cook the potatoes. Toss it up a bit! The bacon will take 5-6 minutes to crisp.\r\n'
+        + 'Once the bacon is cooked, reduce the heat to medium-low, add the minced garlic and toss. Season once more. Add dried or fresh parsley. Control heat as needed.\r\n'
+        + 'Let the garlic cook until fragrant, about one minute.\r\n'
+        + 'Just before serving, drizzle over the maple syrup and toss. Let that cook another minute, giving the potatoes a caramelized effect.\r\n'
+        + 'Serve in a warm bowl with a sunny side up egg!',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/1550441882.jpg',
       strTags: 'Breakfast,Brunch,',
       strYoutube: 'https://www.youtube.com/watch?v=BoD0TIO9nE4',
@@ -316,10 +316,10 @@ export const mockMealsOne = {
       strSource: 'http://www.vodkaandbiscuits.com/2014/03/06/bangin-breakfast-potatoes/',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
-    }
-  ]
-} 
+      dateModified: null,
+    },
+  ],
+};
 
 export const mockMealsTwo = {
   meals: [
@@ -329,10 +329,10 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Chicken',
       strArea: 'Thai',
-      strInstructions: 'Mix Sauce in small bowl.\r\n' +
-        'Mince garlic into wok with oil. Place over high heat, when hot, add chicken and Chinese broccoli stems, cook until chicken is light golden.\r\n' +
-        "Push to the side of the wok, crack egg in and scramble. Don't worry if it sticks to the bottom of the wok - it will char and which adds authentic flavour.\r\n" +
-        'Add noodles, Chinese broccoli leaves and sauce. Gently mix together until the noodles are stained dark and leaves are wilted. Serve immediately!',
+      strInstructions: 'Mix Sauce in small bowl.\r\n'
+        + 'Mince garlic into wok with oil. Place over high heat, when hot, add chicken and Chinese broccoli stems, cook until chicken is light golden.\r\n'
+        + 'Push to the side of the wok, crack egg in and scramble. Don\'t worry if it sticks to the bottom of the wok - it will char and which adds authentic flavour.\r\n'
+        + 'Add noodles, Chinese broccoli leaves and sauce. Gently mix together until the noodles are stained dark and leaves are wilted. Serve immediately!',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/uuuspp1468263334.jpg',
       strTags: 'Pasta',
       strYoutube: 'https://www.youtube.com/watch?v=Ohy1DELF4is',
@@ -379,7 +379,7 @@ export const mockMealsTwo = {
       strSource: null,
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52780',
@@ -387,7 +387,7 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Chicken',
       strArea: 'Unknown',
-      strInstructions: "15 minute potato gratin with chicken and bacon greens: a gratin always seems more effort and more indulgent than ordinary boiled or roasts, but it doesn't have to take 45mins, it's nice for a change and you can control the calorie content by going with full fat to low fat creme fraiche. (It's always tastes better full fat though obviously!) to serve 4: use 800g of potatoes, finely slice and boil in a pan for about 5-8 mins till firmish, not soft. Finely slice 3 onions and place in an oven dish with 2 tblsp of olive oil and 100ml of chicken stock. Cook till the onions are soft then drain the potatoes and pour onto the onions. Season and spoon over cream or creme fraiche till all is covered but not swimming. Grate Parmesan over the top then finish under the grill till nicely golden. serve with chicken and bacon, peas and spinach.",
+      strInstructions: '15 minute potato gratin with chicken and bacon greens: a gratin always seems more effort and more indulgent than ordinary boiled or roasts, but it doesn\'t have to take 45mins, it\'s nice for a change and you can control the calorie content by going with full fat to low fat creme fraiche. (It\'s always tastes better full fat though obviously!) to serve 4: use 800g of potatoes, finely slice and boil in a pan for about 5-8 mins till firmish, not soft. Finely slice 3 onions and place in an oven dish with 2 tblsp of olive oil and 100ml of chicken stock. Cook till the onions are soft then drain the potatoes and pour onto the onions. Season and spoon over cream or creme fraiche till all is covered but not swimming. Grate Parmesan over the top then finish under the grill till nicely golden. serve with chicken and bacon, peas and spinach.',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/qwrtut1468418027.jpg',
       strTags: null,
       strYoutube: 'https://www.youtube.com/watch?v=p3u8eiy3yHI',
@@ -434,7 +434,7 @@ export const mockMealsTwo = {
       strSource: 'https://www.instagram.com/p/BHxR7hYBJ6P',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52804',
@@ -442,12 +442,12 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Miscellaneous',
       strArea: 'Canadian',
-      strInstructions: 'Heat oil in a deep fryer or deep heavy skillet to 365°F (185°C).\r\n' +
-        'Warm gravy in saucepan or microwave.\r\n' +
-        'Place the fries into the hot oil, and cook until light brown, about 5 minutes.\r\n' +
-        'Remove to a paper towel lined plate to drain.\r\n' +
-        'Place the fries on a serving platter, and sprinkle the cheese over them.\r\n' +
-        'Ladle gravy over the fries and cheese, and serve immediately.',
+      strInstructions: 'Heat oil in a deep fryer or deep heavy skillet to 365°F (185°C).\r\n'
+        + 'Warm gravy in saucepan or microwave.\r\n'
+        + 'Place the fries into the hot oil, and cook until light brown, about 5 minutes.\r\n'
+        + 'Remove to a paper towel lined plate to drain.\r\n'
+        + 'Place the fries on a serving platter, and sprinkle the cheese over them.\r\n'
+        + 'Ladle gravy over the fries and cheese, and serve immediately.',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg',
       strTags: 'UnHealthy,Speciality,HangoverFood',
       strYoutube: 'https://www.youtube.com/watch?v=UVAMAoA2_WU',
@@ -494,7 +494,7 @@ export const mockMealsTwo = {
       strSource: 'http://www.food.com/recipe/real-canadian-poutine-113388',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52774',
@@ -502,10 +502,10 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Chicken',
       strArea: 'Thai',
-      strInstructions: 'Mix Sauce in small bowl.\r\n' +
-        'Mince garlic into wok with oil. Place over high heat, when hot, add chicken and Chinese broccoli stems, cook until chicken is light golden.\r\n' +
-        "Push to the side of the wok, crack egg in and scramble. Don't worry if it sticks to the bottom of the wok - it will char and which adds authentic flavour.\r\n" +
-        'Add noodles, Chinese broccoli leaves and sauce. Gently mix together until the noodles are stained dark and leaves are wilted. Serve immediately!',
+      strInstructions: 'Mix Sauce in small bowl.\r\n'
+        + 'Mince garlic into wok with oil. Place over high heat, when hot, add chicken and Chinese broccoli stems, cook until chicken is light golden.\r\n'
+        + 'Push to the side of the wok, crack egg in and scramble. Don\'t worry if it sticks to the bottom of the wok - it will char and which adds authentic flavour.\r\n'
+        + 'Add noodles, Chinese broccoli leaves and sauce. Gently mix together until the noodles are stained dark and leaves are wilted. Serve immediately!',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/uuuspp1468263334.jpg',
       strTags: 'Pasta',
       strYoutube: 'https://www.youtube.com/watch?v=Ohy1DELF4is',
@@ -552,7 +552,7 @@ export const mockMealsTwo = {
       strSource: null,
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52780',
@@ -560,7 +560,7 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Chicken',
       strArea: 'Unknown',
-      strInstructions: "15 minute potato gratin with chicken and bacon greens: a gratin always seems more effort and more indulgent than ordinary boiled or roasts, but it doesn't have to take 45mins, it's nice for a change and you can control the calorie content by going with full fat to low fat creme fraiche. (It's always tastes better full fat though obviously!) to serve 4: use 800g of potatoes, finely slice and boil in a pan for about 5-8 mins till firmish, not soft. Finely slice 3 onions and place in an oven dish with 2 tblsp of olive oil and 100ml of chicken stock. Cook till the onions are soft then drain the potatoes and pour onto the onions. Season and spoon over cream or creme fraiche till all is covered but not swimming. Grate Parmesan over the top then finish under the grill till nicely golden. serve with chicken and bacon, peas and spinach.",
+      strInstructions: '15 minute potato gratin with chicken and bacon greens: a gratin always seems more effort and more indulgent than ordinary boiled or roasts, but it doesn\'t have to take 45mins, it\'s nice for a change and you can control the calorie content by going with full fat to low fat creme fraiche. (It\'s always tastes better full fat though obviously!) to serve 4: use 800g of potatoes, finely slice and boil in a pan for about 5-8 mins till firmish, not soft. Finely slice 3 onions and place in an oven dish with 2 tblsp of olive oil and 100ml of chicken stock. Cook till the onions are soft then drain the potatoes and pour onto the onions. Season and spoon over cream or creme fraiche till all is covered but not swimming. Grate Parmesan over the top then finish under the grill till nicely golden. serve with chicken and bacon, peas and spinach.',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/qwrtut1468418027.jpg',
       strTags: null,
       strYoutube: 'https://www.youtube.com/watch?v=p3u8eiy3yHI',
@@ -607,7 +607,7 @@ export const mockMealsTwo = {
       strSource: 'https://www.instagram.com/p/BHxR7hYBJ6P',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52804',
@@ -615,12 +615,12 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Miscellaneous',
       strArea: 'Canadian',
-      strInstructions: 'Heat oil in a deep fryer or deep heavy skillet to 365°F (185°C).\r\n' +
-        'Warm gravy in saucepan or microwave.\r\n' +
-        'Place the fries into the hot oil, and cook until light brown, about 5 minutes.\r\n' +
-        'Remove to a paper towel lined plate to drain.\r\n' +
-        'Place the fries on a serving platter, and sprinkle the cheese over them.\r\n' +
-        'Ladle gravy over the fries and cheese, and serve immediately.',
+      strInstructions: 'Heat oil in a deep fryer or deep heavy skillet to 365°F (185°C).\r\n'
+        + 'Warm gravy in saucepan or microwave.\r\n'
+        + 'Place the fries into the hot oil, and cook until light brown, about 5 minutes.\r\n'
+        + 'Remove to a paper towel lined plate to drain.\r\n'
+        + 'Place the fries on a serving platter, and sprinkle the cheese over them.\r\n'
+        + 'Ladle gravy over the fries and cheese, and serve immediately.',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg',
       strTags: 'UnHealthy,Speciality,HangoverFood',
       strYoutube: 'https://www.youtube.com/watch?v=UVAMAoA2_WU',
@@ -667,7 +667,7 @@ export const mockMealsTwo = {
       strSource: 'http://www.food.com/recipe/real-canadian-poutine-113388',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52774',
@@ -675,10 +675,10 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Chicken',
       strArea: 'Thai',
-      strInstructions: 'Mix Sauce in small bowl.\r\n' +
-        'Mince garlic into wok with oil. Place over high heat, when hot, add chicken and Chinese broccoli stems, cook until chicken is light golden.\r\n' +
-        "Push to the side of the wok, crack egg in and scramble. Don't worry if it sticks to the bottom of the wok - it will char and which adds authentic flavour.\r\n" +
-        'Add noodles, Chinese broccoli leaves and sauce. Gently mix together until the noodles are stained dark and leaves are wilted. Serve immediately!',
+      strInstructions: 'Mix Sauce in small bowl.\r\n'
+        + 'Mince garlic into wok with oil. Place over high heat, when hot, add chicken and Chinese broccoli stems, cook until chicken is light golden.\r\n'
+        + 'Push to the side of the wok, crack egg in and scramble. Don\'t worry if it sticks to the bottom of the wok - it will char and which adds authentic flavour.\r\n'
+        + 'Add noodles, Chinese broccoli leaves and sauce. Gently mix together until the noodles are stained dark and leaves are wilted. Serve immediately!',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/uuuspp1468263334.jpg',
       strTags: 'Pasta',
       strYoutube: 'https://www.youtube.com/watch?v=Ohy1DELF4is',
@@ -725,7 +725,7 @@ export const mockMealsTwo = {
       strSource: null,
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52780',
@@ -733,7 +733,7 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Chicken',
       strArea: 'Unknown',
-      strInstructions: "15 minute potato gratin with chicken and bacon greens: a gratin always seems more effort and more indulgent than ordinary boiled or roasts, but it doesn't have to take 45mins, it's nice for a change and you can control the calorie content by going with full fat to low fat creme fraiche. (It's always tastes better full fat though obviously!) to serve 4: use 800g of potatoes, finely slice and boil in a pan for about 5-8 mins till firmish, not soft. Finely slice 3 onions and place in an oven dish with 2 tblsp of olive oil and 100ml of chicken stock. Cook till the onions are soft then drain the potatoes and pour onto the onions. Season and spoon over cream or creme fraiche till all is covered but not swimming. Grate Parmesan over the top then finish under the grill till nicely golden. serve with chicken and bacon, peas and spinach.",
+      strInstructions: '15 minute potato gratin with chicken and bacon greens: a gratin always seems more effort and more indulgent than ordinary boiled or roasts, but it doesn\'t have to take 45mins, it\'s nice for a change and you can control the calorie content by going with full fat to low fat creme fraiche. (It\'s always tastes better full fat though obviously!) to serve 4: use 800g of potatoes, finely slice and boil in a pan for about 5-8 mins till firmish, not soft. Finely slice 3 onions and place in an oven dish with 2 tblsp of olive oil and 100ml of chicken stock. Cook till the onions are soft then drain the potatoes and pour onto the onions. Season and spoon over cream or creme fraiche till all is covered but not swimming. Grate Parmesan over the top then finish under the grill till nicely golden. serve with chicken and bacon, peas and spinach.',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/qwrtut1468418027.jpg',
       strTags: null,
       strYoutube: 'https://www.youtube.com/watch?v=p3u8eiy3yHI',
@@ -780,7 +780,7 @@ export const mockMealsTwo = {
       strSource: 'https://www.instagram.com/p/BHxR7hYBJ6P',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52804',
@@ -788,12 +788,12 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Miscellaneous',
       strArea: 'Canadian',
-      strInstructions: 'Heat oil in a deep fryer or deep heavy skillet to 365°F (185°C).\r\n' +
-        'Warm gravy in saucepan or microwave.\r\n' +
-        'Place the fries into the hot oil, and cook until light brown, about 5 minutes.\r\n' +
-        'Remove to a paper towel lined plate to drain.\r\n' +
-        'Place the fries on a serving platter, and sprinkle the cheese over them.\r\n' +
-        'Ladle gravy over the fries and cheese, and serve immediately.',
+      strInstructions: 'Heat oil in a deep fryer or deep heavy skillet to 365°F (185°C).\r\n'
+        + 'Warm gravy in saucepan or microwave.\r\n'
+        + 'Place the fries into the hot oil, and cook until light brown, about 5 minutes.\r\n'
+        + 'Remove to a paper towel lined plate to drain.\r\n'
+        + 'Place the fries on a serving platter, and sprinkle the cheese over them.\r\n'
+        + 'Ladle gravy over the fries and cheese, and serve immediately.',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg',
       strTags: 'UnHealthy,Speciality,HangoverFood',
       strYoutube: 'https://www.youtube.com/watch?v=UVAMAoA2_WU',
@@ -840,7 +840,7 @@ export const mockMealsTwo = {
       strSource: 'http://www.food.com/recipe/real-canadian-poutine-113388',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52774',
@@ -848,10 +848,10 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Chicken',
       strArea: 'Thai',
-      strInstructions: 'Mix Sauce in small bowl.\r\n' +
-        'Mince garlic into wok with oil. Place over high heat, when hot, add chicken and Chinese broccoli stems, cook until chicken is light golden.\r\n' +
-        "Push to the side of the wok, crack egg in and scramble. Don't worry if it sticks to the bottom of the wok - it will char and which adds authentic flavour.\r\n" +
-        'Add noodles, Chinese broccoli leaves and sauce. Gently mix together until the noodles are stained dark and leaves are wilted. Serve immediately!',
+      strInstructions: 'Mix Sauce in small bowl.\r\n'
+        + 'Mince garlic into wok with oil. Place over high heat, when hot, add chicken and Chinese broccoli stems, cook until chicken is light golden.\r\n'
+        + 'Push to the side of the wok, crack egg in and scramble. Don\'t worry if it sticks to the bottom of the wok - it will char and which adds authentic flavour.\r\n'
+        + 'Add noodles, Chinese broccoli leaves and sauce. Gently mix together until the noodles are stained dark and leaves are wilted. Serve immediately!',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/uuuspp1468263334.jpg',
       strTags: 'Pasta',
       strYoutube: 'https://www.youtube.com/watch?v=Ohy1DELF4is',
@@ -898,7 +898,7 @@ export const mockMealsTwo = {
       strSource: null,
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52780',
@@ -906,7 +906,7 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Chicken',
       strArea: 'Unknown',
-      strInstructions: "15 minute potato gratin with chicken and bacon greens: a gratin always seems more effort and more indulgent than ordinary boiled or roasts, but it doesn't have to take 45mins, it's nice for a change and you can control the calorie content by going with full fat to low fat creme fraiche. (It's always tastes better full fat though obviously!) to serve 4: use 800g of potatoes, finely slice and boil in a pan for about 5-8 mins till firmish, not soft. Finely slice 3 onions and place in an oven dish with 2 tblsp of olive oil and 100ml of chicken stock. Cook till the onions are soft then drain the potatoes and pour onto the onions. Season and spoon over cream or creme fraiche till all is covered but not swimming. Grate Parmesan over the top then finish under the grill till nicely golden. serve with chicken and bacon, peas and spinach.",
+      strInstructions: '15 minute potato gratin with chicken and bacon greens: a gratin always seems more effort and more indulgent than ordinary boiled or roasts, but it doesn\'t have to take 45mins, it\'s nice for a change and you can control the calorie content by going with full fat to low fat creme fraiche. (It\'s always tastes better full fat though obviously!) to serve 4: use 800g of potatoes, finely slice and boil in a pan for about 5-8 mins till firmish, not soft. Finely slice 3 onions and place in an oven dish with 2 tblsp of olive oil and 100ml of chicken stock. Cook till the onions are soft then drain the potatoes and pour onto the onions. Season and spoon over cream or creme fraiche till all is covered but not swimming. Grate Parmesan over the top then finish under the grill till nicely golden. serve with chicken and bacon, peas and spinach.',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/qwrtut1468418027.jpg',
       strTags: null,
       strYoutube: 'https://www.youtube.com/watch?v=p3u8eiy3yHI',
@@ -953,7 +953,7 @@ export const mockMealsTwo = {
       strSource: 'https://www.instagram.com/p/BHxR7hYBJ6P',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52804',
@@ -961,12 +961,12 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Miscellaneous',
       strArea: 'Canadian',
-      strInstructions: 'Heat oil in a deep fryer or deep heavy skillet to 365°F (185°C).\r\n' +
-        'Warm gravy in saucepan or microwave.\r\n' +
-        'Place the fries into the hot oil, and cook until light brown, about 5 minutes.\r\n' +
-        'Remove to a paper towel lined plate to drain.\r\n' +
-        'Place the fries on a serving platter, and sprinkle the cheese over them.\r\n' +
-        'Ladle gravy over the fries and cheese, and serve immediately.',
+      strInstructions: 'Heat oil in a deep fryer or deep heavy skillet to 365°F (185°C).\r\n'
+        + 'Warm gravy in saucepan or microwave.\r\n'
+        + 'Place the fries into the hot oil, and cook until light brown, about 5 minutes.\r\n'
+        + 'Remove to a paper towel lined plate to drain.\r\n'
+        + 'Place the fries on a serving platter, and sprinkle the cheese over them.\r\n'
+        + 'Ladle gravy over the fries and cheese, and serve immediately.',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg',
       strTags: 'UnHealthy,Speciality,HangoverFood',
       strYoutube: 'https://www.youtube.com/watch?v=UVAMAoA2_WU',
@@ -1013,7 +1013,7 @@ export const mockMealsTwo = {
       strSource: 'http://www.food.com/recipe/real-canadian-poutine-113388',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52774',
@@ -1021,10 +1021,10 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Chicken',
       strArea: 'Thai',
-      strInstructions: 'Mix Sauce in small bowl.\r\n' +
-        'Mince garlic into wok with oil. Place over high heat, when hot, add chicken and Chinese broccoli stems, cook until chicken is light golden.\r\n' +
-        "Push to the side of the wok, crack egg in and scramble. Don't worry if it sticks to the bottom of the wok - it will char and which adds authentic flavour.\r\n" +
-        'Add noodles, Chinese broccoli leaves and sauce. Gently mix together until the noodles are stained dark and leaves are wilted. Serve immediately!',
+      strInstructions: 'Mix Sauce in small bowl.\r\n'
+        + 'Mince garlic into wok with oil. Place over high heat, when hot, add chicken and Chinese broccoli stems, cook until chicken is light golden.\r\n'
+        + 'Push to the side of the wok, crack egg in and scramble. Don\'t worry if it sticks to the bottom of the wok - it will char and which adds authentic flavour.\r\n'
+        + 'Add noodles, Chinese broccoli leaves and sauce. Gently mix together until the noodles are stained dark and leaves are wilted. Serve immediately!',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/uuuspp1468263334.jpg',
       strTags: 'Pasta',
       strYoutube: 'https://www.youtube.com/watch?v=Ohy1DELF4is',
@@ -1071,7 +1071,7 @@ export const mockMealsTwo = {
       strSource: null,
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52780',
@@ -1079,7 +1079,7 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Chicken',
       strArea: 'Unknown',
-      strInstructions: "15 minute potato gratin with chicken and bacon greens: a gratin always seems more effort and more indulgent than ordinary boiled or roasts, but it doesn't have to take 45mins, it's nice for a change and you can control the calorie content by going with full fat to low fat creme fraiche. (It's always tastes better full fat though obviously!) to serve 4: use 800g of potatoes, finely slice and boil in a pan for about 5-8 mins till firmish, not soft. Finely slice 3 onions and place in an oven dish with 2 tblsp of olive oil and 100ml of chicken stock. Cook till the onions are soft then drain the potatoes and pour onto the onions. Season and spoon over cream or creme fraiche till all is covered but not swimming. Grate Parmesan over the top then finish under the grill till nicely golden. serve with chicken and bacon, peas and spinach.",
+      strInstructions: '15 minute potato gratin with chicken and bacon greens: a gratin always seems more effort and more indulgent than ordinary boiled or roasts, but it doesn\'t have to take 45mins, it\'s nice for a change and you can control the calorie content by going with full fat to low fat creme fraiche. (It\'s always tastes better full fat though obviously!) to serve 4: use 800g of potatoes, finely slice and boil in a pan for about 5-8 mins till firmish, not soft. Finely slice 3 onions and place in an oven dish with 2 tblsp of olive oil and 100ml of chicken stock. Cook till the onions are soft then drain the potatoes and pour onto the onions. Season and spoon over cream or creme fraiche till all is covered but not swimming. Grate Parmesan over the top then finish under the grill till nicely golden. serve with chicken and bacon, peas and spinach.',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/qwrtut1468418027.jpg',
       strTags: null,
       strYoutube: 'https://www.youtube.com/watch?v=p3u8eiy3yHI',
@@ -1126,7 +1126,7 @@ export const mockMealsTwo = {
       strSource: 'https://www.instagram.com/p/BHxR7hYBJ6P',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52804',
@@ -1134,12 +1134,12 @@ export const mockMealsTwo = {
       strDrinkAlternate: null,
       strCategory: 'Miscellaneous',
       strArea: 'Canadian',
-      strInstructions: 'Heat oil in a deep fryer or deep heavy skillet to 365°F (185°C).\r\n' +
-        'Warm gravy in saucepan or microwave.\r\n' +
-        'Place the fries into the hot oil, and cook until light brown, about 5 minutes.\r\n' +
-        'Remove to a paper towel lined plate to drain.\r\n' +
-        'Place the fries on a serving platter, and sprinkle the cheese over them.\r\n' +
-        'Ladle gravy over the fries and cheese, and serve immediately.',
+      strInstructions: 'Heat oil in a deep fryer or deep heavy skillet to 365°F (185°C).\r\n'
+        + 'Warm gravy in saucepan or microwave.\r\n'
+        + 'Place the fries into the hot oil, and cook until light brown, about 5 minutes.\r\n'
+        + 'Remove to a paper towel lined plate to drain.\r\n'
+        + 'Place the fries on a serving platter, and sprinkle the cheese over them.\r\n'
+        + 'Ladle gravy over the fries and cheese, and serve immediately.',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg',
       strTags: 'UnHealthy,Speciality,HangoverFood',
       strYoutube: 'https://www.youtube.com/watch?v=UVAMAoA2_WU',
@@ -1186,10 +1186,10 @@ export const mockMealsTwo = {
       strSource: 'http://www.food.com/recipe/real-canadian-poutine-113388',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
-  ]
-}
+  ],
+};
 
 export const mockMealsThree = {
   meals: [
@@ -1199,9 +1199,9 @@ export const mockMealsThree = {
       strDrinkAlternate: null,
       strCategory: 'Dessert',
       strArea: 'French',
-      strInstructions: 'Heat the cream, chocolate and vanilla pod in a pan until the chocolate has melted. Take off the heat and allow to infuse for 10 mins, scraping the pod seeds into the cream. If using the vanilla extract, add straight away. Heat oven to 160C/fan 140C/gas 3.\r\n' +
-        'Beat yolks and sugar until pale. stir in the chocolate cream. Strain into a jug and pour into ramekins. Place in a deep roasting tray and pour boiling water halfway up the sides. Bake for 15-20 mins until just set with a wobbly centre. Chill in the fridge for at least 4 hrs.\r\n' +
-        'To serve, sprinkle some sugar on top of the brûlées and caramelise with a blowtorch or briefly under a hot grill. Leave caramel to harden, then serve.',
+      strInstructions: 'Heat the cream, chocolate and vanilla pod in a pan until the chocolate has melted. Take off the heat and allow to infuse for 10 mins, scraping the pod seeds into the cream. If using the vanilla extract, add straight away. Heat oven to 160C/fan 140C/gas 3.\r\n'
+        + 'Beat yolks and sugar until pale. stir in the chocolate cream. Strain into a jug and pour into ramekins. Place in a deep roasting tray and pour boiling water halfway up the sides. Bake for 15-20 mins until just set with a wobbly centre. Chill in the fridge for at least 4 hrs.\r\n'
+        + 'To serve, sprinkle some sugar on top of the brûlées and caramelise with a blowtorch or briefly under a hot grill. Leave caramel to harden, then serve.',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/uryqru1511798039.jpg',
       strTags: 'Desert,DinnerParty,Pudding',
       strYoutube: 'https://www.youtube.com/watch?v=LmJ0lsPLHDc',
@@ -1248,7 +1248,7 @@ export const mockMealsThree = {
       strSource: 'https://www.bbcgoodfood.com/recipes/2540/white-chocolate-crme-brle',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '52948',
@@ -1256,14 +1256,14 @@ export const mockMealsThree = {
       strDrinkAlternate: null,
       strCategory: 'Pork',
       strArea: 'Chinese',
-      strInstructions: 'Combine pork, garlic, ginger, soy sauce, sesame oil, and vegetables in a bowl.\r\n' +
-        'Separate wonton skins.\r\n' +
-        'Place a heaping teaspoon of filling in the center of the wonton.\r\n' +
-        'Brush water on 2 borders of the skin, covering 1/4 inch from the edge.\r\n' +
-        'Fold skin over to form a triangle, sealing edges.\r\n' +
-        'Pinch the two long outside points together.\r\n' +
-        'Heat oil to 450 degrees and fry 4 to 5 at a time until golden.\r\n' +
-        'Drain and serve with sauce.',
+      strInstructions: 'Combine pork, garlic, ginger, soy sauce, sesame oil, and vegetables in a bowl.\r\n'
+        + 'Separate wonton skins.\r\n'
+        + 'Place a heaping teaspoon of filling in the center of the wonton.\r\n'
+        + 'Brush water on 2 borders of the skin, covering 1/4 inch from the edge.\r\n'
+        + 'Fold skin over to form a triangle, sealing edges.\r\n'
+        + 'Pinch the two long outside points together.\r\n'
+        + 'Heat oil to 450 degrees and fry 4 to 5 at a time until golden.\r\n'
+        + 'Drain and serve with sauce.',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/1525876468.jpg',
       strTags: 'MainMeal',
       strYoutube: 'https://www.youtube.com/watch?v=9h9No18ZyCI',
@@ -1310,7 +1310,7 @@ export const mockMealsThree = {
       strSource: 'http://www.geniuskitchen.com/recipe/chinese-wontons-20235',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
+      dateModified: null,
     },
     {
       idMeal: '53062',
@@ -1318,11 +1318,11 @@ export const mockMealsThree = {
       strDrinkAlternate: null,
       strCategory: 'Dessert',
       strArea: 'Croatian',
-      strInstructions: 'Mix all the ingredients for the dough together and knead well. Cover the dough and put to rise until doubled in size which should take about 2 hours. Knock back the dough and knead lightly.\r\n' +
-        '\r\n' +
-        'Divide the dough into two equal pieces; roll each piece into an oblong about 12 inches by 8 inches. Mix the filling ingredients together and divide between the dough, spreading over each piece. Roll up the oblongs as tightly as possible to give two 12 inch sausages. Place these side by side, touching each other, on a greased baking sheet. Cover and leave to rise for about 40 minutes. Heat oven to 200ºC (425ºF). Bake for 30-35 minutes until well risen and golden brown. Bread should sound hollow when the base is tapped.\r\n' +
-        '\r\n' +
-        'Remove from oven and brush the hot bread top with milk. Sift with a generous covering of icing sugar.',
+      strInstructions: 'Mix all the ingredients for the dough together and knead well. Cover the dough and put to rise until doubled in size which should take about 2 hours. Knock back the dough and knead lightly.\r\n'
+        + '\r\n'
+        + 'Divide the dough into two equal pieces; roll each piece into an oblong about 12 inches by 8 inches. Mix the filling ingredients together and divide between the dough, spreading over each piece. Roll up the oblongs as tightly as possible to give two 12 inch sausages. Place these side by side, touching each other, on a greased baking sheet. Cover and leave to rise for about 40 minutes. Heat oven to 200ºC (425ºF). Bake for 30-35 minutes until well risen and golden brown. Bread should sound hollow when the base is tapped.\r\n'
+        + '\r\n'
+        + 'Remove from oven and brush the hot bread top with milk. Sift with a generous covering of icing sugar.',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/u9l7k81628771647.jpg',
       strTags: 'Nutty',
       strYoutube: 'https://www.youtube.com/watch?v=Q_akngSJVrQ',
@@ -1369,7 +1369,7 @@ export const mockMealsThree = {
       strSource: 'https://www.visit-croatia.co.uk/croatian-cuisine/croatian-recipes/',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
-      dateModified: null
-    }
-  ]
-}
+      dateModified: null,
+    },
+  ],
+};

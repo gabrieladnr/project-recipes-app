@@ -1,13 +1,13 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event'
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
-import { createStore } from 'redux';
 import { createMemoryHistory } from 'history';
-import rootReducer from '../redux/reducers/';
 import App from '../App';
-import { mockDrinksOne, mockDrinksTwo, mockDrinksThree, mockMealsOne, mockMealsTwo, mockMealsThree } from './searchBarMock';
+import { mockDrinksOne,
+  mockDrinksTwo, mockDrinksThree, mockMealsOne, mockMealsTwo, mockMealsThree,
+} from './searchBarMock';
 import store from '../redux/store';
 
 const renderWithRouterAndRedux = (
@@ -15,7 +15,7 @@ const renderWithRouterAndRedux = (
   path = '/',
 ) => {
   // conteudo
-  
+
   const history = createMemoryHistory({ initialEntries: [path] });
   return {
     // caralho aquatico
@@ -58,7 +58,7 @@ describe('testando o componente searchBar, teste básico no /drinks:', () => {
       json: jest.fn().mockResolvedValue(mockDrinksTwo),
     });
   });
-  
+
   test('os inputs estão sendo renderizados na tela', async () => {
     const { history } = renderWithRouterAndRedux(<App />, '/drinks');
     const search = screen.getByRole('button', { name: /search/i });
@@ -67,7 +67,7 @@ describe('testando o componente searchBar, teste básico no /drinks:', () => {
 
     await waitFor(() => {
       expect(history.location.pathname).toBe('/drinks/12518');
-    })
+    });
   });
 });
 // teste /drinks : first letter mais de 1 objeto.
@@ -78,7 +78,7 @@ describe('testando o componente searchBar, teste básico no /drinks:', () => {
       json: jest.fn().mockResolvedValue(mockDrinksThree),
     });
   });
-  
+
   test('os inputs estão sendo renderizados na tela', async () => {
     renderWithRouterAndRedux(<App />, '/drinks');
     const search = screen.getByRole('button', { name: /search/i });
@@ -96,7 +96,7 @@ describe('testando o componente searchBar, teste básico no /drinks:', () => {
       json: jest.fn().mockResolvedValue({ drinks: null }),
     });
   });
-  
+
   test('os inputs estão sendo renderizados na tela', async () => {
     renderWithRouterAndRedux(<App />, '/drinks');
     const search = screen.getByRole('button', { name: /search/i });
@@ -122,7 +122,7 @@ describe('testando o componente searchBar, teste básico no /drinks:', () => {
     fireEvent.click(search);
     await waitFor(() => {
       expect(history.location.pathname).toBe('/foods/52965');
-    })
+    });
   });
 });
 // teste /foods : name, retorno +1 objeto
@@ -132,7 +132,7 @@ describe('testando o componente searchBar, teste básico no /foods:', () => {
       json: jest.fn().mockResolvedValue(mockMealsTwo),
     });
   });
-  
+
   test('os inputs estão sendo renderizados na tela', async () => {
     renderWithRouterAndRedux(<App />, '/foods');
     const search = screen.getByRole('button', { name: /search/i });
@@ -149,7 +149,7 @@ describe('testando o componente searchBar, teste básico no /foods:', () => {
       json: jest.fn().mockResolvedValue(mockMealsThree),
     });
   });
-  
+
   test('os inputs estão sendo renderizados na tela', async () => {
     renderWithRouterAndRedux(<App />, '/foods');
     const search = screen.getByRole('button', { name: /search/i });
@@ -168,7 +168,7 @@ describe('testando o componente searchBar, teste básico no /foods:', () => {
       json: jest.fn().mockResolvedValue({ meals: null }),
     });
   });
-  
+
   test('os inputs estão sendo renderizados na tela', async () => {
     renderWithRouterAndRedux(<App />, '/foods');
     const search = screen.getByRole('button', { name: /search/i });
@@ -178,4 +178,3 @@ describe('testando o componente searchBar, teste básico no /foods:', () => {
     fireEvent.click(search);
   });
 });
-

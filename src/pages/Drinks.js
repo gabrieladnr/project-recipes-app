@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SearchBar from '../components/SearchBar';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 class Drinks extends React.Component {
   /* componentDidUpdate() {
@@ -42,6 +43,7 @@ class Drinks extends React.Component {
             );
           })
         }
+        <Footer history={ history } />
       </div>
     );
   }

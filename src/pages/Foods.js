@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import SearchBar from '../components/SearchBar';
 import './foods.css';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 class Foods extends React.Component {
   /* componentDidUpdate() {
@@ -42,6 +43,7 @@ class Foods extends React.Component {
             );
           })
         }
+        <Footer history={ history } />
       </div>
     );
   }
