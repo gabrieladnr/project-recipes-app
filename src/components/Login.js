@@ -44,8 +44,8 @@ class Login extends React.Component {
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
     const { enterTheWallet, history } = this.props;
+    history.push('/foods');
     enterTheWallet(email);
-    history.push('');
   }
 
   render() {
