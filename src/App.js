@@ -5,6 +5,9 @@ import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import Login from './components/Login';
 import Recipes from './components/Recipes';
+import Foods from './pages/Foods';
+import Drinks from './pages/Drinks';
+import ProductDescription from './components/ProductDescription';
 
 function App() {
   return (
@@ -20,11 +23,14 @@ function App() {
       <div>
         <Switch>
           {/* <Route path="/" exact component={ Login } /> */}
-          <Route path="/foods" exact component={ Recipes } />
-          {/* <Route path="/drinks" exact component={ Recipes } /> */}
+          <Route exact path="/foods" component={ Foods } />
+          <Route exact path="/drinks" component={ Drinks } />
+          <Route path="/foods/:id" component={ ProductDescription } />
+          <Route path="/drinks/:id" component={ ProductDescription } />
+          <Route path="/recipes" exact component={ Recipes } />
 
           {/* rota abixo placeholderapenas para desenvolvimento, REMOVER */}
-          <Route path="/" exact component={ Recipes } />
+          {/* <Route path="/" component={ Recipes } /> */}
         </Switch>
       </div>
     </div>
