@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SearchBar from '../components/SearchBar';
-import './foods.css';
+import '../styles/foods.css';
 
 class Foods extends React.Component {
   render() {

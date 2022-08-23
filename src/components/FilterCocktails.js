@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 class FilterCocktails extends React.Component {
   // renderiza 5 botões com as categorias de drinks
   renderFilterCocktailsCategoryButtons() {
-    const { drinks } = this.props;
+    const { cocktailCategories } = this.props;
     const maxCategoriesNumber = 5;
-    return drinks.filter((_, index) => index <= maxCategoriesNumber)
+    return cocktailCategories.filter((_, index) => index <= maxCategoriesNumber)
       .map((drink) => (
         <button
           type="button"
@@ -28,12 +28,14 @@ class FilterCocktails extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  drinks: state.cocktails.cocktails,
-});
+// const mapStateToProps = (state) => ({
+//   cocktailCategories: state.cocktails.cocktailCategories,
+// });
+
+const mapStateToProps = (state) => console.log(state);
 
 export default connect(mapStateToProps)(FilterCocktails);
 
 FilterCocktails.propTypes = {
-  drinks: propTypes.arrayOf(propTypes.shape()).isRequired,
+  cocktailCategories: propTypes.arrayOf(propTypes.shape()).isRequired,
 };
