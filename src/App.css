@@ -1,4 +1,5 @@
 /* .meals {
+>>>>>>> release-group-6
   align-items: center;
   background: #0fa36b;
   color: #464646;
@@ -15,6 +16,21 @@
   max-height: 80vh;
 }
 
+<<<<<<< HEAD
+#iceLeft {
+  animation: clink .8s infinite ease;
+  opacity: 0.6;
+  transform-origin: 36px 66px;
+}
+
+#iceRight {
+  animation: clink .8s .2s infinite ease;
+  opacity: 0.6;
+  transform-origin: 60px 78px;
+}
+
+=======
+>>>>>>> release-group-6
 .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
@@ -53,6 +69,8 @@
   }
 }
 
+<<<<<<< HEAD
+=======
 * {
   box-sizing: border-box;
   margin: 0;
@@ -215,6 +233,7 @@ input, textarea, select {
   width: 100%;
 }
 
+>>>>>>> release-group-6
 .container {
   margin: 0 auto;
   max-width: var(--max-width);
@@ -236,4 +255,21 @@ input, textarea, select {
   background: var(--green-light);
   color: var(--green-dark);
 <<<<<<< HEAD
+}
+*/
+.start-recipe-btn {
+  bottom: 0px;
+  right: 50%;
+  position: fixed;
+}
+/*
+@media screen and (max-width: 400px) {
+  main {
+    background: #0fa36b;
+    margin: 30%;
+  }
+
+  li img {
+    width: 150px;
+  }
 } */
