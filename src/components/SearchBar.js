@@ -20,19 +20,18 @@ class SearchBar extends React.Component {
     // fazendo a requisição na api
     const response = await fetch(`${url}${searchInput}`)
       .then((responseApi) => responseApi.json());
-    console.log(response);
-
+    // console.log(response);
     if (history.location.pathname === '/drinks') {
       // adiciona o filtro ao reducer drinks e altera a rota para a devida rota.
       dispatchFilteredDrinks(response);
       // abaixo alteramos a rota devidamente. Quando houver 1 elemento apenas e quando não houver 1 elemento apenas
-      if (response.drinks.length === 1) {
+      if (response.drinks?.length === 1) {
         history.push(`/drinks/${response.drinks[0].idDrink}`);
       }
     } else {
       // adiciona o filtro ao reducer foods e altera a rota para a devida rota.
       dispatchFilteredFoods(response);
-      if (response.meals.length === 1) {
+      if (response.meals?.length === 1) {
         history.push(`/foods/${response.meals[0].idMeal}`);
       }
     }
@@ -73,7 +72,7 @@ class SearchBar extends React.Component {
         // else para chamada da api para a pagina de foods
       } else this.callFetchSearch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
       break;
-    case 'primeira-letra':
+    default:
       if (searchInput.length === 1) {
         if (history.location.pathname === '/drinks') {
           // chamada da api para a pagina de drinks
@@ -82,8 +81,6 @@ class SearchBar extends React.Component {
         } else this.callFetchSearch('https://www.themealdb.com/api/json/v1/1/search.php?f=');
       } else alert('Your search must have only 1 (one) character');
       break;
-    default:
-      return 'error';
     }
   }
 

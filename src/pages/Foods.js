@@ -5,6 +5,11 @@ import SearchBar from '../components/SearchBar';
 import './foods.css';
 
 class Foods extends React.Component {
+  componentDidUpdate() {
+    const { foods } = this.props;
+    if (!foods?.length) alert('Sorry, we haven\'t found any recipes for these filters.');
+  }
+
   render() {
     const { history, foods } = this.props;
     return (
@@ -12,12 +17,15 @@ class Foods extends React.Component {
         <SearchBar history={ history } />
         {
           foods.map((foodElement, index) => {
-            console.log(foodElement);
             const { strMeal, strMealThumb } = foodElement;
             const maxCards = 12;
             if (index >= maxCards) return '';
             return (
-              <div className="card food-card" key={ `foods-${index}` }>
+              <div
+                className="card food-card"
+                key={ `foods-${index}` }
+                data-testid={ `${index}-recipe-card` }
+              >
                 foods
                 <h3 data-testid={ `${index}-card-name` }>{ strMeal }</h3>
                 <img
