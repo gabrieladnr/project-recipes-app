@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import fetchMeals, { fetchMealsCategory } from '../redux/actions';
 import FilterMeals from './FilterMeals';
+import SearchBar from './SearchBar';
 
 class Meals extends React.Component {
   componentDidMount() {
@@ -30,10 +31,13 @@ class Meals extends React.Component {
   }
 
   render() {
+    const { searchButton, history } = this.props;
     return (
       <div>
         <h3>Food Recipes</h3>
-        <FilterMeals />
+        {
+          (searchButton) ? <SearchBar history={ history } /> : <FilterMeals />
+        }
         <div>{this.renderMeals()}</div>
       </div>
     );
@@ -42,6 +46,7 @@ class Meals extends React.Component {
 
 const mapStateToProps = (state) => ({
   meals: state.meals.meals,
+  searchButton: state.header.buttonToggle,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -55,6 +60,8 @@ Meals.propTypes = {
   disptachMeals: propTypes.func.isRequired,
   disptachMealsCategory: propTypes.func.isRequired,
   meals: propTypes.arrayOf(propTypes.shape()).isRequired,
+  searchButton: propTypes.bool.isRequired,
+  history: propTypes.shape().isRequired,
 };
 
 // https://stackoverflow.com/questions/56168771/how-to-limit-for-10-results-the-array-filter

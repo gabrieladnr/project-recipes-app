@@ -1,7 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { login } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -43,9 +42,9 @@ class Login extends React.Component {
     localStorage.setItem('user', JSON.stringify(storageEmail));
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
-    const { enterTheWallet, history } = this.props;
-    enterTheWallet(email);
-    history.push('');
+    const { /* enterTheWallet, */ history } = this.props;
+    /* enterTheWallet(email); */
+    history.push('/foods');
   }
 
   render() {
@@ -94,14 +93,13 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  enterTheWallet: propTypes.func.isRequired,
   history: propTypes.shape({
     push: propTypes.func,
   }).isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  enterTheWallet: (email) => dispatch(login(email)),
+const mapDispatchToProps = (/* dispatch */) => ({
+  // enterTheWallet: (email) => dispatch(login(email)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);
