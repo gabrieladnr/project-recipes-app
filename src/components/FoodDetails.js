@@ -44,12 +44,14 @@ class FoodDetails extends React.Component {
   favoriteRecipe = () => {
     const { match: { params: { id } } } = this.props;
     const { recipe, favorite } = this.state;
+    // -----------------------------------------------------
     if (localStorage.getItem('favoriteRecipes') !== null
     && JSON.parse(localStorage.getItem('favoriteRecipes'))
       .some((item) => item.id === id)) {
       const oldFavorites = localStorage.getItem('favoriteRecipes');
       const newFavorites = JSON.parse(oldFavorites).filter((item) => item.id !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+      // -----------------------------------------------------
     } else {
       const oldFavorites = (localStorage.getItem('favoriteRecipes') !== null)
         ? localStorage.getItem('favoriteRecipes')
@@ -77,6 +79,7 @@ class FoodDetails extends React.Component {
         },
       ];
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+      // -----------------------------------------------------
     }
     this.setState({ favorite: !favorite });
   }
@@ -85,6 +88,7 @@ class FoodDetails extends React.Component {
     const { history, match: { params: { id } } } = this.props;
     const { recipe, copied, favorite, recomendation } = this.state;
     const favoriteImg = (favorite) ? blackHeartIcon : whiteHeartIcon;
+    // -----------------------------------------------------
     let btn;
     if (localStorage.getItem('doneRecipes') !== null
       && JSON.parse(localStorage.getItem('doneRecipes'))
@@ -108,13 +112,14 @@ class FoodDetails extends React.Component {
           }
         </button>);
     }
+    // -----------------------------------------------------
     const recomendList = (recomendation.length > 0)
       ? recomendation.map((item, index) => {
         const testId = `${index}-recomendation-card`;
         const maxRecomendation = 7;
         if (index < maxRecomendation) {
           return (
-            <li data-testid={ testId } key={ item.idDrink }>
+            <li data-testid={ testId } key={ index }>
               <img src={ item.strDrinkThumb } alt={ item.strDrink } />
               <h3>{item.strDrink}</h3>
             </li>
@@ -123,6 +128,7 @@ class FoodDetails extends React.Component {
         return <> </>;
       })
       : <> </>;
+    // -----------------------------------------------------
     return (
       <main>
         <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
