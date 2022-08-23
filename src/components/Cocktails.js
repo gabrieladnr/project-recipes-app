@@ -18,7 +18,7 @@ class Cocktails extends React.Component {
     const { drinks } = this.props;
     const maxCocktailsNumber = 12;
 
-    return drinks.filter((_, index) => index <= maxCocktailsNumber)
+    return drinks.filter((_, index) => index < maxCocktailsNumber)
       .map((cocktail, index) => (
         <div key={ cocktail.idDrink } data-testid={ `${index}-recipe-card` }>
           <img
