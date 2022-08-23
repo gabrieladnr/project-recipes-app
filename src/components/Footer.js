@@ -1,28 +1,31 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
+import '../styles/FooterStyle.css';
 
 export default class Footer extends Component {
   render() {
+    const { history } = this.props;
     return (
-      <div data-testid="footer" className="Footer">
+      <div data-testid="footer" className="footer">
         Footer
         <div>
-          <img src={ drinkIcon } alt="drinkImage" />
           <button
             data-testid="drinks-bottom-btn"
             type="button"
-            onClick={ push('/drinks') }
+            src={ drinkIcon }
+            onClick={ () => history.push('/drinks') }
           >
             Drinks
           </button>
         </div>
         <div>
-          <img src={ mealIcon } alt="foodImage" />
           <button
             data-testid="food-bottom-btn"
             type="button"
-            onClick={ push('/foods') }
+            src={ mealIcon }
+            onClick={ () => history.push('/foods') }
           >
             Foods
           </button>
@@ -31,3 +34,9 @@ export default class Footer extends Component {
     );
   }
 }
+
+Footer.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
