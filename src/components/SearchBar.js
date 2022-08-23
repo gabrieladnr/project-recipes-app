@@ -137,12 +137,10 @@ class SearchBar extends React.Component {
     );
   }
 }
-
 const mapDispatchToProps = (dispatch) => ({
   dispatchFilteredDrinks: (drinks) => dispatch(actionFilterDrinks(drinks)),
   dispatchFilteredFoods: (foods) => dispatch(actionFilterFoods(foods)),
 });
-
 SearchBar.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
@@ -153,5 +151,4 @@ SearchBar.propTypes = {
   dispatchFilteredDrinks: PropTypes.func.isRequired,
   dispatchFilteredFoods: PropTypes.func.isRequired,
 };
-
 export default connect(null, mapDispatchToProps)(SearchBar);

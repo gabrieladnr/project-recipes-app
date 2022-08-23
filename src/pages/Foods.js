@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SearchBar from '../components/SearchBar';
-import './foods.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import '../styles/foods.css';
 
 class Foods extends React.Component {
   /* componentDidUpdate() {
@@ -44,6 +44,7 @@ class Foods extends React.Component {
           })
         }
         <Footer history={ history } />
+
       </div>
     );
   }
@@ -52,12 +53,14 @@ class Foods extends React.Component {
 const mapStateToProps = (store) => ({
   foods: store.foods.filteredFoods.meals,
   searchButton: store.header.buttonToggle,
+
 });
 
 Foods.propTypes = {
   history: PropTypes.shape().isRequired,
   foods: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   searchButton: PropTypes.bool.isRequired,
+
 };
 
 export default connect(mapStateToProps, null)(Foods);

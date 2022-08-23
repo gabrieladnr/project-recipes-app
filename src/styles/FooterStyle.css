@@ -1,13 +1,11 @@
 /* FOOTER STYLES */
-
 .footer {
+  bottom: 0;
   position: fixed;
-  bottom: 0px;
 }
 
 /* RECIPE IN PROGRESS STYLES */
-
 .checked {
+  color: rgb(172, 172, 172);
   text-decoration: line-through;
-  color:rgb(172, 172, 172)
 }
