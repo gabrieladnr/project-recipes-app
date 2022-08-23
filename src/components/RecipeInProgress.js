@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 
 export default class RecipeInProgress extends Component {
-  // para 'riscar' a palavra, inserir o style - textDecoration = "line-through"
   constructor() {
     super();
     this.state = {
@@ -114,11 +113,6 @@ export default class RecipeInProgress extends Component {
                       {`${displayedIngridients[measure]} 
                       ${displayedIngridients[ingredient]}`}
                     </label>
-                  // <li
-                  //   data-testid={ testid }
-                  //   key={ index }
-                  // >
-                  // </li>
                   );
                 })
             }
