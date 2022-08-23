@@ -1,4 +1,4 @@
-import { MEALS, COCKTAILS, COCKTAILS_CATEGORIES } from './actionTypes';
+import { MEALS, COCKTAILS, COCKTAILS_CATEGORIES, MEALS_CATEGORIES } from './actionTypes';
 
 // action type API de receitas de comidas
 const mealAction = (meals) => ({
@@ -45,6 +45,22 @@ export function fetchCocktailsCategory() {
     .then((categoriesResponse) => {
       const { drinks } = categoriesResponse;
       return dispatch(cocktailsCategoryAction(drinks));
+    });
+}
+
+// action type API de categorias de comidas
+const mealsMealsAction = (mealsCategories) => ({
+  type: MEALS_CATEGORIES,
+  payload: mealsCategories,
+});
+
+// action fetch API de categorias de comidas
+export function fetchMealsCategory() {
+  return (dispatch) => fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
+    .then((response) => response.json())
+    .then((categoriesResponse) => {
+      const { meals } = categoriesResponse;
+      return dispatch(mealsMealsAction(meals));
     });
 }
 

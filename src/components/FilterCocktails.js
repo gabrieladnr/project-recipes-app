@@ -28,11 +28,12 @@ class FilterCocktails extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   cocktailCategories: state.cocktails.cocktailCategories,
-// });
-
-const mapStateToProps = (state) => console.log(state);
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    cocktailCategories: state.cocktails.cocktailCategories,
+  };
+};
 
 export default connect(mapStateToProps)(FilterCocktails);
 

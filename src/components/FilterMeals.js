@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 class FilterMeals extends React.Component {
   // renderiza 5 botões com as categorias de comidas
   renderFilterMealCategoryButtons() {
-    const { meals } = this.props;
+    const { mealsCategories } = this.props;
     const maxCategoriesNumber = 5;
-    return meals.filter((_, index) => index <= maxCategoriesNumber)
+    return mealsCategories.filter((_, index) => index <= maxCategoriesNumber)
       .map((meal) => (
         <button
           type="button"
@@ -29,11 +29,12 @@ class FilterMeals extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  meals: state.meals.meals,
+  mealsCategories: state.meals.mealsCategories,
 });
 
 export default connect(mapStateToProps)(FilterMeals);
 
 FilterMeals.propTypes = {
-  meals: propTypes.arrayOf(propTypes.shape()).isRequired,
+  mealsCategories: propTypes.arrayOf(propTypes.shape()).isRequired,
+
 };

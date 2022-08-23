@@ -1,13 +1,14 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import fetchMeals from '../redux/actions';
+import fetchMeals, { fetchMealsCategory } from '../redux/actions';
 import FilterMeals from './FilterMeals';
 
 class Meals extends React.Component {
   componentDidMount() {
-    const { disptachMeals } = this.props;
+    const { disptachMeals, disptachMealsCategory } = this.props;
     disptachMeals();
+    disptachMealsCategory();
   }
 
   // renderiza as primeiras 12 receitas de comida da API
@@ -46,12 +47,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   disptachMeals: () => dispatch(fetchMeals()),
+  disptachMealsCategory: () => dispatch(fetchMealsCategory()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Meals);
 
 Meals.propTypes = {
   disptachMeals: propTypes.func.isRequired,
+  disptachMealsCategory: propTypes.func.isRequired,
   meals: propTypes.arrayOf(propTypes.shape()).isRequired,
 };
 
