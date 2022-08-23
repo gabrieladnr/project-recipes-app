@@ -1,32 +1,33 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
-import Drinks from '../pages/Drinks';
+import renderWithRouter from './helpers/renderWithRouterAndRedux';
+import Recipes from '../components/Recipes';
 
 describe('Testa o Header', () => {
-  const history = createMemoryHistory({ initialEntries: ['/'] });
+  const history = createMemoryHistory({ initialEntries: ['/foods'] });
 
-  test('Testa se o o Header tem um título', () => {
-    render(
+  test('Testa se o Header aparece um título', () => {
+    renderWithRouter(
       <Router history={ history }>
-        <Drinks history={ history } />
+        <Recipes history={ history } />
       </Router>,
     );
 
     const idTittle = screen.getByTestId('page-title');
-    const tittle = screen.getByText(/Drinks/i);
-    expect(tittle).toBeInTheDocument();
     expect(idTittle).toBeInTheDocument();
+    expect(idTittle.textContent).toBe('Foods');
   });
 
   test('Testa se o Header tem os icones', () => {
-    render(
+    renderWithRouter(
       <Router history={ history }>
-        <Drinks history={ history } />
+        <Recipes history={ history } />
       </Router>,
     );
+
     const idProfile = screen.getByTestId('profile-top-btn');
     const idSearch = screen.getByTestId('search-top-btn');
     expect(idProfile).toBeInTheDocument();
@@ -34,10 +35,10 @@ describe('Testa o Header', () => {
   });
 
   test('Testa se ao clicar no icone do profile, ele direciona para o profile',
-    async () => {
-      render(
+    () => {
+      renderWithRouter(
         <Router history={ history }>
-          <Drinks history={ history } />
+          <Recipes history={ history } />
         </Router>,
       );
 
@@ -48,12 +49,14 @@ describe('Testa o Header', () => {
 
   test(`Testa se ao clicar no icone do Search, aparece o input de pesquisa e ao clicar
 duas vezes, o input de pesquisa some`, () => {
-    render(
-      <Router history={ history }>
-        <Drinks history={ history } />
+    const history2 = createMemoryHistory({ initialEntries: ['/foods'] });
+    renderWithRouter(
+      <Router history={ history2 }>
+        <Recipes history={ history2 } />
       </Router>,
     );
     const idSearch = screen.getByTestId('search-top-btn');
+    expect(idSearch).toBeInTheDocument();
     userEvent.click(idSearch);
     const inputSearch = screen.getByTestId('search-input');
     expect(inputSearch).toBeInTheDocument();
