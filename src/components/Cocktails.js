@@ -1,14 +1,15 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchCocktails } from '../redux/actions';
-import '../pages/foods.css';
+import { fetchCocktails, fetchCocktailsCategory } from '../redux/actions';
+import '../styles/foods.css';
 import FilterCocktails from './FilterCocktails';
 
 class Cocktails extends React.Component {
   componentDidMount() {
-    const { disptachCocktails } = this.props;
+    const { disptachCocktails, disptachCocktailsCategory } = this.props;
     disptachCocktails();
+    disptachCocktailsCategory();
   }
 
   // renderiza as primeiras 12 receitas de bebidas da API
@@ -47,12 +48,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   disptachCocktails: () => dispatch(fetchCocktails()),
+  disptachCocktailsCategory: () => dispatch(fetchCocktailsCategory()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cocktails);
 
 Cocktails.propTypes = {
   disptachCocktails: propTypes.func.isRequired,
+  disptachCocktailsCategory: propTypes.func.isRequired,
   drinks: propTypes.arrayOf(propTypes.shape()).isRequired,
 };
 
