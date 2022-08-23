@@ -3,6 +3,13 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class FilterCocktails extends React.Component {
+  // implementa o filtro por categoria ao clicar no botão de categoria,
+  // renderizando no click 12 receitas da categoria
+
+  // handleCategoryButtonClick() {
+
+  // }
+
   // renderiza 5 botões com as categorias de drinks
   renderFilterCocktailsCategoryButtons() {
     const { cocktailCategories } = this.props;
@@ -13,7 +20,7 @@ class FilterCocktails extends React.Component {
           type="button"
           key={ drink.strCategory }
           data-testid={ `${drink.strCategory}-category-filter` }
-        // onClick={}
+          // onClick={ this.handleCategoryButtonClick() }
         >
           { drink.strCategory}
         </button>));
