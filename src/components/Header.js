@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import { searchButtonToggle } from '../redux/actions/headerActions';
 
 class Header extends Component {
-  constructor() {
-    super();
-    this.state = {
-      search: false,
-    };
-  }
-
-  handleClickSearch = ({ target }) => {
-    const value = target.value === 'true';
-    this.setState({
-      search: !value,
-    });
+  handleClickSearch = () => {
+    const { searchToggle } = this.props;
+    searchToggle();
   }
 
   render() {
     const { history, searchBool, tittle } = this.props;
-    const { search } = this.state;
     return (
       <header>
         <input
@@ -35,21 +27,13 @@ class Header extends Component {
         <h1 data-testid="page-title">{tittle}</h1>
         {
           searchBool === 'true' && (
-            <>
-              <input
-                data-testid="search-top-btn"
-                type="image"
-                value={ search }
-                src={ searchIcon }
-                alt="searchIcon"
-                onClick={ this.handleClickSearch }
-              />
-              {
-                search === true && (
-                  <input type="text" data-testid="search-input" />
-                )
-              }
-            </>
+            <input
+              data-testid="search-top-btn"
+              type="image"
+              src={ searchIcon }
+              alt="searchIcon"
+              onClick={ this.handleClickSearch }
+            />
           )
         }
       </header>
@@ -57,7 +41,12 @@ class Header extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  searchToggle: () => dispatch(searchButtonToggle()),
+});
+
 Header.propTypes = {
+  searchToggle: PropTypes.func.isRequired,
   searchBool: PropTypes.string.isRequired,
   tittle: PropTypes.string.isRequired,
   history: PropTypes.shape({
@@ -65,4 +54,4 @@ Header.propTypes = {
   }).isRequired,
 };
 
-export default Header;
+export default connect(null, mapDispatchToProps)(Header);
