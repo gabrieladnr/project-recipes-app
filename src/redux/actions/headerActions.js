@@ -1,4 +1,8 @@
-import { FILTERED_DRINKS, FILTERED_FOODS } from './actionTypes';
+import { BUTTON_TOGGLE, FILTERED_DRINKS, FILTERED_FOODS } from './actionTypes';
+
+export const searchButtonToggle = () => ({
+  type: BUTTON_TOGGLE,
+});
 
 export const actionFilterDrinks = (drinks) => ({
   type: FILTERED_DRINKS,

@@ -88,9 +88,6 @@ class SearchBar extends React.Component {
     const { searchInput, disabled } = this.state;
     return (
       <div className="search-bar">
-        <button type="button" data-testid="search-top-btn">
-          Pesquisar
-        </button>
         <input
           type="text"
           data-testid="search-input"
