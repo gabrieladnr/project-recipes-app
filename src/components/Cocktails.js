@@ -36,7 +36,7 @@ class Cocktails extends React.Component {
       <div>
         <h3>Cocktail Recipes</h3>
         <FilterCocktails />
-        {/* <div>{this.renderCocktails()}</div> */}
+        <div>{this.renderCocktails()}</div>
       </div>
     );
   }
