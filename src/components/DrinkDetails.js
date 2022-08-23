@@ -166,7 +166,7 @@ class DrinkDetails extends React.Component {
               type="button"
               data-testid="share-btn"
               onClick={ () => {
-                copy(history.location.pathname);
+                copy(`http://localhost:3000${history.location.pathname}`);
                 this.setState({
                   copied: true,
                 });
