@@ -12,13 +12,6 @@ class FilterMeals extends React.Component {
     };
   }
 
-  // altera o estado para que quando a tela abre exibam 12 receitas
-  componentDidMount() {
-    const { filterAll } = this.state;
-    this.setState({ filterAll: true });
-    console.log(`montou o componente, e renderiza as 12 receitas ${filterAll}`);
-  }
-
   // implementa o filtro All ao clicar no botão All
   // altera o estado local para remover filtro de categoria
   handleAllButtonClick = () => {
