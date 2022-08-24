@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   mealsCategories: [],
 };
 
-// reducer da requisição a API de receitas de comidas
+// reducer das requisições a APIs comidas
 const mealsReducer = (state = INITIAL_STATE, action) => {
   const { payload, type } = action;
   switch (type) {
