@@ -6,35 +6,34 @@ class FilterCocktails extends React.Component {
   constructor() {
     super();
     this.state = {
-      filterOn: false, // controla se o botão de filtro por categoria foi clicado, para renderizar as receitas filtradas
-      filterAll: false, // controla se o botão de All foi clicado, para renderizar todas as receitas
+      filterToggle: true, // controla se será exibido filtro por categoria ou All, sendo true == all, e false == filtro de cateogria;
       drinksFilteredByCategory: [], // array de receitas filtradas por categoria retornado da API
+      activeFilter: '', // controla qual filtro está sendo exibido
     };
   }
 
-  // altera o estado para que quando a tela abre exibam 12 receitas
-  componentDidMount() {
-    this.setState({ filterAll: true });
-  }
-
   // implementa o filtro All ao clicar no botão All
-  // altera o estado local
+  // altera o estado local para remover filtro de categoria
   handleAllButtonClick = () => {
-    console.log('clicou');
-    this.setState({ filterAll: true });
-    this.setState({ filterOn: false });
+    this.setState({ filterToggle: true });
+    this.setState({ activeFilter: '' });
   }
 
   // implementa o filtro por categoria ao clicar no botão de categoria,
   // renderizando no click 12 receitas da categoria
   handleCategoryButtonClick = async (category) => {
-    this.setState({ filterOn: true });
-    const response = await fetch(`${'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c='}${category}`)
-      .then((responseDrinksInCategory) => responseDrinksInCategory.json());
+    const { activeFilter } = this.state;
+    if (category === activeFilter) {
+      this.setState({ filterToggle: true });
+    } else {
+      this.setState({ filterToggle: false });
+      const response = await fetch(`${'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c='}${category}`)
+        .then((responseDrinksInCategory) => responseDrinksInCategory.json());
 
-    const drinksFilteredByCategory = response.drinks;
-    this.setState({ drinksFilteredByCategory: [...drinksFilteredByCategory] });
-    this.setState({ filterAll: false });
+      const drinksFilteredByCategory = response.drinks;
+      this.setState({ drinksFilteredByCategory: [...drinksFilteredByCategory] });
+      this.setState({ activeFilter: category });
+    }
   }
 
   // renderiza os cards das primeiras 12 receitas de drinks da API de todas as receitas
@@ -90,7 +89,7 @@ class FilterCocktails extends React.Component {
   }
 
   render() {
-    const { filterOn, filterAll } = this.state;
+    const { filterToggle } = this.state;
     return (
       <div>
         { this.renderFilterCocktailsCategoryButtons() }
@@ -102,8 +101,8 @@ class FilterCocktails extends React.Component {
         >
           All
         </button>
-        { filterOn && this.renderDrinksFilteredByCategory() }
-        { console.log(filterAll) && renderAllDrinks() }
+        { !filterToggle && this.renderDrinksFilteredByCategory() }
+        { filterToggle && this.renderAllDrinks() }
       </div>
     );
   }

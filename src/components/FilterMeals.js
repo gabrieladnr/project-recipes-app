@@ -6,9 +6,9 @@ class FilterMeals extends React.Component {
   constructor() {
     super();
     this.state = {
-      filterOn: false, // controla se o botão de filtro por categoria foi clicado, para renderizar as receitas filtradas
-      filterAll: false, // controla se o botão de All foi clicado, para renderizar todas as receitas
+      filterToggle: true, // controla se será exibido filtro por categoria ou All, sendo true == all, e false == filtro de cateogria;
       mealsFilteredByCategory: [], // array de receitas filtradas por categoria retornado da API
+      activeFilter: '', // controla qual filtro está sendo exibido
     };
   }
 
@@ -20,25 +20,27 @@ class FilterMeals extends React.Component {
   }
 
   // implementa o filtro All ao clicar no botão All
-  // altera o estado local
+  // altera o estado local para remover filtro de categoria
   handleAllButtonClick = () => {
-    // const { meals } = this.props;
-    // const { filterAll } = this.state;
-    // console.log(`clicou em all, que possui agora o valor ${filterAll}`);
-    this.setState({ filterAll: true });
-    this.setState({ filterOn: false });
+    this.setState({ filterToggle: true });
+    this.setState({ activeFilter: '' });
   }
 
   // implementa o filtro por categoria ao clicar no botão de categoria,
   // altera o estado local
   handleCategoryButtonClick = async (category) => {
-    this.setState({ filterOn: true });
-    const response = await fetch(`${'https://www.themealdb.com/api/json/v1/1/filter.php?c='}${category}`)
-      .then((responseMealsInCategory) => responseMealsInCategory.json());
+    const { activeFilter } = this.state;
+    if (category === activeFilter) {
+      this.setState({ filterToggle: true });
+    } else {
+      this.setState({ filterToggle: false });
+      const response = await fetch(`${'https://www.themealdb.com/api/json/v1/1/filter.php?c='}${category}`)
+        .then((responseMealsInCategory) => responseMealsInCategory.json());
 
-    const mealsFilteredByCategory = response.meals;
-    this.setState({ mealsFilteredByCategory: [...mealsFilteredByCategory] });
-    this.setState({ filterAll: false });
+      const mealsFilteredByCategory = response.meals;
+      this.setState({ mealsFilteredByCategory: [...mealsFilteredByCategory] });
+      this.setState({ activeFilter: category });
+    }
   }
 
   // renderiza os cards das primeiras 12 receitas de comida da API de todas as receitas
@@ -99,7 +101,7 @@ class FilterMeals extends React.Component {
   }
 
   render() {
-    const { filterOn, filterAll } = this.state;
+    const { filterToggle } = this.state;
     return (
       <div>
         { this.renderFilterMealCategoryButtons() }
@@ -111,8 +113,8 @@ class FilterMeals extends React.Component {
         >
           All
         </button>
-        { filterOn && this.renderMealFilteredByCategory() }
-        { filterAll && this.renderAllMeals() }
+        { !filterToggle && this.renderMealFilteredByCategory() }
+        { filterToggle && this.renderAllMeals() }
       </div>
     );
   }
