@@ -7,16 +7,27 @@ class FilterMeals extends React.Component {
     super();
     this.state = {
       filterOn: false, // controla se o botão de filtro por categoria foi clicado, para renderizar as receitas filtradas
-      // filterAll: false, // controla se o botão de All foi clicado, para renderizar todas as receitas
+      filterAll: false, // controla se o botão de All foi clicado, para renderizar todas as receitas
       mealsFilteredByCategory: [], // array de receitas filtradas por categoria retornado da API
     };
   }
 
+  // altera o estado para que quando a tela abre exibam 12 receitas
+  componentDidMount() {
+    const { filterAll } = this.state;
+    this.setState({ filterAll: true });
+    console.log(`montou o componente, e renderiza as 12 receitas ${filterAll}`);
+  }
+
   // implementa o filtro All ao clicar no botão All
   // altera o estado local
-  // handleAllButtonClick() {
-  //   this.setState({ filterAll: true });
-  // }
+  handleAllButtonClick = () => {
+    // const { meals } = this.props;
+    // const { filterAll } = this.state;
+    // console.log(`clicou em all, que possui agora o valor ${filterAll}`);
+    this.setState({ filterAll: true });
+    this.setState({ filterOn: false });
+  }
 
   // implementa o filtro por categoria ao clicar no botão de categoria,
   // altera o estado local
@@ -27,6 +38,25 @@ class FilterMeals extends React.Component {
 
     const mealsFilteredByCategory = response.meals;
     this.setState({ mealsFilteredByCategory: [...mealsFilteredByCategory] });
+    this.setState({ filterAll: false });
+  }
+
+  // renderiza os cards das primeiras 12 receitas de comida da API de todas as receitas
+  renderAllMeals() {
+    const { meals } = this.props;
+    const maxMealsNumber = 12;
+
+    return meals.filter((_, index) => index < maxMealsNumber)
+      .map((meal, index) => (
+        <div key={ meal.idMeal } data-testid={ `${index}-recipe-card` }>
+          <img
+            src={ meal.strMealThumb }
+            data-testid={ `${index}-card-img` }
+            alt="card-thumb"
+            className="thumb-card"
+          />
+          <p data-testid={ `${index}-card-name` }>{ meal.strMeal }</p>
+        </div>));
   }
 
   // renderiza no click até 12 receitas da categoria
@@ -34,7 +64,7 @@ class FilterMeals extends React.Component {
     const maxMealsNumber = 12;
     const { mealsFilteredByCategory } = this.state;
 
-    return mealsFilteredByCategory.filter((_, index) => index <= maxMealsNumber)
+    return mealsFilteredByCategory.filter((_, index) => index < maxMealsNumber)
       .map((meal, index) => (
         <div key={ index } data-testid={ `${index}-recipe-card` }>
           <img
@@ -52,7 +82,7 @@ class FilterMeals extends React.Component {
     const { mealsCategories } = this.props;
     // const { categories } = this.state;
     const maxCategoriesNumber = 5;
-    return mealsCategories.filter((_, index) => index <= maxCategoriesNumber)
+    return mealsCategories.filter((_, index) => index < maxCategoriesNumber)
       .map((meal) => (
         <div key={ meal.strCategory }>
           <button
@@ -69,7 +99,7 @@ class FilterMeals extends React.Component {
   }
 
   render() {
-    const { filterOn } = this.state;
+    const { filterOn, filterAll } = this.state;
     return (
       <div>
         { this.renderFilterMealCategoryButtons() }
@@ -82,7 +112,7 @@ class FilterMeals extends React.Component {
           All
         </button>
         { filterOn && this.renderMealFilteredByCategory() }
-        {/* { filterAll &&} */}
+        { filterAll && this.renderAllMeals() }
       </div>
     );
   }
@@ -90,10 +120,12 @@ class FilterMeals extends React.Component {
 
 const mapStateToProps = (state) => ({
   mealsCategories: state.meals.mealsCategories,
+  meals: state.meals.meals,
 });
 
 export default connect(mapStateToProps)(FilterMeals);
 
 FilterMeals.propTypes = {
   mealsCategories: propTypes.arrayOf(propTypes.shape()).isRequired,
+  meals: propTypes.arrayOf(propTypes.shape()).isRequired,
 };

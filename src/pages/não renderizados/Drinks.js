@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import SearchBar from '../components/SearchBar';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import SearchBar from '../../components/SearchBar';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 class Drinks extends React.Component {
   /* componentDidUpdate() {
