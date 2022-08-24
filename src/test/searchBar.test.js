@@ -1,14 +1,14 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import App from '../App';
-import { mockDrinksOne,
-  mockDrinksTwo, mockDrinksThree, mockMealsOne, mockMealsTwo, mockMealsThree,
-} from './searchBarMock';
 import store from '../redux/store';
+import oneDrink from '../../cypress/mocks/oneDrink';
+import drinkCategories from '../../cypress/mocks/drinkCategories';
+import drinks from '../../cypress/mocks/drinks';
+import userEvent from '@testing-library/user-event';
 
 const renderWithRouterAndRedux = (
   component,
@@ -33,25 +33,93 @@ const renderWithRouterAndRedux = (
 
 // TESTANDO DRINKS
 // teste /drinks : ingredientes, retorno +1 objeto.
-describe('testando o componente searchBar, teste básico no /drinks:', () => {
+describe('teste /drinks: name, retorno apenas 1 objeto:', () => {
   beforeEach(() => {
-    jest.spyOn(global, 'fetch').mockResolvedValue({
-      json: jest.fn().mockResolvedValue(mockDrinksOne),
-    });
+    global.fetch = async (url) => {
+      switch (url) {
+      case 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=':
+        return {
+          json: jest.fn().mockResolvedValue(drinks),
+        };
+      case 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list':
+        return {
+          json: jest.fn().mockResolvedValue(drinkCategories),
+        };
+      case 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=digitamos':
+        return {
+          json: jest.fn().mockResolvedValue(oneDrink),
+        };
+      default:
+        return {
+          json: jest.fn().mockResolvedValue({ drinks: [], meals: [] }),
+        };
+      }
+    };
   });
 
   test('os inputs estão sendo renderizados na tela', async () => {
     renderWithRouterAndRedux(<App />, '/drinks');
-    const search = screen.getByRole('button', { name: /search/i });
-    fireEvent.click(screen.getByRole('radio', { name: /ingredient/i }));
+    const search = screen.getByTestId('search-top-btn');
+    expect(search).toBeInTheDocument();
     fireEvent.click(search);
-    // fireEvent.click(screen.getByRole('radio', { name: /first letter/i }));
-    // fireEvent.click(search);
-    // console.log(store.getState());
-    await screen.findAllByText('Mudslinger');
+    const inputText = screen.getByTestId('search-input');
+    const ingredient = screen.getByRole('radio', { name: /ingredient/i });
+    const firstLetter = screen.getByRole('radio', { name: /first letter/i });
+    const name = screen.getByRole('radio', { name: /name/i });
+    expect(inputText).toBeInTheDocument();
+    expect(ingredient).toBeInTheDocument();
+    expect(firstLetter).toBeInTheDocument();
+    expect(name).toBeInTheDocument();
+    fireEvent.click(search);
+  });
+
+  test('Testa se dá para alterar o input de texto', () => {
+    renderWithRouterAndRedux(<App />, '/drinks');
+    const search = screen.getByTestId('search-top-btn');
+    expect(search).toBeInTheDocument();
+    fireEvent.click(search);
+    const inputText = screen.getByTestId('search-input');
+    expect(inputText).toBeInTheDocument();
+    const ingredient = screen.getByRole('radio', { name: /ingredient/i });
+    expect(ingredient).toBeInTheDocument();
+    userEvent.type(inputText, 'honey');
+    const buttonSearch = screen.getByTestId('exec-search-btn');
+    fireEvent.click(buttonSearch);
+    screen.logTestingPlaygroundURL();
+  });
+  test('Testa se dá para alterar o input de texto', () => {
+    renderWithRouterAndRedux(<App />, '/drinks');
+    const search = screen.getByTestId('search-top-btn');
+    expect(search).toBeInTheDocument();
+    fireEvent.click(search);
+    const inputText = screen.getByTestId('search-input');
+    expect(inputText).toBeInTheDocument();
+    const ingredient = screen.getByRole('radio', { name: /ingredient/i });
+    expect(ingredient).toBeInTheDocument();
+    const firstLetter = screen.getByRole('radio', { name: /first letter/i });
+    expect(firstLetter).toBeInTheDocument();
+    const name = screen.getByRole('radio', { name: /name/i });
+    expect(name).toBeInTheDocument();
+    screen.logTestingPlaygroundURL();
+  });
+  test('Testa se dá para alterar o input de texto', () => {
+    renderWithRouterAndRedux(<App />, '/drinks');
+    const search = screen.getByTestId('search-top-btn');
+    expect(search).toBeInTheDocument();
+    fireEvent.click(search);
+    const inputText = screen.getByTestId('search-input');
+    expect(inputText).toBeInTheDocument();
+    const ingredient = screen.getByRole('radio', { name: /ingredient/i });
+    expect(ingredient).toBeInTheDocument();
+    const firstLetter = screen.getByRole('radio', { name: /first letter/i });
+    expect(firstLetter).toBeInTheDocument();
+    const name = screen.getByRole('radio', { name: /name/i });
+    expect(name).toBeInTheDocument();
+    screen.logTestingPlaygroundURL();
   });
 });
-// teste /drinks : name, retorno apenas 1 objeto.
+
+/* // teste /drinks : name, retorno apenas 1 objeto.
 describe('testando o componente searchBar, teste básico no /drinks:', () => {
   beforeEach(() => {
     jest.spyOn(global, 'fetch').mockResolvedValue({
@@ -177,4 +245,4 @@ describe('testando o componente searchBar, teste básico no /foods:', () => {
     userEvent.type(screen.getByTestId('search-input'), 'a');
     fireEvent.click(search);
   });
-});
+}); */
