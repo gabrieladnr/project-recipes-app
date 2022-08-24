@@ -83,7 +83,43 @@ class SearchBar extends React.Component {
     }
   }
 
+  // renderiza os cards das primeiras 12 receitas de comida da API e o resultado da busca
+  renderSearchMeals() {
+    const { meals } = this.props;
+    const maxMealsNumber = 12;
+    return meals.filter((_, index) => index < maxMealsNumber)
+      .map((meal, index) => (
+        <div key={ meal.idMeal } data-testid={ `${index}-recipe-card` }>
+          <img
+            src={ meal.strMealThumb }
+            data-testid={ `${index}-card-img` }
+            alt="card-thumb"
+            className="thumb-card"
+          />
+          <p data-testid={ `${index}-card-name` }>{ meal.strMeal }</p>
+        </div>));
+  }
+
+  // renderiza as primeiras 12 receitas de bebidas da API e o resultado da busca
+  renderSearchCocktails() {
+    const { drinks } = this.props;
+    const maxCocktailsNumber = 12;
+
+    return drinks.filter((_, index) => index < maxCocktailsNumber)
+      .map((cocktail, index) => (
+        <div key={ cocktail.idDrink } data-testid={ `${index}-recipe-card` }>
+          <img
+            src={ cocktail.strDrinkThumb }
+            data-testid={ `${index}-card-img` }
+            alt="card-thumb"
+            className="thumb-card"
+          />
+          <p data-testid={ `${index}-card-name` }>{ cocktail.strDrink }</p>
+        </div>));
+  }
+
   render() {
+    const { history } = this.props;
     const { searchInput, disabled } = this.state;
     return (
       <div className="search-bar">
@@ -132,14 +168,25 @@ class SearchBar extends React.Component {
         >
           Search
         </button>
+        <div>
+          { (history.location.pathname === '/foods')
+            ? this.renderSearchMeals() : this.renderSearchCocktails() }
+        </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  meals: state.meals.meals,
+  drinks: state.cocktails.cocktails,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   dispatchFilteredDrinks: (drinks) => dispatch(actionFilterDrinks(drinks)),
   dispatchFilteredFoods: (foods) => dispatch(actionFilterFoods(foods)),
 });
+
 SearchBar.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
@@ -149,5 +196,8 @@ SearchBar.propTypes = {
   }).isRequired,
   dispatchFilteredDrinks: PropTypes.func.isRequired,
   dispatchFilteredFoods: PropTypes.func.isRequired,
+  meals: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  drinks: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
-export default connect(null, mapDispatchToProps)(SearchBar);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
