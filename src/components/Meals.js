@@ -18,7 +18,9 @@ class Meals extends React.Component {
       <div>
         <h3>Food Recipes</h3>
         {
-          (searchButton) ? <SearchBar history={ history } /> : <FilterMeals />
+          (searchButton)
+            ? <SearchBar history={ history } />
+            : <FilterMeals history={ history } />
         }
       </div>
     );

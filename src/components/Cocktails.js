@@ -19,7 +19,9 @@ class Cocktails extends React.Component {
       <div>
         <h3>Cocktail Recipes</h3>
         {
-          (searchButton) ? <SearchBar history={ history } /> : <FilterCocktails />
+          (searchButton)
+            ? <SearchBar history={ history } />
+            : <FilterCocktails history={ history } />
         }
       </div>
     );

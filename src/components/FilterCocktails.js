@@ -36,6 +36,11 @@ class FilterCocktails extends React.Component {
     }
   }
 
+  handleClickSendToDetails = (id) => {
+    const { history } = this.props;
+    history.push(`/drinks/${id}`);
+  }
+
   // renderiza os cards das primeiras 12 receitas de drinks da API de todas as receitas
   renderAllDrinks() {
     const { drinks } = this.props;
@@ -43,7 +48,12 @@ class FilterCocktails extends React.Component {
 
     return drinks.filter((_, index) => index < maxDrinksNumber)
       .map((drink, index) => (
-        <div key={ drink.idDrink } data-testid={ `${index}-recipe-card` }>
+        <button
+          type="button"
+          onClick={ () => this.handleClickSendToDetails(drink.idDrink) }
+          key={ drink.idDrink }
+          data-testid={ `${index}-recipe-card` }
+        >
           <img
             src={ drink.strDrinkThumb }
             data-testid={ `${index}-card-img` }
@@ -51,7 +61,7 @@ class FilterCocktails extends React.Component {
             className="thumb-card"
           />
           <p data-testid={ `${index}-card-name` }>{ drink.strDrink }</p>
-        </div>));
+        </button>));
   }
 
   // renderiza no click até 12 receitas da categoria
@@ -61,7 +71,12 @@ class FilterCocktails extends React.Component {
 
     return drinksFilteredByCategory.filter((_, index) => index < maxDrinksNumber)
       .map((meal, index) => (
-        <div key={ index } data-testid={ `${index}-recipe-card` }>
+        <button
+          type="button"
+          onClick={ () => this.handleClickSendToDetails(drink.idDrink) }
+          key={ index }
+          data-testid={ `${index}-recipe-card` }
+        >
           <img
             src={ meal.strDrinkThumb }
             data-testid={ `${index}-card-img` }
@@ -69,7 +84,7 @@ class FilterCocktails extends React.Component {
             className="thumb-card"
           />
           <p data-testid={ `${index}-card-name` }>{ meal.strDrink }</p>
-        </div>));
+        </button>));
   }
 
   // renderiza 5 botões com as categorias de drinks
@@ -118,4 +133,10 @@ export default connect(mapStateToProps)(FilterCocktails);
 FilterCocktails.propTypes = {
   cocktailCategories: propTypes.arrayOf(propTypes.shape()).isRequired,
   drinks: propTypes.arrayOf(propTypes.shape()).isRequired,
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+    location: propTypes.shape({
+      pathname: propTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
