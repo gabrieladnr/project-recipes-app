@@ -83,13 +83,23 @@ class SearchBar extends React.Component {
     }
   }
 
+  handleClickSendToDetails = (type, id) => {
+    const { history } = this.props;
+    history.push(`/${type}/${id}`);
+  }
+
   // renderiza os cards das primeiras 12 receitas de comida da API e o resultado da busca
   renderSearchMeals() {
     const { meals } = this.props;
     const maxMealsNumber = 12;
     return meals.filter((_, index) => index < maxMealsNumber)
       .map((meal, index) => (
-        <div key={ meal.idMeal } data-testid={ `${index}-recipe-card` }>
+        <button
+          type="button"
+          onClick={ () => this.handleClickSendToDetails('foods', meal.idMeal) }
+          key={ meal.idMeal }
+          data-testid={ `${index}-recipe-card` }
+        >
           <img
             src={ meal.strMealThumb }
             data-testid={ `${index}-card-img` }
@@ -97,7 +107,7 @@ class SearchBar extends React.Component {
             className="thumb-card"
           />
           <p data-testid={ `${index}-card-name` }>{ meal.strMeal }</p>
-        </div>));
+        </button>));
   }
 
   // renderiza as primeiras 12 receitas de bebidas da API e o resultado da busca
@@ -107,7 +117,12 @@ class SearchBar extends React.Component {
 
     return drinks.filter((_, index) => index < maxCocktailsNumber)
       .map((cocktail, index) => (
-        <div key={ cocktail.idDrink } data-testid={ `${index}-recipe-card` }>
+        <button
+          type="button"
+          onClick={ () => this.handleClickSendToDetails('drinks', cocktail.idDrink) }
+          key={ cocktail.idDrink }
+          data-testid={ `${index}-recipe-card` }
+        >
           <img
             src={ cocktail.strDrinkThumb }
             data-testid={ `${index}-card-img` }
@@ -115,7 +130,7 @@ class SearchBar extends React.Component {
             className="thumb-card"
           />
           <p data-testid={ `${index}-card-name` }>{ cocktail.strDrink }</p>
-        </div>));
+        </button>));
   }
 
   render() {

@@ -36,6 +36,11 @@ class FilterMeals extends React.Component {
     }
   }
 
+  handleClickSendToDetails = (id) => {
+    const { history } = this.props;
+    history.push(`/foods/${id}`);
+  }
+
   // renderiza os cards das primeiras 12 receitas de comida da API de todas as receitas
   renderAllMeals() {
     const { meals } = this.props;
@@ -43,7 +48,12 @@ class FilterMeals extends React.Component {
 
     return meals.filter((_, index) => index < maxMealsNumber)
       .map((meal, index) => (
-        <div key={ meal.idMeal } data-testid={ `${index}-recipe-card` }>
+        <button
+          type="button"
+          onClick={ () => this.handleClickSendToDetails(meal.idMeal) }
+          key={ meal.idMeal }
+          data-testid={ `${index}-recipe-card` }
+        >
           <img
             src={ meal.strMealThumb }
             data-testid={ `${index}-card-img` }
@@ -51,7 +61,7 @@ class FilterMeals extends React.Component {
             className="thumb-card"
           />
           <p data-testid={ `${index}-card-name` }>{ meal.strMeal }</p>
-        </div>));
+        </button>));
   }
 
   // renderiza no click até 12 receitas da categoria
@@ -61,7 +71,12 @@ class FilterMeals extends React.Component {
 
     return mealsFilteredByCategory.filter((_, index) => index < maxMealsNumber)
       .map((meal, index) => (
-        <div key={ index } data-testid={ `${index}-recipe-card` }>
+        <button
+          type="button"
+          onClick={ () => this.handleClickSendToDetails(meal.idMeal) }
+          key={ index }
+          data-testid={ `${index}-recipe-card` }
+        >
           <img
             src={ meal.strMealThumb }
             data-testid={ `${index}-card-img` }
@@ -69,7 +84,7 @@ class FilterMeals extends React.Component {
             className="thumb-card"
           />
           <p data-testid={ `${index}-card-name` }>{ meal.strMeal }</p>
-        </div>));
+        </button>));
   }
 
   // renderiza 5 botões com as categorias de comidas
@@ -123,4 +138,10 @@ export default connect(mapStateToProps)(FilterMeals);
 FilterMeals.propTypes = {
   mealsCategories: propTypes.arrayOf(propTypes.shape()).isRequired,
   meals: propTypes.arrayOf(propTypes.shape()).isRequired,
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+    location: propTypes.shape({
+      pathname: propTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
