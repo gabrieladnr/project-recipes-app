@@ -1,35 +1,11 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
-import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import { createMemoryHistory } from 'history';
 import App from '../App';
-import store from '../redux/store';
 import oneDrink from '../../cypress/mocks/oneDrink';
 import drinkCategories from '../../cypress/mocks/drinkCategories';
 import drinks from '../../cypress/mocks/drinks';
-
-const renderWithRouterAndRedux = (
-  component,
-  path = '/',
-) => {
-  // conteudo
-
-  const history = createMemoryHistory({ initialEntries: [path] });
-  return {
-    // caralho aquatico
-    ...render(
-      <Provider store={ store }>
-        <Router history={ history }>
-          {component}
-        </Router>
-      </Provider>,
-    ),
-    history,
-    store,
-  };
-};
+import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 
 // TESTANDO DRINKS
 // teste /drinks : ingredientes, retorno +1 objeto.

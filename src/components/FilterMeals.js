@@ -47,7 +47,7 @@ class FilterMeals extends React.Component {
     const { meals } = this.props;
     const maxMealsNumber = 12;
 
-    return meals.filter((_, index) => index < maxMealsNumber)
+    return meals !== undefined && meals.filter((_, index) => index < maxMealsNumber)
       .map((meal, index) => (
         <button
           type="button"
