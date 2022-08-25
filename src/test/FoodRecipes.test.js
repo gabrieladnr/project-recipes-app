@@ -122,6 +122,7 @@ describe('Testa o funcionamento da tela de receitas, verificando se:', () => {
     expect(history.location.pathname).toBe('/foods/52874');
   });
 
+  // problema de lint aqui, não soube resolver
   test('ao clicar na receita o user é redirect p/ detalhes da receita', async () => {
     const history = createMemoryHistory({ initialEntries: ['/foods'] });
     renderWithRouter(<Recipes history={ history } />);
