@@ -10,6 +10,7 @@ import FoodDetails from './components/FoodDetails';
 import DrinkDetails from './components/DrinkDetails';
 import Recipes from './components/Recipes';
 import ProductDescription from './components/ProductDescription';
+import RecipeInProgress from './components/RecipeInProgress';
 
 function App() {
   return (
@@ -21,10 +22,10 @@ function App() {
           <Route path="/drinks/:id" exact component={ DrinkDetails } />
           <Route path="/foods" exact component={ Recipes } />
           <Route path="/drinks" exact component={ Recipes } />
-          <Route path="/foods/:id/in-progress" component={ ProductDescription } />
+          <Route path="/foods/:id/in-progress" component={ RecipeInProgress } />
           <Route
             path="/drinks/:id/in-progress"
-            component={ ProductDescription }
+            component={ RecipeInProgress }
           />
           <Route path="/profile" component={ Profile } />
           <Route path="/done-recipes" component={ DoneRecipes } />
