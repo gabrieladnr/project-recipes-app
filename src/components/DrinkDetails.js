@@ -51,7 +51,7 @@ class DrinkDetails extends React.Component {
       const newFavorites = JSON.parse(oldFavorites).filter((item) => item.id !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
     } else {
-      const oldFavorites = (localStorage.getItem('favoriteRecipes') !== null)
+      const oldFavorites = (JSON.parse(localStorage.getItem('favoriteRecipes')) !== null)
         ? JSON.parse(localStorage.getItem('favoriteRecipes'))
         : null;
       const newFavorites = (oldFavorites !== null) ? [
@@ -112,7 +112,7 @@ class DrinkDetails extends React.Component {
     const recomendList = (recomendation.length > 0)
       ? recomendation.map((item, index) => {
         const testId = `${index}-recomendation-card`;
-        const maxRecomendation = 7;
+        const maxRecomendation = 6;
         if (index < maxRecomendation) {
           return (
             <li data-testid={ testId } key={ item.idMeal }>
@@ -187,6 +187,7 @@ class DrinkDetails extends React.Component {
               <img src={ favoriteImg } alt={ JSON.stringify(favorite) } />
             </button>
           </section>
+          <h3>Recomendation list:</h3>
           <ul data-testid="recomendation-card">
             {
               recomendList
