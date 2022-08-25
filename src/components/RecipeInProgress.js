@@ -1,75 +1,24 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import FoodsInProgress from './FoodsInProgress';
+import DrinksInProgress from './DrinksInProgress';
+import FoodsInProgress from './FoodsInProgress';
 
 export default class RecipeInProgress extends Component {
-  constructor() {
-    super();
-    this.state = {
-      // ingredientes que são mostrados na tela, depois de selecionado o prato para ser feito
-      displayedIngridients: [],
-      statusCheck: '',
-      checked: false,
-      // estado da lista de ingredientes (quantos estão checked ou não) exibidos na tela, que são salvos no localStorage
-      savedIngridients: [],
-    };
-  }
-
-  // parte da lógica do localStorage
-  componentDidMount() {
-    this.saveProgress();
-  }
-
-  // função para mudar estilo da fonte quando usuário clicar no checkbox e atualizar localStorage após cada mudança
-  handleIngridients = () => {
-    const { checked, savedIngridients } = this.state;
-    if (checked === false) {
-      this.setState({
-        checked: true,
-        statusCheck: 'checked',
-      });
-      savedIngridients.push(displayedIngridients);
-      localStorage.setItem('inProgressRecipes', savedIngridients);
-    } else {
-      this.setState({
-        checked: false,
-        statusCheck: '',
-      });
-      savedIngridients.filter((e) => !e).push(displayedIngridients);
-      localStorage.setItem('inProgressRecipes', savedIngridients);
-    }
-  }
-
-  // Lógica para atualizar o localStorage - caso a pessoa desmarque todos os ingredientes de uma lista de ingredientes de um prato, o obj que armazena os pratos será atualizado, excluindo o objeto/array contento os ingredientes.
-  updateLocalStorage = () => {
-    const { checked } = this.state;
-    if (checked === true) {
-      savedIngridients.map((e) => e);
-    } else {
-      savedIngridients.filter((e) => !e);
-    }
-  }
-
-  // função para salvar o estado do andamento da lista de receitas no localStorage
-  saveProgress = () => {
-    localStorage.setItem('inProgressRecipes', saveRecipes);
-  }
-
-  handleFavoriteRcipe = () => {
-    // lógica de favoritar
-  }
-
-  handleShareRecipe = () => {
-    // lógica de compartilhar
-  }
 
   render() {
-    const { displayedIngridients, statusCheck } = this.state;
+    const { history, match: { params: { id } } } = this.props;
+    const { recipe, statusCheck, favorite, whichItem } = this.state;
     return (
       <div>
         RecipeInProgress
         <div>
-          <img data-testid="recipe-photo" src={ recipeImage } alt="fotoDaReceita" />
-          <h1 data-testid="recipe-title">{ recipeName }</h1>
+          <img data-testid="recipe-photo" src={ recipe } alt="fotoDaReceita" />
+          <h1 data-testid="recipe-title">
+            { recipe.strMeal
+              ? recipe.strMeal : recipe.strDrink }
+
+          </h1>
           <button
             data-testid="share-btn"
             type="button"
@@ -80,7 +29,7 @@ export default class RecipeInProgress extends Component {
           <button
             data-testid="favorite-btn"
             type="button"
-            onClick={ this.handleFavoriteRcipe() }
+            onClick={ this.favoriteRecipe() }
           >
             Favoritar receita
           </button>
@@ -88,13 +37,12 @@ export default class RecipeInProgress extends Component {
           <ol>
             {
               // ALTERNATIVA PARA MOSTRAR INGREDIENTES
-              Object.keys(displayedIngridients)
+              Object.keys(recipe)
                 .filter((key) => key
                   .includes('strIngredient'))
                 .map((ingredient, index) => {
-                  // const testid = `${index}-ingredient-name-and-measure`;
-                  if (displayedIngridients[ingredient] === ''
-                  || displayedIngridients[ingredient] === null) {
+                  if (recipe[ingredient] === ''
+                  || recipe[ingredient] === null) {
                     return <div key={ index }> </div>;
                   }
                   const measure = `strMeasure${index + 1}`;
@@ -108,39 +56,37 @@ export default class RecipeInProgress extends Component {
                         data-testid={ `${index}-ingredient-step` }
                         checked={ statusCheck }
                         className={ statusCheck }
-                        onChange={ this.handleIngridients() }
+                        onChange={ this.handleRecipeProgress() }
                       />
-                      {`${displayedIngridients[measure]} 
-                      ${displayedIngridients[ingredient]}`}
+                      {`${recipe[measure]} 
+                      ${recipe[ingredient]}`}
                     </label>
                   );
                 })
             }
-            {/* {
-              // map dos ingredientes da receita
-              // data-testid="${index}-ingredient-step"
-              // allIngridients - dados retornados pela API
-              displayedIngridients.map((ingridient, index) => (
-                <label
-                  key={ index }
-                  htmlFor="ingridients"
-                >
-                  {ingridient}
-                  <input
-                    type="checkbox"
-                    data-testid={ `${index}-ingredient-step` }
-                    checked={ statusCheck }
-                    className={ statusCheck }
-                    onChange={ this.handleIngridients() }
-                  />
-                </label>
-              ))
-            } */}
           </ol>
-          <p data-testid="instructions">Instruções</p>
-          <button data-testid="finish-recipe-btn" type="button">Finalizar receita</button>
+          <h3>Instructions:</h3>
+          <p data-testid="instructions">{ recipe.srtInstructions }</p>
+          <button 
+          data-testid="finish-recipe-btn"
+          type="button"
+          disabled={ this.finalizeRecipe() }
+          >
+            Finalizar receita</button>
         </div>
       </div>
     );
   }
 }
+
+RecipeInProgress.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.objectOf(PropTypes.string),
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
+  }).isRequired,
+};
