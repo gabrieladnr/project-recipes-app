@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import copy from 'clipboard-copy';
-import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import Share from './Share';
 
 class FoodDetails extends React.Component {
   constructor() {
@@ -11,7 +10,6 @@ class FoodDetails extends React.Component {
     this.state = {
       recipe: {},
       recomendation: [],
-      copied: false,
       favorite: false,
     };
   }
@@ -86,7 +84,7 @@ class FoodDetails extends React.Component {
 
   render() {
     const { history, match: { params: { id } } } = this.props;
-    const { recipe, copied, favorite, recomendation } = this.state;
+    const { recipe, favorite, recomendation } = this.state;
     const favoriteImg = (favorite) ? blackHeartIcon : whiteHeartIcon;
     // -----------------------------------------------------
     let btn;
@@ -176,22 +174,12 @@ class FoodDetails extends React.Component {
             {
               btn
             }
-            <button
-              type="button"
-              data-testid="share-btn"
-              onClick={ () => {
-                copy(`http://localhost:3000${history.location.pathname}`);
-                this.setState({
-                  copied: true,
-                });
-              } }
-            >
-              <img src={ shareIcon } alt="share" />
-            </button>
-            {
-              (copied) ? <p>Link copied!</p>
-                : <> </>
-            }
+            <Share
+              keyused="history"
+              history={ history.location.pathname }
+              item=""
+              testId="share-btn"
+            />
             <button
               type="button"
               data-testid="favorite-btn"
