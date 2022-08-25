@@ -1,4 +1,4 @@
-import { MEALS, MEALS_CATEGORIES } from '../actions/actionTypes';
+import { FILTERED_FOODS, MEALS, MEALS_CATEGORIES } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   meals: [],
@@ -7,18 +7,23 @@ const INITIAL_STATE = {
 
 // reducer da requisição a API de receitas de comidas
 const mealsReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+  const { payload, type } = action;
+  switch (type) {
   case MEALS:
     return {
       ...state,
-      meals: action.payload,
+      meals: payload,
     };
   case MEALS_CATEGORIES:
     return {
       ...state,
-      mealsCategories: action.payload,
+      mealsCategories: payload,
     };
-
+  case FILTERED_FOODS:
+    return {
+      ...state,
+      meals: (!payload.meals?.length) ? [] : [...payload.meals],
+    };
   default:
     return state;
   }

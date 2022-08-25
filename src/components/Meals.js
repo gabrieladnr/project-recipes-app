@@ -17,7 +17,7 @@ class Meals extends React.Component {
     const { meals } = this.props;
     const maxMealsNumber = 12;
 
-    return meals.filter((_, index) => index <= maxMealsNumber)
+    return meals.filter((_, index) => index < maxMealsNumber)
       .map((meal, index) => (
         <div key={ meal.idMeal } data-testid={ `${index}-recipe-card` }>
           <img

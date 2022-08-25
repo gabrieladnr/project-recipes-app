@@ -14,8 +14,8 @@ class Recipes extends React.Component {
     return (
       <div>
         { <Header tittle={ title } searchBool="true" history={ history } />}
-        { (pathname === '/foods') && <Meals /> }
-        { (pathname === '/drinks') && <Cocktails />}
+        { (pathname === '/foods') && <Meals history={ history } /> }
+        { (pathname === '/drinks') && <Cocktails history={ history } />}
         <Footer history={ history } />
       </div>
     );
