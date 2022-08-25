@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
-class FoodDetails extends React.Component {
+export default class FoodsInProgress extends Component {
   constructor() {
     super();
     this.state = {
@@ -13,6 +13,10 @@ class FoodDetails extends React.Component {
       recomendation: [],
       copied: false,
       favorite: false,
+      statusCheck: '',
+      checked: false,
+      checkedIngredients: [],
+      statusDisabled: true,
     };
   }
 
@@ -23,14 +27,14 @@ class FoodDetails extends React.Component {
   }
 
   getRecomendation = async () => {
-    const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+    const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
     const result = await fetch(url)
       .then((response) => response.json());
     this.setState({ recomendation: result.drinks });
   }
 
   getRecipeById = async (id) => {
-    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
     const result = await fetch(url)
       .then((response) => response.json());
     this.setState({ recipe: result.meals[0] });
@@ -84,51 +88,46 @@ class FoodDetails extends React.Component {
     this.setState({ favorite: !favorite });
   }
 
-  render() {
-    const { history, match: { params: { id } } } = this.props;
-    const { recipe, copied, favorite, recomendation } = this.state;
-    const favoriteImg = (favorite) ? blackHeartIcon : whiteHeartIcon;
-    // -----------------------------------------------------
-    let btn;
-    if (localStorage.getItem('doneRecipes') !== null
-      && JSON.parse(localStorage.getItem('doneRecipes'))
-        .some((item) => item.id === id)) {
-      btn = (<> </>);
+  recipeProgress = (ingredient) => {
+    const { checked, recipe, checkedIngredients } = this.state;
+    if (checked === false) {
+      this.setState({
+        checked: true,
+        statusCheck: 'checked',
+        checkedIngredients: [...checkedIngredients, ingredient],
+      });
     } else {
-      btn = (
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          className="start-recipe-btn"
-          onClick={ () => history.push(`${history.location.pathname}/in-progress`) }
-        >
-          {
-            (localStorage.getItem('inProgressRecipes') !== null
-              && Object.keys(JSON.parse(
-                localStorage.getItem('inProgressRecipes'),
-              ).meals)
-                .some((item) => item === id))
-              ? 'Continue Recipe' : 'Start Recipe'
-          }
-        </button>);
+      this.setState({
+        checked: false,
+        statusCheck: '',
+        checkedIngredients: checkedIngredients.filter((item) => item !== ingredient),
+      });
     }
-    // -----------------------------------------------------
-    const recomendList = (recomendation.length > 0)
-      ? recomendation.map((item, index) => {
-        const testId = `${index}-recomendation-card`;
-        const maxRecomendation = 7;
-        if (index < maxRecomendation) {
-          return (
-            <li data-testid={ testId } key={ index }>
-              <img src={ item.strDrinkThumb } alt={ item.strDrink } />
-              <h3>{item.strDrink}</h3>
-            </li>
-          );
-        }
-        return <> </>;
-      })
-      : <> </>;
-    // -----------------------------------------------------
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      ...JSON.parse(localStorage.getItem('inProgressRecipes')),
+      meals: {
+        [recipe.id]: checkedIngredients,
+      },
+    }));
+  }
+
+  finalizeRecipe = () => {
+    const { recipe, checkedIngredients, statusDisabled } = this.state;
+    const avaliableIngrid = Object.keys(recipe)
+      .filter((e) => e.includes('strIngredient'));
+    if (avaliableIngrid.length === checkedIngredients.length) {
+      this.setState({
+        statusDisabled: !statusDisabled,
+      });
+    }
+  }
+
+  render() {
+    const { history } = this.props;
+    const {
+      recipe, copied, favorite, recomendation, statusCheck, statusDisabled } = this.state;
+    console.log(recomendation);
+    const favoriteImg = (favorite) ? blackHeartIcon : whiteHeartIcon;
     return (
       <main>
         <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
@@ -144,18 +143,27 @@ class FoodDetails extends React.Component {
           {
             Object.keys(recipe).filter((key) => key.includes('strIngredient'))
               .map((ingredient, index) => {
-                const testid = `${index}-ingredient-name-and-measure`;
                 if (recipe[ingredient] === '' || recipe[ingredient] === null) {
                   return <div key={ index }> </div>;
                 }
                 const measure = `strMeasure${index + 1}`;
                 return (
-                  <li
-                    data-testid={ testid }
+                  <label
                     key={ index }
+                    htmlFor="ingridients"
                   >
+                    <input
+                      type="checkbox"
+                      data-testid={ `${index}-ingridient-step` }
+                      onChange={ () => {
+                        this.recipeProgress(recipe[ingredient]);
+                        this.finalizeRecipe();
+                      } }
+                      className={ statusCheck }
+                      checked={ statusCheck }
+                    />
                     {`${recipe[measure]} ${recipe[ingredient]}`}
-                  </li>
+                  </label>
                 );
               })
           }
@@ -163,19 +171,7 @@ class FoodDetails extends React.Component {
         <section>
           <h3>Instructions:</h3>
           <p data-testid="instructions">{ recipe.strInstructions }</p>
-          <iframe
-            title={ recipe.strMeal }
-            src={ recipe.strYoutube }
-            width="500"
-            height="500"
-            data-testid="video"
-          >
-            <p>Your browser does not support iframes.</p>
-          </iframe>
           <section>
-            {
-              btn
-            }
             <button
               type="button"
               data-testid="share-btn"
@@ -201,18 +197,20 @@ class FoodDetails extends React.Component {
               <img src={ favoriteImg } alt={ JSON.stringify(favorite) } />
             </button>
           </section>
-          <ul data-testid="recomendation-card">
-            {
-              recomendList
-            }
-          </ul>
+          <button
+            data-testid="finish-recipe-btn"
+            type="button"
+            disabled={ statusDisabled }
+          >
+            Finalizar receita
+          </button>
         </section>
       </main>
     );
   }
 }
 
-FoodDetails.propTypes = {
+FoodsInProgress.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.objectOf(PropTypes.string),
   }).isRequired,
@@ -223,5 +221,3 @@ FoodDetails.propTypes = {
     }),
   }).isRequired,
 };
-
-export default FoodDetails;
