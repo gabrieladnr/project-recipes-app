@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import FoodsInProgress from './FoodsInProgress';
 import DrinksInProgress from './DrinksInProgress';
 import FoodsInProgress from './FoodsInProgress';
 
