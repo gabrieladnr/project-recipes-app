@@ -20,7 +20,6 @@ class SearchBar extends React.Component {
     // fazendo a requisição na api
     const response = await fetch(`${url}${searchInput}`)
       .then((responseApi) => responseApi.json());
-    // console.log(response);
     if (history.location.pathname === '/drinks') {
       // adiciona o filtro ao reducer drinks e altera a rota para a devida rota.
       dispatchFilteredDrinks(response);
