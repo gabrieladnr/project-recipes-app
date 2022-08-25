@@ -25,6 +25,7 @@ class FilterMeals extends React.Component {
     const { activeFilter } = this.state;
     if (category === activeFilter) {
       this.setState({ filterToggle: true });
+      this.setState({ activeFilter: '' });
     } else {
       this.setState({ filterToggle: false });
       const response = await fetch(`${'https://www.themealdb.com/api/json/v1/1/filter.php?c='}${category}`)
