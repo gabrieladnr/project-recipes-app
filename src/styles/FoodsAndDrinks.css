@@ -1,0 +1,29 @@
+
+.filterBtn {
+    border: 3px solid black;
+    border-radius: 35%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.drinks {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.drinks button {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    height: 180px;
+}
+
+.thumb-card {
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+}
