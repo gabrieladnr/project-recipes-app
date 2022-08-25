@@ -1,12 +1,12 @@
 import { MEALS, COCKTAILS, COCKTAILS_CATEGORIES, MEALS_CATEGORIES } from './actionTypes';
 
-// action type API de receitas de comidas
+// action type API de todas as receitas de comidas
 const mealAction = (meals) => ({
   type: MEALS,
   payload: meals,
 });
 
-// action fetch API de receitas de comidas
+// action fetch API de todas as receitas de comidas
 export default function fetchMeals() {
   return (dispatch) => fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
     .then((response) => response.json())
@@ -16,13 +16,13 @@ export default function fetchMeals() {
     });
 }
 
-// action type API de receitas de bebidas
+// action type API de todas as receitas de bebidas
 const cocktailsAction = (drinks) => ({
   type: COCKTAILS,
   payload: drinks,
 });
 
-// action fetch API de receitas de bebidas
+// action fetch API de todas as receitas de bebidas
 export function fetchCocktails() {
   return (dispatch) => fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
     .then((response) => response.json())
