@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import copy from 'clipboard-copy';
 import Header from '../components/Header';
-import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import Share from '../components/Share';
 
 class FavoriteRecipes extends Component {
   constructor() {
     super();
     this.state = {
       recipes: [],
-      copied: false,
     };
   }
 
@@ -47,7 +45,7 @@ class FavoriteRecipes extends Component {
 
   render() {
     const { history } = this.props;
-    const { recipes, copied } = this.state;
+    const { recipes } = this.state;
 
     return (
       <div>
@@ -125,25 +123,12 @@ class FavoriteRecipes extends Component {
                                 {item.name}
                               </button>
                             </h3>
-                            <button
-                              type="button"
-                              data-testid={ testIdShare }
-                              src={ shareIcon }
-                              onClick={ () => {
-                                copy(
-                                  `http://localhost:3000/${item.type}s/${item.id}`,
-                                );
-                                this.setState({
-                                  copied: true,
-                                });
-                              } }
-                            >
-                              <img src={ shareIcon } alt="share" />
-                            </button>
-                            {
-                              (copied) ? <p>Link copied!</p>
-                                : <> </>
-                            }
+                            <Share
+                              keyused="item"
+                              history={ history.location.pathname }
+                              item={ item }
+                              testId={ testIdShare }
+                            />
                             <button
                               type="button"
                               data-testid={ testIdFavorite }
