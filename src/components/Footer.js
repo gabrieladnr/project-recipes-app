@@ -9,17 +9,6 @@ export default class Footer extends Component {
     const { history } = this.props;
     return (
       <div data-testid="footer" className="footer">
-        Footer
-        <div>
-          <button
-            data-testid="drinks-bottom-btn"
-            type="button"
-            src={ drinkIcon }
-            onClick={ () => history.push('/drinks') }
-          >
-            Drinks
-          </button>
-        </div>
         <div>
           <button
             data-testid="food-bottom-btn"
@@ -27,7 +16,17 @@ export default class Footer extends Component {
             src={ mealIcon }
             onClick={ () => history.push('/foods') }
           >
-            Foods
+            <img src={ mealIcon } alt="food" />
+          </button>
+        </div>
+        <div>
+          <button
+            data-testid="drinks-bottom-btn"
+            type="button"
+            src={ drinkIcon }
+            onClick={ () => history.push('/drinks') }
+          >
+            <img src={ drinkIcon } alt="drink" />
           </button>
         </div>
       </div>
