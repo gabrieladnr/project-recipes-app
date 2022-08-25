@@ -1,0 +1,7 @@
+.done-recipes-filter-abled {
+  background-color: gainsboro;
+}
+
+.done-recipes-filter-disabled {
+  background-color: rgb(184, 184, 184);
+}

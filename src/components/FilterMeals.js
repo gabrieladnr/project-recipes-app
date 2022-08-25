@@ -6,37 +6,54 @@ class FilterMeals extends React.Component {
   constructor() {
     super();
     this.state = {
-      filterOn: false, // controla se o botão de filtro por categoria foi clicado, para renderizar as receitas filtradas
-      // filterAll: false, // controla se o botão de All foi clicado, para renderizar todas as receitas
+      filterToggle: true, // controla se será exibido filtro por categoria ou All, sendo true == all, e false == filtro de cateogria;
       mealsFilteredByCategory: [], // array de receitas filtradas por categoria retornado da API
+      activeFilter: '', // controla qual filtro está sendo exibido
     };
   }
 
   // implementa o filtro All ao clicar no botão All
-  // altera o estado local
-  // handleAllButtonClick() {
-  //   this.setState({ filterAll: true });
-  // }
+  // altera o estado local para remover filtro de categoria
+  handleAllButtonClick = () => {
+    this.setState({ filterToggle: true });
+    this.setState({ activeFilter: '' });
+  }
 
   // implementa o filtro por categoria ao clicar no botão de categoria,
   // altera o estado local
   handleCategoryButtonClick = async (category) => {
-    this.setState({ filterOn: true });
-    const response = await fetch(`${'https://www.themealdb.com/api/json/v1/1/filter.php?c='}${category}`)
-      .then((responseMealsInCategory) => responseMealsInCategory.json());
+    const { activeFilter } = this.state;
+    if (category === activeFilter) {
+      this.setState({ filterToggle: true });
+    } else {
+      this.setState({ filterToggle: false });
+      const response = await fetch(`${'https://www.themealdb.com/api/json/v1/1/filter.php?c='}${category}`)
+        .then((responseMealsInCategory) => responseMealsInCategory.json());
 
-    const mealsFilteredByCategory = response.meals;
-    this.setState({ mealsFilteredByCategory: [...mealsFilteredByCategory] });
+      const mealsFilteredByCategory = response.meals;
+      this.setState({ mealsFilteredByCategory: [...mealsFilteredByCategory] });
+      this.setState({ activeFilter: category });
+    }
   }
 
-  // renderiza no click até 12 receitas da categoria
-  renderMealFilteredByCategory() {
-    const maxMealsNumber = 12;
-    const { mealsFilteredByCategory } = this.state;
+  handleClickSendToDetails = (id) => {
+    const { history } = this.props;
+    history.push(`/foods/${id}`);
+  }
 
-    return mealsFilteredByCategory.filter((_, index) => index <= maxMealsNumber)
+  // renderiza os cards das primeiras 12 receitas de comida da API de todas as receitas
+  renderAllMeals() {
+    const { meals } = this.props;
+    const maxMealsNumber = 12;
+
+    return meals.filter((_, index) => index < maxMealsNumber)
       .map((meal, index) => (
-        <div key={ index } data-testid={ `${index}-recipe-card` }>
+        <button
+          type="button"
+          onClick={ () => this.handleClickSendToDetails(meal.idMeal) }
+          key={ meal.idMeal }
+          data-testid={ `${index}-recipe-card` }
+        >
           <img
             src={ meal.strMealThumb }
             data-testid={ `${index}-card-img` }
@@ -44,7 +61,30 @@ class FilterMeals extends React.Component {
             className="thumb-card"
           />
           <p data-testid={ `${index}-card-name` }>{ meal.strMeal }</p>
-        </div>));
+        </button>));
+  }
+
+  // renderiza no click até 12 receitas da categoria
+  renderMealFilteredByCategory() {
+    const maxMealsNumber = 12;
+    const { mealsFilteredByCategory } = this.state;
+
+    return mealsFilteredByCategory.filter((_, index) => index < maxMealsNumber)
+      .map((meal, index) => (
+        <button
+          type="button"
+          onClick={ () => this.handleClickSendToDetails(meal.idMeal) }
+          key={ index }
+          data-testid={ `${index}-recipe-card` }
+        >
+          <img
+            src={ meal.strMealThumb }
+            data-testid={ `${index}-card-img` }
+            alt="card-thumb"
+            className="thumb-card"
+          />
+          <p data-testid={ `${index}-card-name` }>{ meal.strMeal }</p>
+        </button>));
   }
 
   // renderiza 5 botões com as categorias de comidas
@@ -52,7 +92,7 @@ class FilterMeals extends React.Component {
     const { mealsCategories } = this.props;
     // const { categories } = this.state;
     const maxCategoriesNumber = 5;
-    return mealsCategories.filter((_, index) => index <= maxCategoriesNumber)
+    return mealsCategories.filter((_, index) => index < maxCategoriesNumber)
       .map((meal) => (
         <div key={ meal.strCategory }>
           <button
@@ -69,7 +109,7 @@ class FilterMeals extends React.Component {
   }
 
   render() {
-    const { filterOn } = this.state;
+    const { filterToggle } = this.state;
     return (
       <div>
         { this.renderFilterMealCategoryButtons() }
@@ -81,8 +121,8 @@ class FilterMeals extends React.Component {
         >
           All
         </button>
-        { filterOn && this.renderMealFilteredByCategory() }
-        {/* { filterAll &&} */}
+        { !filterToggle && this.renderMealFilteredByCategory() }
+        { filterToggle && this.renderAllMeals() }
       </div>
     );
   }
@@ -90,10 +130,18 @@ class FilterMeals extends React.Component {
 
 const mapStateToProps = (state) => ({
   mealsCategories: state.meals.mealsCategories,
+  meals: state.meals.meals,
 });
 
 export default connect(mapStateToProps)(FilterMeals);
 
 FilterMeals.propTypes = {
   mealsCategories: propTypes.arrayOf(propTypes.shape()).isRequired,
+  meals: propTypes.arrayOf(propTypes.shape()).isRequired,
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+    location: propTypes.shape({
+      pathname: propTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
