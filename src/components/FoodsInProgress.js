@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import copy from 'clipboard-copy';
-import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import Share from './Share';
 
 export default class FoodsInProgress extends Component {
   constructor() {
     super();
     this.state = {
       recipe: {},
-      recomendation: [],
-      copied: false,
       favorite: false,
       statusCheck: '',
       checked: false,
@@ -21,16 +18,17 @@ export default class FoodsInProgress extends Component {
   }
 
   componentDidMount() {
-    const { match: { params: { id } } } = this.props;
+    const { id } = this.props;
+    console.log(id);
     this.getRecipeById(id);
-    this.getRecomendation();
+    this.maintainProgress();
   }
 
-  getRecomendation = async () => {
-    const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-    const result = await fetch(url)
-      .then((response) => response.json());
-    this.setState({ recomendation: result.drinks });
+  maintainProgress = () => {
+    const progress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    this.setState({
+      checkedIngredients: progress,
+    });
   }
 
   getRecipeById = async (id) => {
@@ -46,7 +44,7 @@ export default class FoodsInProgress extends Component {
   }
 
   favoriteRecipe = () => {
-    const { match: { params: { id } } } = this.props;
+    const { id } = this.props;
     const { recipe, favorite } = this.state;
     // -----------------------------------------------------
     if (localStorage.getItem('favoriteRecipes') !== null
@@ -125,8 +123,7 @@ export default class FoodsInProgress extends Component {
   render() {
     const { history } = this.props;
     const {
-      recipe, copied, favorite, recomendation, statusCheck, statusDisabled } = this.state;
-    console.log(recomendation);
+      recipe, favorite, statusCheck, statusDisabled } = this.state;
     const favoriteImg = (favorite) ? blackHeartIcon : whiteHeartIcon;
     return (
       <main>
@@ -172,22 +169,12 @@ export default class FoodsInProgress extends Component {
           <h3>Instructions:</h3>
           <p data-testid="instructions">{ recipe.strInstructions }</p>
           <section>
-            <button
-              type="button"
-              data-testid="share-btn"
-              onClick={ () => {
-                copy(`http://localhost:3000${history.location.pathname}`);
-                this.setState({
-                  copied: true,
-                });
-              } }
-            >
-              <img src={ shareIcon } alt="share" />
-            </button>
-            {
-              (copied) ? <p>Link copied!</p>
-                : <> </>
-            }
+            <Share
+              keyused="history"
+              history={ history.location.pathname }
+              item=""
+              testId="share-btn"
+            />
             <button
               type="button"
               data-testid="favorite-btn"
@@ -211,9 +198,7 @@ export default class FoodsInProgress extends Component {
 }
 
 FoodsInProgress.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.objectOf(PropTypes.string),
-  }).isRequired,
+  id: PropTypes.string.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
     location: PropTypes.shape({

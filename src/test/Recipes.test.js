@@ -1,10 +1,10 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+// import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import Recipes from '../components/Recipes';
 import renderWithRouter from './helpers/renderWithRouterAndRedux';
-import meals from '../../cypress/mocks/meals';
+// import meals from '../../cypress/mocks/meals';
 
 // screen.logTestingPlayground()
 
