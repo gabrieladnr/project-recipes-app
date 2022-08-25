@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
-import '../styles/doneRecipes.css';
+import '../styles/DoneRecipes.css';
+import Share from '../components/Share';
 
 class DoneRecipes extends Component {
   // Passo 1 - Vamos receber o valor do localStorage para dentro do meu stado inicial.
@@ -12,7 +13,6 @@ class DoneRecipes extends Component {
     this.state = {
       doneRecipes: [],
       filterDoneRecipes: 'All',
-      copied: false,
     };
   }
 
@@ -24,9 +24,11 @@ class DoneRecipes extends Component {
   // Função responsável apenas por atribuir no estado um valor passado por parametro. No componentDidMount não é recomendável que atualize o estado local
   callLocalStorage = () => {
     const localStorageDoneRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')); // ALTERAR LOCALSTORAGE FUTURAMENTE. PEGANDO DOS FAVORITADOS PARA TESTE.
-    this.setState({
-      doneRecipes: [...localStorageDoneRecipes],
-    });
+    if (localStorageDoneRecipes?.length) {
+      this.setState({
+        doneRecipes: [...localStorageDoneRecipes],
+      });
+    }
   }
 
   // Passo 2.1.2 - Essa função é responsável por atribuir uma classe e estilizar o botão ed filtragem quando este estiver selecionado retorna true ou false;
@@ -46,7 +48,7 @@ class DoneRecipes extends Component {
     const { history } = this.props;
     // Passo 2 - exibir filtros e componentes na tela
     // Passo 3 - trazer o component Compartilhar
-    const { doneRecipes, filterDoneRecipes, filter } = this.state;
+    const { doneRecipes, filterDoneRecipes } = this.state;
     // Passo 2.1.3 - RESOLVENDO LINT : repetindo literal 3 vezes
     const classAbled = 'done-recipes-filter-abled';
     const classDisabled = 'done-recipes-filter-disabled';
@@ -84,7 +86,7 @@ class DoneRecipes extends Component {
         </div>
         <div className="done-recipes">
           {
-            doneRecipes
+            (doneRecipes?.length) && doneRecipes
               .filter((recipe) => (
                 (filterDoneRecipes === 'Foods') ? recipe.type === 'food' : true)) // filtrar comidas
               .filter((recipe) => (
@@ -109,19 +111,13 @@ class DoneRecipes extends Component {
                     <h3 data-testid={ `${index}-horizontal-done-date` }>
                       {doneDate}
                     </h3>
-                    <button
-                      type="button"
-                      data-testid="share-btn"
-                      onClick={ () => {
-                        copy(`http://localhost:3000${history.location.pathname}`);
-                        this.setState({
-                          copied: true,
-                        });
-                      } }
-                    >
-                      <img src={ shareIcon } alt="share" />
-                    </button>
-                    CATAPIMBAS
+                    <Share
+                      keyused="history"
+                      history={ history.location.pathname }
+                      item=""
+                      testId="share-btn"
+                    />
+                    <img src={ shareIcon } alt="share" />
                   </div>
                 );
               })
@@ -131,3 +127,13 @@ class DoneRecipes extends Component {
     );
   }
 }
+
+DoneRecipes.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
+  }).isRequired,
+};
+export default DoneRecipes;

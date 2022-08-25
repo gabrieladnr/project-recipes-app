@@ -3,13 +3,12 @@ import { Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Profile from './pages/Profile';
-// import DoneRecipes from './pages/DoneRecipes';
+import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Login from './components/Login';
 import FoodDetails from './components/FoodDetails';
 import DrinkDetails from './components/DrinkDetails';
 import Recipes from './components/Recipes';
-import ProductDescription from './components/ProductDescription';
 import RecipeInProgress from './components/RecipeInProgress';
 
 function App() {
@@ -28,7 +27,7 @@ function App() {
             component={ RecipeInProgress }
           />
           <Route path="/profile" component={ Profile } />
-          {/* <Route path="/done-recipes" component={ DoneRecipes } /> */}
+          <Route path="/done-recipes" component={ DoneRecipes } />
           <Route path="/favorite-recipes" component={ FavoriteRecipes } />
         </Switch>
       </div>
