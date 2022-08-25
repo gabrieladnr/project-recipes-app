@@ -32,7 +32,7 @@ export default class FoodsInProgress extends Component {
   }
 
   getRecipeById = async (id) => {
-    const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
     const result = await fetch(url)
       .then((response) => response.json());
     this.setState({ recipe: result.meals[0] });
