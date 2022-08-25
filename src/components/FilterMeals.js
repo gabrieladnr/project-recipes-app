@@ -36,7 +36,7 @@ class FilterMeals extends React.Component {
 
     return mealsFilteredByCategory.filter((_, index) => index <= maxMealsNumber)
       .map((meal, index) => (
-        <div key={ meal.idMeal } data-testid={ `${index}-recipe-card` }>
+        <div key={ index } data-testid={ `${index}-recipe-card` }>
           <img
             src={ meal.strMealThumb }
             data-testid={ `${index}-card-img` }
@@ -54,7 +54,7 @@ class FilterMeals extends React.Component {
     const maxCategoriesNumber = 5;
     return mealsCategories.filter((_, index) => index <= maxCategoriesNumber)
       .map((meal) => (
-        <div key="buttons-div">
+        <div key={ meal.strCategory }>
           <button
             type="button"
             key={ meal.strCategory }
