@@ -25,6 +25,7 @@ class FilterCocktails extends React.Component {
     const { activeFilter } = this.state;
     if (category === activeFilter) {
       this.setState({ filterToggle: true });
+      this.setState({ activeFilter: '' });
     } else {
       this.setState({ filterToggle: false });
       const response = await fetch(`${'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c='}${category}`)
@@ -70,20 +71,20 @@ class FilterCocktails extends React.Component {
     const { drinksFilteredByCategory } = this.state;
 
     return drinksFilteredByCategory.filter((_, index) => index < maxDrinksNumber)
-      .map((meal, index) => (
+      .map((drink, index) => (
         <button
           type="button"
           onClick={ () => this.handleClickSendToDetails(drink.idDrink) }
-          key={ index }
+          key={ drink.strDrinkThumb }
           data-testid={ `${index}-recipe-card` }
         >
           <img
-            src={ meal.strDrinkThumb }
+            src={ drink.strDrinkThumb }
             data-testid={ `${index}-card-img` }
             alt="card-thumb"
             className="thumb-card"
           />
-          <p data-testid={ `${index}-card-name` }>{ meal.strDrink }</p>
+          <p data-testid={ `${index}-card-name` }>{ drink.strDrink }</p>
         </button>));
   }
 
