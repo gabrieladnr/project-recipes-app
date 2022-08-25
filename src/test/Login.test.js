@@ -2,6 +2,7 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
+import { Router } from 'react-router-dom';
 import renderWithRouter from './helpers/renderWithRouterAndRedux';
 import Login from '../components/Login';
 
@@ -12,7 +13,11 @@ describe('Testa a tela de Login', () => {
   const buttonLogin = 'login-submit-btn';
 
   test('Testa se o input de email, de senha e o botão aparece na tela', () => {
-    renderWithRouter(<Login />);
+    renderWithRouter(
+      <Router history={ history }>
+        <Login history={ history } />
+      </Router>,
+    );
     const email = screen.getByTestId('email-input');
     const password = screen.getByTestId('password-input');
     const button = screen.getByTestId('login-submit-btn');
@@ -23,7 +28,11 @@ describe('Testa a tela de Login', () => {
   });
 
   test('Testa se o botão está desabilitado', () => {
-    renderWithRouter(<Login />);
+    renderWithRouter(
+      <Router history={ history }>
+        <Login history={ history } />
+      </Router>,
+    );
 
     const btn = screen.getByTestId(buttonLogin);
 
@@ -31,7 +40,11 @@ describe('Testa a tela de Login', () => {
   });
 
   test('Testa se o botão habilita ao preencher os campos', () => {
-    renderWithRouter(<Login />);
+    renderWithRouter(
+      <Router history={ history }>
+        <Login history={ history } />
+      </Router>,
+    );
 
     const email = screen.getByTestId(emailInput);
     const password = screen.getByTestId(passwordInput);
@@ -46,7 +59,11 @@ describe('Testa a tela de Login', () => {
   });
 
   test('Testa se o botão é clicável', () => {
-    renderWithRouter(<Login history={ history } />);
+    renderWithRouter(
+      <Router history={ history }>
+        <Login history={ history } />
+      </Router>,
+    );
 
     const email = screen.getByTestId(emailInput);
     const password = screen.getByTestId(passwordInput);

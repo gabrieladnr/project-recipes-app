@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
-class FoodDetails extends React.Component {
+export default class DrinksInProgress extends Component {
   constructor() {
     super();
     this.state = {
@@ -13,6 +13,10 @@ class FoodDetails extends React.Component {
       recomendation: [],
       copied: false,
       favorite: false,
+      statusCheck: '',
+      checked: false,
+      checkedIngredients: [],
+      statusDisabled: true,
     };
   }
 
@@ -20,20 +24,28 @@ class FoodDetails extends React.Component {
     const { match: { params: { id } } } = this.props;
     this.getRecipeById(id);
     this.getRecomendation();
+    this.maintainProgress();
+  }
+
+  maintainProgress = () => {
+    const progress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    this.setState({
+      checkedIngredients: progress,
+    });
   }
 
   getRecomendation = async () => {
-    const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+    const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
     const result = await fetch(url)
       .then((response) => response.json());
-    this.setState({ recomendation: result.drinks });
+    this.setState({ recomendation: result.meals });
   }
 
   getRecipeById = async (id) => {
-    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
     const result = await fetch(url)
       .then((response) => response.json());
-    this.setState({ recipe: result.meals[0] });
+    this.setState({ recipe: result.drinks[0] });
     if (localStorage.getItem('favoriteRecipes') !== null
     && JSON.parse(localStorage.getItem('favoriteRecipes'))
       .some((item) => item.id === id)) {
@@ -42,120 +54,126 @@ class FoodDetails extends React.Component {
   }
 
   favoriteRecipe = () => {
-    const { match: { params: { id } } } = this.props;
     const { recipe, favorite } = this.state;
-    // -----------------------------------------------------
+    const { match: { params: { id } } } = this.props;
     if (localStorage.getItem('favoriteRecipes') !== null
     && JSON.parse(localStorage.getItem('favoriteRecipes'))
       .some((item) => item.id === id)) {
       const oldFavorites = localStorage.getItem('favoriteRecipes');
       const newFavorites = JSON.parse(oldFavorites).filter((item) => item.id !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-      // -----------------------------------------------------
     } else {
-      const oldFavorites = (JSON.parse(localStorage.getItem('favoriteRecipes')) !== null)
+      const oldFavorites = (localStorage.getItem('favoriteRecipes') !== null)
         ? JSON.parse(localStorage.getItem('favoriteRecipes'))
         : null;
       const newFavorites = (oldFavorites !== null) ? [
         ...oldFavorites,
         {
-          id: recipe.idMeal,
-          type: 'food',
-          nationality: recipe.strArea,
+          id: recipe.idDrink,
+          type: 'drink',
+          nationality: '',
           category: recipe.strCategory,
-          alcoholicOrNot: '',
-          name: recipe.strMeal,
-          image: recipe.strMealThumb,
+          alcoholicOrNot: recipe.strAlcoholic,
+          name: recipe.strDrink,
+          image: recipe.strDrinkThumb,
         },
       ] : [
         {
-          id: recipe.idMeal,
-          type: 'food',
-          nationality: recipe.strArea,
+          id: recipe.idDrink,
+          type: 'drink',
+          nationality: '',
           category: recipe.strCategory,
-          alcoholicOrNot: '',
-          name: recipe.strMeal,
-          image: recipe.strMealThumb,
+          alcoholicOrNot: recipe.strAlcoholic,
+          name: recipe.strDrink,
+          image: recipe.strDrinkThumb,
         },
       ];
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-      // -----------------------------------------------------
     }
     this.setState({ favorite: !favorite });
   }
 
-  render() {
-    const { history, match: { params: { id } } } = this.props;
-    const { recipe, copied, favorite, recomendation } = this.state;
-    const favoriteImg = (favorite) ? blackHeartIcon : whiteHeartIcon;
-    // -----------------------------------------------------
-    let btn;
-    if (localStorage.getItem('doneRecipes') !== null
-      && JSON.parse(localStorage.getItem('doneRecipes'))
-        .some((item) => item.id === id)) {
-      btn = (<> </>);
+  recipeProgress = (ingredient) => {
+    const { checked, recipe, checkedIngredients } = this.state;
+    if (checked === false) {
+      this.setState({
+        checked: true,
+        statusCheck: 'checked',
+        checkedIngredients: [...checkedIngredients, ingredient],
+      });
     } else {
-      btn = (
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          className="start-recipe-btn"
-          onClick={ () => history.push(`${history.location.pathname}/in-progress`) }
-        >
-          {
-            (localStorage.getItem('inProgressRecipes') !== null
-              && Object.keys(JSON.parse(
-                localStorage.getItem('inProgressRecipes'),
-              ).meals)
-                .some((item) => item === id))
-              ? 'Continue Recipe' : 'Start Recipe'
-          }
-        </button>);
+      this.setState({
+        checked: false,
+        statusCheck: '',
+        checkedIngredients: checkedIngredients.filter((item) => item !== ingredient),
+      });
     }
-    // -----------------------------------------------------
-    const recomendList = (recomendation.length > 0)
-      ? recomendation.map((item, index) => {
-        const testId = `${index}-recomendation-card`;
-        const maxRecomendation = 6;
-        if (index < maxRecomendation) {
-          return (
-            <li data-testid={ testId } key={ index }>
-              <img src={ item.strDrinkThumb } alt={ item.strDrink } />
-              <h3>{item.strDrink}</h3>
-            </li>
-          );
-        }
-        return <> </>;
-      })
-      : <> </>;
-    // -----------------------------------------------------
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      ...JSON.parse(localStorage.getItem('inProgressRecipes')),
+      cocktails: {
+        [recipe.id]: checkedIngredients,
+      },
+    }));
+  }
+
+  finalizeRecipe = () => {
+    const { recipe, checkedIngredients, statusDisabled } = this.state;
+    const avaliableIngrid = Object.keys(recipe)
+      .filter((e) => e.includes('strIngredient'));
+    if (avaliableIngrid.length === checkedIngredients.length) {
+      this.setState({
+        statusDisabled: !statusDisabled,
+      });
+    }
+  }
+
+  // compartilhar - check
+  // habilitar botão quando todos os checkmarks estiverem procados - check em teoria
+  // favorite - check
+  // marcar os ingredientes - riscando as palavras - check
+  // salvar estado da receita - localStorage - check
+
+  render() {
+    const { history } = this.props;
+    const { recipe, copied, favorite, recomendation, statusCheck } = this.state;
+    console.log(recomendation);
+    const favoriteImg = (favorite) ? blackHeartIcon : whiteHeartIcon;
     return (
       <main>
-        <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
+        <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
         <img
           data-testid="recipe-photo"
-          src={ recipe.strMealThumb }
+          src={ recipe.strDrinkThumb }
           alt={ recipe.strTags }
           tagname={ recipe.strTags }
         />
-        <p data-testid="recipe-category">{ recipe.strCategory }</p>
+        <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
         <h3>Ingredients</h3>
         <ul>
           {
             Object.keys(recipe).filter((key) => key.includes('strIngredient'))
               .map((ingredient, index) => {
-                const testid = `${index}-ingredient-name-and-measure`;
                 if (recipe[ingredient] === '' || recipe[ingredient] === null) {
                   return <div key={ index }> </div>;
                 }
                 const measure = `strMeasure${index + 1}`;
                 return (
-                  <li
-                    data-testid={ testid }
+                  <label
                     key={ index }
+                    htmlFor="ingridients"
                   >
+                    <input
+                      type="checkbox"
+                      data-testid={ `${index}-ingridient-step` }
+                      onChange={ () => {
+                        this.recipeProgress(recipe[ingredient]);
+                        this.finalizeRecipe();
+                      } }
+                      className={ statusCheck }
+                      checked={ statusCheck }
+                    />
                     {`${recipe[measure]} ${recipe[ingredient]}`}
-                  </li>
+                  </label>
                 );
               })
           }
@@ -163,19 +181,7 @@ class FoodDetails extends React.Component {
         <section>
           <h3>Instructions:</h3>
           <p data-testid="instructions">{ recipe.strInstructions }</p>
-          <iframe
-            title={ recipe.strMeal }
-            src={ recipe.strYoutube }
-            width="500"
-            height="500"
-            data-testid="video"
-          >
-            <p>Your browser does not support iframes.</p>
-          </iframe>
           <section>
-            {
-              btn
-            }
             <button
               type="button"
               data-testid="share-btn"
@@ -201,19 +207,20 @@ class FoodDetails extends React.Component {
               <img src={ favoriteImg } alt={ JSON.stringify(favorite) } />
             </button>
           </section>
-          <h3>Recomendation list:</h3>
-          <ul data-testid="recomendation-card">
-            {
-              recomendList
-            }
-          </ul>
+          <button
+            data-testid="finish-recipe-btn"
+            type="button"
+            disabled={ statusDisabled }
+          >
+            Finalizar receita
+          </button>
         </section>
       </main>
     );
   }
 }
 
-FoodDetails.propTypes = {
+DrinksInProgress.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.objectOf(PropTypes.string),
   }).isRequired,
@@ -224,5 +231,3 @@ FoodDetails.propTypes = {
     }),
   }).isRequired,
 };
-
-export default FoodDetails;
