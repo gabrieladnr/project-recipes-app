@@ -2,13 +2,13 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import App from '../App';
 import store from '../redux/store';
 import oneDrink from '../../cypress/mocks/oneDrink';
 import drinkCategories from '../../cypress/mocks/drinkCategories';
 import drinks from '../../cypress/mocks/drinks';
-import userEvent from '@testing-library/user-event';
 
 const renderWithRouterAndRedux = (
   component,
@@ -73,11 +73,12 @@ describe('teste /drinks: name, retorno apenas 1 objeto:', () => {
     fireEvent.click(search);
   });
 
-  test('Testa se dá para alterar o input de texto', () => {
+  test('Testa se dá para alterar o input de texto', async () => {
     renderWithRouterAndRedux(<App />, '/drinks');
     const search = screen.getByTestId('search-top-btn');
     expect(search).toBeInTheDocument();
     fireEvent.click(search);
+
     const inputText = screen.getByTestId('search-input');
     expect(inputText).toBeInTheDocument();
     const ingredient = screen.getByRole('radio', { name: /ingredient/i });
@@ -85,9 +86,32 @@ describe('teste /drinks: name, retorno apenas 1 objeto:', () => {
     userEvent.type(inputText, 'honey');
     const buttonSearch = screen.getByTestId('exec-search-btn');
     fireEvent.click(buttonSearch);
+
+    const test = await screen.findAllByText(/Figgy Thyme/i);
+    expect(test).toBeInTheDocument();
+    expect().toBeInTheDocument();
     screen.logTestingPlaygroundURL();
   });
-  test('Testa se dá para alterar o input de texto', () => {
+  /* Figgy Thyme
+
+card-thumb
+Honey Bee
+
+card-thumb
+Hot Toddy
+
+card-thumb
+Melya
+
+card-thumb
+Scottish Highland Liqueur
+
+card-thumb
+Strawberry Shivers
+
+card-thumb
+Sweet Bananas */
+  /* test('Testa se dá para alterar o input de texto', () => {
     renderWithRouterAndRedux(<App />, '/drinks');
     const search = screen.getByTestId('search-top-btn');
     expect(search).toBeInTheDocument();
@@ -116,7 +140,7 @@ describe('teste /drinks: name, retorno apenas 1 objeto:', () => {
     const name = screen.getByRole('radio', { name: /name/i });
     expect(name).toBeInTheDocument();
     screen.logTestingPlaygroundURL();
-  });
+  }); */
 });
 
 /* // teste /drinks : name, retorno apenas 1 objeto.
