@@ -105,6 +105,7 @@ describe('Testa o funcionamento da tela de receitas de drinks, verificando se:',
     userEvent.click(a1Recipe);
     expect(history.location.pathname).toBe('/drinks/17222');
   });
+  // problema de lint aqui, não soube resolver
   test('ao clicar na receita o user é redirecionado para detalhes', async () => {
     const history = createMemoryHistory({ initialEntries: ['/drinks'] });
     renderWithRouter(<Recipes history={ history } />);
