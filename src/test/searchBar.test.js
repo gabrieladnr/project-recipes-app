@@ -13,7 +13,7 @@ import fetch from '../../cypress/mocks/fetch';
 // TESTANDO DRINKS
 // teste /drinks : ingredientes, retorno +1 objeto.
 describe('teste /drinks: name, retorno apenas 1 objeto:', () => {
-  /* beforeEach(() => {
+  beforeEach(() => {
     global.fetch = async (url) => {
       switch (url) {
       case 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=':
@@ -34,11 +34,6 @@ describe('teste /drinks: name, retorno apenas 1 objeto:', () => {
         };
       }
     };
-  }); */
-
-  // ATENÇÃO !!! As fetchs já foram feitas dentro da pasta cypress. Esse é o código para resolver todos as nossas mocks sem nenhum trabalho
-  beforeEach(() => {
-    global.fetch = fetch;
   });
 
   test('os inputs estão sendo renderizados na tela', async () => {
