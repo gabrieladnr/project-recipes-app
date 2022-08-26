@@ -1,9 +1,12 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import copy from 'clipboard-copy';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import App from '../App';
 import favoriteRecipes from './helpers/favoritesLocalStorage';
+
+jest.mock('clipboard-copy');
 
 describe('Favorite Recipes Empty: ', () => {
   test('Testa se não tem nenhuma receita favoritada, aparece apenas uma mensagem', () => {
@@ -17,10 +20,16 @@ describe('Favorite Recipes Empty: ', () => {
 describe('Testes a página Favorite Recipes com receitas favoritadas', () => {
   const favoriteRoute = '/favorite-recipes';
   const buttonInfo = '0-horizontal-name';
+  // let windowSpy;
 
   beforeEach(() => {
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    // windowSpy = jest.spyOn(window, 'document', 'get');
   });
+
+  // afterEach(() => {
+  //   windowSpy.mockRestore();
+  // });
 
   test('Testa se, ao favoritar uma bebida ou comida, os inputs aparecem na tela',
     () => {
@@ -85,6 +94,20 @@ describe('Testes a página Favorite Recipes com receitas favoritadas', () => {
     const buttonFavorite = screen.getByTestId('0-horizontal-favorite-btn');
     userEvent.click(buttonFavorite);
     userEvent.click(screen.getByTestId('0-horizontal-image'));
+  });
+
+  test('Testa se ao clicar no botão share ele exibe uma mensagem', () => {
+    renderWithRouterAndRedux(<App />, favoriteRoute);
+    copy.mockResolvedValue({});
+
+    const buttonShare = screen.getByTestId('0-horizontal-share-btn');
+    userEvent.click(buttonShare);
+
+    const copiedText = screen.getByTestId('link-copied');
+
+    // screen.logTestingPlaygroundURL();
+
+    expect(copiedText).toBeVisible();
   });
 
   test('', () => {
