@@ -74,6 +74,7 @@ class FilterCocktails extends React.Component {
       .map((drink, index) => (
         <button
           type="button"
+          className="recipeOpt"
           onClick={ () => this.handleClickSendToDetails(drink.idDrink) }
           key={ drink.strDrinkThumb }
           data-testid={ `${index}-recipe-card` }
@@ -97,6 +98,7 @@ class FilterCocktails extends React.Component {
         <button
           type="button"
           key={ drink.strCategory }
+          className="filterBtn"
           data-testid={ `${drink.strCategory}-category-filter` }
           onClick={ () => this.handleCategoryButtonClick(drink.strCategory) }
         >
@@ -112,13 +114,16 @@ class FilterCocktails extends React.Component {
         <button
           type="button"
           key="All-category-filter"
+          className="filterBtn"
           data-testid="All-category-filter"
           onClick={ this.handleAllButtonClick }
         >
           All
         </button>
-        { !filterToggle && this.renderDrinksFilteredByCategory() }
-        { filterToggle && this.renderAllDrinks() }
+        <div className="drinks">
+          { !filterToggle && this.renderDrinksFilteredByCategory() }
+          { filterToggle && this.renderAllDrinks() }
+        </div>
       </div>
     );
   }

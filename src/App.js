@@ -14,23 +14,21 @@ import RecipeInProgress from './components/RecipeInProgress';
 function App() {
   return (
     <div className="meals">
-      <div>
-        <Switch>
-          <Route path="/" exact component={ Login } />
-          <Route path="/foods/:id" exact component={ FoodDetails } />
-          <Route path="/drinks/:id" exact component={ DrinkDetails } />
-          <Route path="/foods" exact component={ Recipes } />
-          <Route path="/drinks" exact component={ Recipes } />
-          <Route path="/foods/:id/in-progress" component={ RecipeInProgress } />
-          <Route
-            path="/drinks/:id/in-progress"
-            component={ RecipeInProgress }
-          />
-          <Route path="/profile" component={ Profile } />
-          <Route path="/done-recipes" component={ DoneRecipes } />
-          <Route path="/favorite-recipes" component={ FavoriteRecipes } />
-        </Switch>
-      </div>
+      <Switch>
+        <Route path="/" exact component={ Login } />
+        <Route path="/foods/:id" exact component={ FoodDetails } />
+        <Route path="/drinks/:id" exact component={ DrinkDetails } />
+        <Route path="/foods" exact component={ Recipes } />
+        <Route path="/drinks" exact component={ Recipes } />
+        <Route path="/foods/:id/in-progress" component={ RecipeInProgress } />
+        <Route
+          path="/drinks/:id/in-progress"
+          component={ RecipeInProgress }
+        />
+        <Route path="/profile" component={ Profile } />
+        <Route path="/done-recipes" component={ DoneRecipes } />
+        <Route path="/favorite-recipes" component={ FavoriteRecipes } />
+      </Switch>
     </div>
   );
 }
