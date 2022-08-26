@@ -111,6 +111,7 @@ class DoneRecipes extends Component {
                   >
                     <button
                       type="button"
+                      data-testid={ `button-${index}-horizontal-image` }
                       onClick={ () => history.push(`${type}s/${id}`) }
                     >
                       <img
@@ -122,6 +123,7 @@ class DoneRecipes extends Component {
                     </button>
                     <button
                       type="button"
+                      data-testid={ `button-${index}-horizontal-name` }
                       onClick={ () => history.push(`${type}s/${id}`) }
                     >
                       <h3 data-testid={ `${index}-horizontal-name` }>
