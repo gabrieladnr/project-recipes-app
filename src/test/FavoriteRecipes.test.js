@@ -83,11 +83,10 @@ describe('Testes a página Favorite Recipes com receitas favoritadas', () => {
   test('Testa se, ao cliclar no botão de favoritos, ele desfavorita', () => {
     renderWithRouterAndRedux(<App />, favoriteRoute);
     const buttonFavorite = screen.getByTestId('0-horizontal-favorite-btn');
-
-    // userEvent.click(screen.getByTestId('0-horizontal-share-btn'));
-    userEvent.click();
+    userEvent.click(buttonFavorite);
     userEvent.click(screen.getByTestId('0-horizontal-image'));
   });
+
   test('', () => {
     renderWithRouterAndRedux(<App />, favoriteRoute);
     userEvent.click(screen.getByTestId('0-horizontal-name'));
