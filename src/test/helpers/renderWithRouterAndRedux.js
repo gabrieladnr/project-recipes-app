@@ -1,17 +1,19 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { Provider } from 'react-redux';
-import { legacy_createStore as createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import reducer from '../../redux/reducers';
+import store from '../../redux/store/index';
 
-export const renderWithRouterAndRedux = (component, initialState, route = '/') => {
-  const store = createStore(reducer, initialState, applyMiddleware(thunk));
-  const history = createMemoryHistory({ initialEntries: [route] });
+const renderWithRouterAndRedux = (
+  component,
+  path = '/',
+) => {
+  // conteudo
 
+  const history = createMemoryHistory({ initialEntries: [path] });
   return {
+    // caralho aquatico
     ...render(
       <Provider store={ store }>
         <Router history={ history }>

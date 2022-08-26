@@ -11,7 +11,7 @@ class DoneRecipes extends Component {
   constructor() {
     super();
     this.state = {
-      doneRecipes: [],
+      doneRecipes: null,
       filterDoneRecipes: 'All',
     };
   }
@@ -23,7 +23,7 @@ class DoneRecipes extends Component {
 
   // Função responsável apenas por atribuir no estado um valor passado por parametro. No componentDidMount não é recomendável que atualize o estado local
   callLocalStorage = () => {
-    const localStorageDoneRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')); // ALTERAR LOCALSTORAGE FUTURAMENTE. PEGANDO DOS FAVORITADOS PARA TESTE.
+    const localStorageDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes')); // ALTERAR LOCALSTORAGE FUTURAMENTE. PEGANDO DOS FAVORITADOS PARA TESTE.
     if (localStorageDoneRecipes?.length) {
       this.setState({
         doneRecipes: [...localStorageDoneRecipes],
@@ -92,32 +92,67 @@ class DoneRecipes extends Component {
               .filter((recipe) => (
                 (filterDoneRecipes === 'Drinks') ? recipe.type === 'drink' : true)) // filtrar bebidas
               .map((recipe, index) => {
-                const { image, name, doneDate } = recipe;
+                const {
+                  id,
+                  type,
+                  category,
+                  nationality,
+                  alcoholicOrNot,
+                  name,
+                  image,
+                  doneDate,
+                  tags,
+                } = recipe;
                 console.log(recipe);
                 return (
                   <div
                     className={ `done-recipe ${index}-done-recipe` }
                     key={ `${index}-done-recipe` }
                   >
-                    <img
-                      className="thumb-card"
-                      src={ image }
-                      alt="recipe"
-                      data-testid={ `${index}-horizontal-top-text` }
-                    />
-                    <h3 data-testid={ `${index}-horizontal-name` }>
-                      {name}
+                    <button
+                      type="button"
+                      onClick={ () => history.push(`${type}s/${id}`) }
+                    >
+                      <img
+                        className="thumb-card"
+                        src={ image }
+                        alt="recipe"
+                        data-testid={ `${index}-horizontal-image` }
+                      />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={ () => history.push(`${type}s/${id}`) }
+                    >
+                      <h3 data-testid={ `${index}-horizontal-name` }>
+                        {name}
+                      </h3>
+                    </button>
+                    <h3 data-testid={ `${index}-horizontal-top-text` }>
+                      {
+                        type === 'food' ? `${nationality} - ${category}`
+                          : alcoholicOrNot
+                      }
                     </h3>
                     <h3 data-testid={ `${index}-horizontal-done-date` }>
                       {doneDate}
                     </h3>
+                    {
+                      tags.map((tag) => (
+                        <h3
+                          key={ `${name}-${tag}` }
+                          data-testid={ `${index}-${tag}-horizontal-tag` }
+                        >
+                          {tag}
+                        </h3>
+                      ))
+                    }
                     <Share
-                      keyused="history"
-                      history={ history.location.pathname }
-                      item=""
-                      testId="share-btn"
+                      testId={ `${index}-horizontal-share-btn` }
+                      item={ recipe }
+                      pathname={ history.location.pathname }
+                      keyused="item"
                     />
-                    <img src={ shareIcon } alt="share" />
                   </div>
                 );
               })
@@ -130,10 +165,11 @@ class DoneRecipes extends Component {
 
 DoneRecipes.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func,
     location: PropTypes.shape({
-      pathname: PropTypes.string,
+      pathname: PropTypes.string.isRequired,
     }),
+    push: PropTypes.func,
   }).isRequired,
 };
+
 export default DoneRecipes;
