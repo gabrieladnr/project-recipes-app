@@ -63,7 +63,7 @@ class Share extends Component {
   }
 }
 Share.propTypes = {
-  pathname: PropTypes.string.isRequired,
+  pathname: PropTypes.func.isRequired,
   item: PropTypes.shape({
     type: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
