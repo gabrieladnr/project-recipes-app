@@ -13,7 +13,6 @@ const renderWithRouterAndRedux = (
 
   const history = createMemoryHistory({ initialEntries: [path] });
   return {
-    // caralho aquatico
     ...render(
       <Provider store={ store }>
         <Router history={ history }>
