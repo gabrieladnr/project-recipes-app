@@ -98,6 +98,7 @@ class FilterMeals extends React.Component {
         <div key={ meal.strCategory }>
           <button
             type="button"
+            className="filterBtn"
             key={ meal.strCategory }
             data-testid={ `${meal.strCategory}-category-filter` }
             onClick={ () => this.handleCategoryButtonClick(meal.strCategory) }
@@ -112,11 +113,12 @@ class FilterMeals extends React.Component {
   render() {
     const { filterToggle } = this.state;
     return (
-      <div>
+      <nav>
         { this.renderFilterMealCategoryButtons() }
         <button
           type="button"
           key="All-category-filter"
+          className="filterBtn"
           data-testid="All-category-filter"
           onClick={ this.handleAllButtonClick }
         >
@@ -124,7 +126,7 @@ class FilterMeals extends React.Component {
         </button>
         { !filterToggle && this.renderMealFilteredByCategory() }
         { filterToggle && this.renderAllMeals() }
-      </div>
+      </nav>
     );
   }
 }
