@@ -162,7 +162,7 @@ class DrinkDetails extends React.Component {
             }
             <Share
               keyused="history"
-              history={ history.location.pathname }
+              pathname={ history.location.pathname }
               item=""
               testId="share-btn"
             />
