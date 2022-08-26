@@ -3,15 +3,11 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
-
-import fetch from '../../cypress/mocks/fetch';
 // MOCKS DO CYPRESS PARA NÃO PRECISAR MONTAR OS MODULES:
-
-// import oneDrink from '../../cypress/mocks/oneDrink';
-// import drinkCategories from '../../cypress/mocks/drinkCategories';
-// import drinks from '../../cypress/mocks/drinks';
+import oneDrink from '../../cypress/mocks/oneDrink';
+import drinkCategories from '../../cypress/mocks/drinkCategories';
+import drinks from '../../cypress/mocks/drinks';
 // TESTANDO DRINKS
-// teste /drinks : ingredientes, retorno +1 objeto.
 describe('teste /drinks: name, retorno apenas 1 objeto:', () => {
   beforeEach(() => {
     global.fetch = async (url) => {
