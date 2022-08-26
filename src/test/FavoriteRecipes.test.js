@@ -20,16 +20,10 @@ describe('Favorite Recipes Empty: ', () => {
 describe('Testes a página Favorite Recipes com receitas favoritadas', () => {
   const favoriteRoute = '/favorite-recipes';
   const buttonInfo = '0-horizontal-name';
-  // let windowSpy;
 
   beforeEach(() => {
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
-    // windowSpy = jest.spyOn(window, 'document', 'get');
   });
-
-  // afterEach(() => {
-  //   windowSpy.mockRestore();
-  // });
 
   test('Testa se, ao favoritar uma bebida ou comida, os inputs aparecem na tela',
     () => {
@@ -104,9 +98,6 @@ describe('Testes a página Favorite Recipes com receitas favoritadas', () => {
     userEvent.click(buttonShare);
 
     const copiedText = screen.getByTestId('link-copied');
-
-    // screen.logTestingPlaygroundURL();
-
     expect(copiedText).toBeVisible();
   });
 
