@@ -25,7 +25,8 @@ describe('Testando o componente Drink Details:', () => {
   });
 
   test('botão de Continue a receita:', async () => {
-    localStorage.getItem('doneRecipes', JSON.stringify(doneRecipes));
+    localStorage.clear();
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
     localStorage.setItem('inProgressRecipes', '{"meals":{"52771":{"id":"52771"}}}');
     renderWithRouterAndRedux(<App />, '/foods/52771');
     await waitFor(() => {
@@ -36,13 +37,14 @@ describe('Testando o componente Drink Details:', () => {
   });
 
   test('botão de Continue a receita:', async () => {
-    console.log(JSON.parse(localStorage.getItem('favoriteRecipes')));
+    localStorage.clear();
     localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
     localStorage.setItem('inProgressRecipes', '{"meals":{"52771":{"id":"52771"}}}');
     renderWithRouterAndRedux(<App />, '/foods/52771');
     await waitFor(() => {
       screen.getByTestId('4-recomendation-card');
     });
+    userEvent.click(screen.getByTestId('favorite-btn'));
     screen.logTestingPlaygroundURL();
   });
 });
