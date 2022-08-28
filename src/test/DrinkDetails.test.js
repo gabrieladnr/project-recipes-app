@@ -23,7 +23,6 @@ describe('Testando o componente Drink Details:', () => {
       }
     };
   });
-  const continueTestId = 'continue-recipe-btn';
 
   test('botão de Continue a receita:', async () => {
     localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
@@ -36,12 +35,24 @@ describe('Testando o componente Drink Details:', () => {
   });
 
   test('botão de Continue a receita:', async () => {
+    localStorage.clear();
+    renderWithRouterAndRedux(<App />, '/drinks/178319');
+    await waitFor(() => {
+      screen.getByTestId('4-recomendation-card');
+    });
+    userEvent.click(screen.getByTestId('start-recipe-btn'));
+    screen.logTestingPlaygroundURL();
+  });
+
+  test('botão de Continue a receita:', async () => {
+    localStorage.clear();
     localStorage.setItem('inProgressRecipes', '{"cocktails":{"178319":{"id":"178319"}}}');
     renderWithRouterAndRedux(<App />, '/drinks/178319');
     await waitFor(() => {
       screen.getByTestId('4-recomendation-card');
     });
-    userEvent.click(screen.getByTestId(continueTestId));
+    userEvent.click(screen.getByTestId('favorite-btn'));
+    userEvent.click(screen.getByTestId('start-recipe-btn'));
     screen.logTestingPlaygroundURL();
   });
 });
