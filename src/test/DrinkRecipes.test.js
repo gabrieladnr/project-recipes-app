@@ -9,6 +9,7 @@ const history = createMemoryHistory({ initialEntries: ['/foods'] });
 const drinksBtn = 'drinks-bottom-btn';
 const foodsBtn = 'food-bottom-btn';
 const CocoaCateg = 'Cocoa-category-filter';
+const cocktailCate = 'Cocktail-category-filter';
 
 describe('Testa o funcionamento da tela de receitas de drinks, verificando se:', () => {
   test('a rota é /foods ao ser redirecionado após o Login', () => {
@@ -48,7 +49,7 @@ describe('Testa o funcionamento da tela de receitas de drinks, verificando se:',
     userEvent.click(drinksFooterBtn);
 
     const OrdinaryCateg = await screen.findByTestId('Ordinary Drink-category-filter');
-    const CocktailCategory = await screen.findByTestId('Cocktail-category-filter');
+    const CocktailCategory = await screen.findByTestId(cocktailCate);
     const ShakeCategory = await screen.findByTestId('Shake-category-filter');
     const OtherCategory = await screen.findByTestId('Other/Unknown-category-filter');
     const CocoaCategory = await screen.findByTestId(CocoaCateg);
@@ -88,7 +89,7 @@ describe('Testa o funcionamento da tela de receitas de drinks, verificando se:',
 
   test('ao clicar em uma categoria de bebida são exibidas receitas', async () => {
     renderWithRouter(<Recipes history={ history } />);
-    const CocktailCategory = await screen.findByTestId('Cocktail-category-filter');
+    const CocktailCategory = await screen.findByTestId(cocktailCate);
 
     userEvent.click(CocktailCategory);
     const a1Recipe = await screen.findByText(/a1/i);
@@ -97,7 +98,7 @@ describe('Testa o funcionamento da tela de receitas de drinks, verificando se:',
   test('ao clicar na receita da categ o user é redirecionado para detalhes', async () => {
     renderWithRouter(<Recipes history={ history } />);
 
-    const CocktailCategory = await screen.findByTestId('Cocktail-category-filter');
+    const CocktailCategory = await screen.findByTestId(cocktailCate);
     userEvent.click(CocktailCategory);
 
     const a1Recipe = await screen.findByText(/a1/i);
@@ -107,7 +108,7 @@ describe('Testa o funcionamento da tela de receitas de drinks, verificando se:',
   });
   // problema de lint aqui, não soube resolver
   test('ao clicar na receita o user é redirecionado para detalhes', async () => {
-    const history = createMemoryHistory({ initialEntries: ['/drinks'] });
+    createMemoryHistory({ initialEntries: ['/drinks'] });
     renderWithRouter(<Recipes history={ history } />);
 
     const adamRecipe = await screen.findByText(/adam/i);
