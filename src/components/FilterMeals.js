@@ -51,6 +51,7 @@ class FilterMeals extends React.Component {
       .map((meal, index) => (
         <button
           type="button"
+          className="recipes-recipe-card"
           onClick={ () => this.handleClickSendToDetails(meal.idMeal) }
           key={ meal.idMeal }
           data-testid={ `${index}-recipe-card` }
@@ -74,6 +75,7 @@ class FilterMeals extends React.Component {
       .map((meal, index) => (
         <button
           type="button"
+          className="recipes-recipe-card"
           onClick={ () => this.handleClickSendToDetails(meal.idMeal) }
           key={ index }
           data-testid={ `${index}-recipe-card` }
@@ -95,18 +97,15 @@ class FilterMeals extends React.Component {
     const maxCategoriesNumber = 5;
     return mealsCategories.filter((_, index) => index < maxCategoriesNumber)
       .map((meal) => (
-        <div key={ meal.strCategory }>
-          <button
-            type="button"
-            className="filterBtn"
-            key={ meal.strCategory }
-            data-testid={ `${meal.strCategory}-category-filter` }
-            onClick={ () => this.handleCategoryButtonClick(meal.strCategory) }
-          >
-            { meal.strCategory}
-          </button>
-
-        </div>
+        <button
+          key={ meal.strCategory }
+          type="button"
+          className="filterBtn"
+          data-testid={ `${meal.strCategory}-category-filter` }
+          onClick={ () => this.handleCategoryButtonClick(meal.strCategory) }
+        >
+          { meal.strCategory}
+        </button>
       ));
   }
 
@@ -114,18 +113,22 @@ class FilterMeals extends React.Component {
     const { filterToggle } = this.state;
     return (
       <nav>
-        { this.renderFilterMealCategoryButtons() }
-        <button
-          type="button"
-          key="All-category-filter"
-          className="filterBtn"
-          data-testid="All-category-filter"
-          onClick={ this.handleAllButtonClick }
-        >
-          All
-        </button>
-        { !filterToggle && this.renderMealFilteredByCategory() }
-        { filterToggle && this.renderAllMeals() }
+        <div className="filters-cards">
+          { this.renderFilterMealCategoryButtons() }
+          <button
+            type="button"
+            key="All-category-filter"
+            className="filterBtn"
+            data-testid="All-category-filter"
+            onClick={ this.handleAllButtonClick }
+          >
+            All
+          </button>
+        </div>
+        <div className="recipes-cards">
+          { !filterToggle && this.renderMealFilteredByCategory() }
+          { filterToggle && this.renderAllMeals() }
+        </div>
       </nav>
     );
   }

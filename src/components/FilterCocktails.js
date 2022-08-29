@@ -51,6 +51,7 @@ class FilterCocktails extends React.Component {
       .map((drink, index) => (
         <button
           type="button"
+          className="recipes-recipe-card"
           onClick={ () => this.handleClickSendToDetails(drink.idDrink) }
           key={ drink.idDrink }
           data-testid={ `${index}-recipe-card` }
@@ -74,7 +75,7 @@ class FilterCocktails extends React.Component {
       .map((drink, index) => (
         <button
           type="button"
-          className="recipeOpt"
+          className="recipeOpt recipes-recipe-card"
           onClick={ () => this.handleClickSendToDetails(drink.idDrink) }
           key={ drink.strDrinkThumb }
           data-testid={ `${index}-recipe-card` }
@@ -110,17 +111,19 @@ class FilterCocktails extends React.Component {
     const { filterToggle } = this.state;
     return (
       <div>
-        { this.renderFilterCocktailsCategoryButtons() }
-        <button
-          type="button"
-          key="All-category-filter"
-          className="filterBtn"
-          data-testid="All-category-filter"
-          onClick={ this.handleAllButtonClick }
-        >
-          All
-        </button>
-        <div className="drinks">
+        <div className="filters-cards">
+          { this.renderFilterCocktailsCategoryButtons() }
+          <button
+            type="button"
+            key="All-category-filter"
+            className="filterBtn"
+            data-testid="All-category-filter"
+            onClick={ this.handleAllButtonClick }
+          >
+            All
+          </button>
+        </div>
+        <div className="recipes-cards">
           { !filterToggle && this.renderDrinksFilteredByCategory() }
           { filterToggle && this.renderAllDrinks() }
         </div>
