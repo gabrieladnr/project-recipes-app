@@ -5,6 +5,8 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import store from '../../redux/store/index';
 
+// 35-38,101,135
+
 const renderWithRouterAndRedux = (
   component,
   path = '/',
@@ -13,7 +15,6 @@ const renderWithRouterAndRedux = (
 
   const history = createMemoryHistory({ initialEntries: [path] });
   return {
-    // caralho aquatico
     ...render(
       <Provider store={ store }>
         <Router history={ history }>

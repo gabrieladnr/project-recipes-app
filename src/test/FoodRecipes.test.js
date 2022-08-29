@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import Recipes from '../components/Recipes';
 import renderWithRouter from './helpers/renderWithRouterAndRedux';
+import App from '../App';
 // import meals from '../../cypress/mocks/meals';
 
 // screen.logTestingPlayground()
@@ -23,15 +24,16 @@ import renderWithRouter from './helpers/renderWithRouterAndRedux';
 const BeefCategoryFilter = 'Beef-category-filter';
 const drinksBtn = 'drinks-bottom-btn';
 const foodsBtn = 'food-bottom-btn';
-const history = createMemoryHistory({ initialEntries: ['/foods'] });
+
 describe('Testa o funcionamento da tela de receitas, verificando se:', () => {
   test('a rota é /foods ao ser redirecionado após o Login', () => {
+    const history = createMemoryHistory({ initialEntries: ['/foods'] });
     renderWithRouter(<Recipes history={ history } />);
     expect(history.location.pathname).toBe('/foods');
   });
 
   test('são exibidos 12 cards de receitas no load inicial da página', async () => {
-    renderWithRouter(<Recipes history={ history } />);
+    renderWithRouter(<App />, '/foods');
     const firstcardName = await screen.findByTestId('0-card-name');
     const lastcardName = await screen.findByTestId('11-card-name');
     const firstcardImg = await screen.findByTestId('0-recipe-card');
@@ -43,7 +45,7 @@ describe('Testa o funcionamento da tela de receitas, verificando se:', () => {
   });
 
   test('o footer com links para Drinks e Foods é exibido na página', () => {
-    renderWithRouter(<Recipes history={ history } />);
+    renderWithRouter(<App />, '/foods');
     const footer = screen.getByTestId('footer');
     const foodsFooterBtn = screen.getByTestId(foodsBtn);
     const drinksFooterBtn = screen.getByTestId(drinksBtn);
@@ -53,7 +55,7 @@ describe('Testa o funcionamento da tela de receitas, verificando se:', () => {
   });
 
   test('são exibidas as primeiras cinco categorias de comidas', async () => {
-    renderWithRouter(<Recipes history={ history } />);
+    renderWithRouter(<App />, '/foods');
 
     const BeefCategory = await screen.findByTestId(BeefCategoryFilter);
     const BreakfastCategory = await screen.findByTestId('Breakfast-category-filter');
@@ -68,7 +70,7 @@ describe('Testa o funcionamento da tela de receitas, verificando se:', () => {
   });
 
   test('ao clicar em uma categoria de comida são exibidas receitas', async () => {
-    renderWithRouter(<Recipes history={ history } />);
+    renderWithRouter(<App />, '/foods');
     const foodsFooterBtn = screen.getByTestId(foodsBtn);
     userEvent.click(foodsFooterBtn);
 
@@ -80,7 +82,7 @@ describe('Testa o funcionamento da tela de receitas, verificando se:', () => {
   });
 
   test('ao clicar em All são exibidas receitas de todas as categorias', async () => {
-    renderWithRouter(<Recipes history={ history } />);
+    renderWithRouter(<App />, '/foods');
 
     const btnAll = await screen.findByRole('button', {
       name: /all/i,
@@ -93,7 +95,7 @@ describe('Testa o funcionamento da tela de receitas, verificando se:', () => {
   });
 
   test('ao clicar novamente em uma categoria são exibidas receitas gerais', async () => {
-    renderWithRouter(<Recipes history={ history } />);
+    renderWithRouter(<App />, '/foods');
 
     const foodsFooterBtn = screen.getByTestId(foodsBtn);
     userEvent.click(foodsFooterBtn);
@@ -111,6 +113,7 @@ describe('Testa o funcionamento da tela de receitas, verificando se:', () => {
   });
 
   test('ao clicar na receita da categ o user é redirecionado para detalhes', async () => {
+    const history = createMemoryHistory({ initialEntries: ['/foods'] });
     renderWithRouter(<Recipes history={ history } />);
 
     const BeefCategory = await screen.findByTestId(BeefCategoryFilter);
@@ -122,10 +125,8 @@ describe('Testa o funcionamento da tela de receitas, verificando se:', () => {
     expect(history.location.pathname).toBe('/foods/52874');
   });
 
-  // problema de lint aqui, não soube resolver
   test('ao clicar na receita o user é redirect p/ detalhes da receita', async () => {
-    const history = createMemoryHistory({ initialEntries: ['/foods'] });
-    renderWithRouter(<Recipes history={ history } />);
+    const { history } = renderWithRouter(<App />, '/foods');
 
     const vegRecipe = await screen.findByRole('button', {
       name: /card-thumb burek/i,

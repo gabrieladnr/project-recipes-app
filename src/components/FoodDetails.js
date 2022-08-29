@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import Share from './Share';
+import '../styles/RecipeDetail.css';
 
 class FoodDetails extends React.Component {
   constructor() {
@@ -112,23 +113,23 @@ class FoodDetails extends React.Component {
     }
     // -----------------------------------------------------
     const recomendList = (recomendation.length > 0)
-      ? recomendation.map((item, index) => {
+      && recomendation.map((item, index) => {
         const testId = `${index}-recomendation-card`;
-        const maxRecomendation = 6;
-        if (index < maxRecomendation) {
+        const titleTestId = `${index}-recomendation-title`;
+        const maxRecomendation = 5;
+        if (index <= maxRecomendation) {
           return (
             <li data-testid={ testId } key={ index }>
               <img src={ item.strDrinkThumb } alt={ item.strDrink } />
-              <h3>{item.strDrink}</h3>
+              <h3 data-testid={ titleTestId }>{item.strDrink}</h3>
             </li>
           );
         }
         return <> </>;
-      })
-      : <> </>;
+      });
     // -----------------------------------------------------
     return (
-      <main>
+      <main className="detail-page">
         <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
         <img
           data-testid="recipe-photo"
@@ -190,7 +191,7 @@ class FoodDetails extends React.Component {
             </button>
           </section>
           <h3>Recomendation list:</h3>
-          <ul data-testid="recomendation-card">
+          <ul className="recomendation-card">
             {
               recomendList
             }
