@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import { searchButtonToggle } from '../redux/actions/headerActions';
+import '../styles/header.css';
 
 class Header extends Component {
   handleClickSearch = () => {
@@ -14,7 +15,7 @@ class Header extends Component {
   render() {
     const { history, searchBool, tittle } = this.props;
     return (
-      <header>
+      <header className="page-header">
         <input
           data-testid="profile-top-btn"
           type="image"

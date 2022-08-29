@@ -1,24 +1,107 @@
 .detail-page {
-    color: rgb(7, 7, 7);
-    margin: 5%;
-    width: 100%;
+  color: rgb(7, 7, 7);
+  margin: 5%;
+  width: 100%;
 }
 
 .recomendation-card {
-    display: flex;
-    list-style: none;
-    overflow-x: scroll;
-    padding: 0;
+  display: flex;
+  list-style: none;
+  overflow-x: scroll;
+  padding: 0;
 }
 
 .recomendation-card li {
-    border: 1px solid black;
-    border-radius: 8px;
-    margin: 10px;
-    text-align: center;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin: 10px;
+  text-align: center;
 }
 
 .recomendation-card img {
-    margin: 10px;
-    height: 160px;
+  height: 160px;
+  margin: 10px;
+}
+
+.recipes-cards {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 15px;
+  justify-content: center;
+  width: 360px;
+}
+
+.recipes-title {
+  align-items: flex-end;
+  background-image: url('https://cdn.iconscout.com/icon/free/png-256/fork-and-spoon-1960305-1655191.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 50px;
+  color: white;
+  display: flex;
+  font-family: var(--bebas-neue);
+  height: 50px;
+  justify-content: center;
+}
+
+.recipes-recipe-card {
+  align-items: center;
+  background: var(--background-box-filters);
+  border: none;
+  border-image-slice: 1;
+  border-image-source: var(--color-rainbow-left);
+  border-left: 10px solid;
+  border-width: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 250px;
+  justify-content: center;
+  padding: 10px;
+  width: 160px;
+}
+
+.recipes-recipe-card p {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--roboto-condensed);
+  font-size: 20px;
+  height: 90px;
+  justify-content: center;
+  margin: 0;
+  overflow: hidden;
+  width: 130px;
+}
+
+.section-recipes {
+  background: var(--section-background);
+  min-height: 80vh;
+  padding-bottom: 70px;
+  padding-top: 30px;
+}
+
+.filters-cards {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 5px 10px;
+  justify-content: center;
+  padding: 20px 0;
+  width: 360px;
+}
+
+.filterBtn {
+  background: var(--background-box-filters);
+  border: none;
+  border-bottom: 5px solid;
+  border-image-slice: 1;
+  border-image-source: var(--color-rainbow-bottom);
+  border-width: 5px;
+  color: rgb(26, 26, 26);
+  font-family: var(--bebas-neue);
+  font-size: 24px;
+  height: 50px;
+  width: 165px;
 }

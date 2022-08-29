@@ -1,4 +1,4 @@
-.meals {
+.app {
   align-items: center;
   color: #313131;
   display: flex;
@@ -7,31 +7,84 @@
   justify-content: center;
 }
 
+.initial-page {
+  align-items: center;
+  background: var(--section-background);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+}
+
 .login-page {
+  background: var(--background-box-filters);
+  border: none;
+  border-radius: 10px;
+  padding: 40px 20px;
   text-align: center;
-  height: 100vh;
-  width: 100%;
+  width: 300px;
 }
 
 .login-submit-btn {
-  bottom: 50px;    
+  background-color: rgb(43, 98, 174);
+  border: none;
+  border-image-slice: 1;
+  border-image-source: var(--color-rainbow-bottom);
+  border-top: 2px solid;
+  bottom: 50px;
+  color: white;
+  font-family: var(--roboto-condensed);
+  font-size: 20px;
+  height: 50px;
+  width: 240px;
+}
+
+.login-submit-btn:disabled {
+  background-color: rgb(123, 147, 181);
+}
+
+.login-input {
+  border: none;
+  border-bottom: 2px solid;
+  border-image-slice: 1;
+  border-image-source: var(--color-rainbow-bottom);
+  border-radius: 7px;
+  height: 50px;
+  padding: 0 20px;
+  width: 240px;
+}
+
+form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.login-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.login-header-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-paragraph {
+  align-items: center;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  margin: 0;
 }
 
 .rocksGlass {
   animation: shake 1s infinite ease;
-  max-height: 40vh;
-}
-
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
-}
-
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
+  width: 80px;
 }
 
 @keyframes shake {
@@ -65,13 +118,8 @@
 }
 
 .logo-trybe img {
-    bottom: 0;
-    height: 40px;
-    position: fixed;
-    right: 0;
-}
-
-.email-input , .password-input {
-    border-radius: 7px;
-    margin-bottom: 10px;
+  bottom: 0;
+  height: 40px;
+  position: fixed;
+  right: 0;
 }

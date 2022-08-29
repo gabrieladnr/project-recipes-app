@@ -1,4 +1,4 @@
-
+/* 
 .filterBtn {
     border: 3px solid black;
     border-radius: 35%;
@@ -6,7 +6,7 @@
     justify-content: center;
     flex-wrap: wrap;
 }
-
+ */
 .drinks {
     display: flex;
     flex-direction: column;

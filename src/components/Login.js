@@ -52,49 +52,58 @@ class Login extends React.Component {
     return (
       <div className="initial-page">
         <div className="login-page">
-          <object
-            className="rocksGlass"
-            type="image/svg+xml"
-            data={ rockGlass }
-          >
-            Glass
-          </object>
-          <h4 className="logo">TRYBE</h4>
-          <h2>App de Receitas</h2>
-          <p>Informe seu email e senha:</p>
-          <form>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              data-testid="email-input"
-              className="email-input"
-              value={ email }
-              onChange={ (event) => this.handleInputChange(event) }
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Senha"
-              data-testid="password-input"
-              className="password-input"
-              value={ password }
-              onChange={ (event) => this.handleInputChange(event) }
-            />
-            {
-              (invalid) ? <p>Por favor preencha os campos corretamente</p>
-                : <p>Bem vindo(a)!</p>
-            }
-            <button
-              type="button"
-              disabled={ invalid }
-              data-testid="login-submit-btn"
-              className="login-submit-btn"
-              onClick={ () => this.handleEnter(email) }
+          <header className="login-header">
+            <div className="login-header-content">
+              <h4 className="logo">TRYBE</h4>
+              <h2>App de Receitas</h2>
+            </div>
+            <object
+              className="rocksGlass"
+              type="image/svg+xml"
+              data={ rockGlass }
             >
-              Enter
-            </button>
-          </form>
+              Glass
+            </object>
+          </header>
+          <section className="login-form">
+            <p className="login-paragraph">Informe seu email e senha:</p>
+            <form>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                data-testid="email-input"
+                className="email-input login-input"
+                value={ email }
+                onChange={ (event) => this.handleInputChange(event) }
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Senha"
+                data-testid="password-input"
+                className="password-input login-input"
+                value={ password }
+                onChange={ (event) => this.handleInputChange(event) }
+              />
+              <button
+                type="button"
+                disabled={ invalid }
+                data-testid="login-submit-btn"
+                className="login-submit-btn"
+                onClick={ () => this.handleEnter(email) }
+              >
+                Enter
+              </button>
+              {
+                (invalid) ? (
+                  <p className="login-paragraph">
+                    Por favor preencha os campos corretamente
+                  </p>
+                ) : <p className="login-paragraph">Bem vindo(a)!</p>
+              }
+            </form>
+          </section>
         </div>
         <section className="logo-trybe">
           <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--Eg8INSNe--/c_fill,f_auto,fl_progressive,h_320,q_auto,w_320/https://dev-to-uploads.s3.amazonaws.com/uploads/organization/profile_image/5302/26258239-4ac6-4d28-b94c-ba6d3f9eabc2.png" alt="Logo da trybe" />
