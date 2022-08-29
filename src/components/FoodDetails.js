@@ -177,7 +177,7 @@ class FoodDetails extends React.Component {
             <Share
               keyused="history"
               pathname={ history.location.pathname }
-              item=""
+              item={ { type: '', id: '' } }
               testId="share-btn"
             />
             <button

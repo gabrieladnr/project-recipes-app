@@ -100,7 +100,7 @@ export default class DrinksInProgress extends Component {
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       ...JSON.parse(localStorage.getItem('inProgressRecipes')),
       cocktails: {
-        [recipe.id]: checkedIngredients,
+        [recipe.idDrink]: checkedIngredients,
       },
     }));
   }
@@ -189,6 +189,7 @@ export default class DrinksInProgress extends Component {
             data-testid="finish-recipe-btn"
             type="button"
             disabled={ statusDisabled }
+            onClick={ () => history.push('/done-recipes') }
           >
             Finalizar receita
           </button>

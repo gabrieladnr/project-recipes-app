@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import Share from './Share';
+import CheckList from './CheckList';
+import { getRecipeMeals } from '../redux/actions';
 
-export default class FoodsInProgress extends Component {
+class FoodsInProgress extends Component {
   constructor() {
     super();
     this.state = {
-      recipe: {},
       favorite: false,
-      statusCheck: '',
+      statusCheck: false,
+      statusClass: 'unchecked',
       checked: false,
       checkedIngredients: [],
       statusDisabled: true,
@@ -18,24 +21,13 @@ export default class FoodsInProgress extends Component {
   }
 
   componentDidMount() {
-    const { id } = this.props;
-    console.log(id);
+    const { id, payload } = this.props;
+    payload(id);
     this.getRecipeById(id);
     this.maintainProgress();
   }
 
-  maintainProgress = () => {
-    const progress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    this.setState({
-      checkedIngredients: progress,
-    });
-  }
-
   getRecipeById = async (id) => {
-    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-    const result = await fetch(url)
-      .then((response) => response.json());
-    this.setState({ recipe: result.meals[0] });
     if (localStorage.getItem('favoriteRecipes') !== null
     && JSON.parse(localStorage.getItem('favoriteRecipes'))
       .some((item) => item.id === id)) {
@@ -45,7 +37,7 @@ export default class FoodsInProgress extends Component {
 
   favoriteRecipe = () => {
     const { id } = this.props;
-    const { recipe, favorite } = this.state;
+    const { mealRecipe, favorite } = this.state;
     // -----------------------------------------------------
     if (localStorage.getItem('favoriteRecipes') !== null
     && JSON.parse(localStorage.getItem('favoriteRecipes'))
@@ -61,23 +53,23 @@ export default class FoodsInProgress extends Component {
       const newFavorites = (oldFavorites !== null) ? [
         ...oldFavorites,
         {
-          id: recipe.idMeal,
+          id: mealRecipe.idMeal,
           type: 'food',
-          nationality: recipe.strArea,
-          category: recipe.strCategory,
+          nationality: mealRecipe.strArea,
+          category: mealRecipe.strCategory,
           alcoholicOrNot: '',
-          name: recipe.strMeal,
-          image: recipe.strMealThumb,
+          name: mealRecipe.strMeal,
+          image: mealRecipe.strMealThumb,
         },
       ] : [
         {
-          id: recipe.idMeal,
+          id: mealRecipe.idMeal,
           type: 'food',
-          nationality: recipe.strArea,
-          category: recipe.strCategory,
+          nationality: mealRecipe.strArea,
+          category: mealRecipe.strCategory,
           alcoholicOrNot: '',
-          name: recipe.strMeal,
-          image: recipe.strMealThumb,
+          name: mealRecipe.strMeal,
+          image: mealRecipe.strMealThumb,
         },
       ];
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
@@ -87,31 +79,45 @@ export default class FoodsInProgress extends Component {
   }
 
   recipeProgress = (ingredient) => {
-    const { checked, recipe, checkedIngredients } = this.state;
-    if (checked === false) {
+    const { checked, mealRecipe, checkedIngredients } = this.state;
+    if (!checked) {
       this.setState({
         checked: true,
-        statusCheck: 'checked',
+        statusClass: 'checked',
         checkedIngredients: [...checkedIngredients, ingredient],
       });
     } else {
       this.setState({
         checked: false,
-        statusCheck: '',
+        statusClass: 'unchecked',
         checkedIngredients: checkedIngredients.filter((item) => item !== ingredient),
       });
     }
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       ...JSON.parse(localStorage.getItem('inProgressRecipes')),
       meals: {
-        [recipe.id]: checkedIngredients,
+        [`${mealRecipe.idMeal}`]: checkedIngredients,
       },
     }));
   }
 
+  maintainProgress = () => {
+    if (localStorage.getItem('inProgressRecipes') !== null) {
+      const progress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      this.setState({
+        checkedIngredients: progress,
+      });
+    } else {
+      this.setState({
+        checkedIngredients: [],
+      });
+    }
+  }
+
   finalizeRecipe = () => {
-    const { recipe, checkedIngredients, statusDisabled } = this.state;
-    const avaliableIngrid = Object.keys(recipe)
+    const { mealRecipe } = this.props;
+    const { checkedIngredients, statusDisabled } = this.state;
+    const avaliableIngrid = Object.keys(mealRecipe)
       .filter((e) => e.includes('strIngredient'));
     if (avaliableIngrid.length === checkedIngredients.length) {
       this.setState({
@@ -120,80 +126,83 @@ export default class FoodsInProgress extends Component {
     }
   }
 
+  handleChange = ({ target }) => {
+    const { checked } = this.state;
+    const { value } = target.checked;
+    if (checked === false) {
+      this.setState({
+        statusCheck: value,
+      });
+    }
+  }
+
   render() {
-    const { history } = this.props;
+    const { history, mealRecipe } = this.props;
+    const { meals: { meals } } = mealRecipe;
     const {
-      recipe, favorite, statusCheck, statusDisabled } = this.state;
+      favorite,
+      statusCheck,
+      statusDisabled,
+      statusClass } = this.state;
     const favoriteImg = (favorite) ? blackHeartIcon : whiteHeartIcon;
-    return (
-      <main>
-        <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
-        <img
-          data-testid="recipe-photo"
-          src={ recipe.strMealThumb }
-          alt={ recipe.strTags }
-          tagname={ recipe.strTags }
-        />
-        <p data-testid="recipe-category">{ recipe.strCategory }</p>
-        <h3>Ingredients</h3>
-        <ul>
+    if (meals !== undefined) {
+      const recipe = meals[0];
+      const infoObj = {
+        recipe,
+        statusCheck,
+        statusClass,
+      };
+      return (
+        <main>
+          <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
+          <img
+            data-testid="recipe-photo"
+            src={ recipe.strMealThumb }
+            alt={ recipe.strTags }
+            tagname={ recipe.strTags }
+          />
+          <p data-testid="recipe-category">{ recipe.strCategory }</p>
+          <h3>Ingredients</h3>
           {
-            Object.keys(recipe).filter((key) => key.includes('strIngredient'))
-              .map((ingredient, index) => {
-                if (recipe[ingredient] === '' || recipe[ingredient] === null) {
-                  return <div key={ index }> </div>;
-                }
-                const measure = `strMeasure${index + 1}`;
-                return (
-                  <label
-                    key={ index }
-                    htmlFor="ingridients"
-                  >
-                    <input
-                      type="checkbox"
-                      data-testid={ `${index}-ingridient-step` }
-                      onChange={ () => {
-                        this.recipeProgress(recipe[ingredient]);
-                        this.finalizeRecipe();
-                      } }
-                      className={ statusCheck }
-                      checked={ statusCheck }
-                    />
-                    {`${recipe[measure]} ${recipe[ingredient]}`}
-                  </label>
-                );
-              })
-          }
-        </ul>
-        <section>
-          <h3>Instructions:</h3>
-          <p data-testid="instructions">{ recipe.strInstructions }</p>
-          <section>
-            <Share
-              keyused="history"
-              history={ history.location.pathname }
-              item=""
-              testId="share-btn"
+            Object.keys(recipe).length > 0 && <CheckList
+              infoObj={ infoObj }
+              handleChange={ this.handleChange }
+              recipeProgress={ this.recipeProgress }
+              finalizeRecipe={ this.finalizeRecipe }
             />
+          }
+          <section>
+            <h3>Instructions:</h3>
+            <p data-testid="instructions">{ recipe.strInstructions }</p>
+            <section>
+              <Share
+                keyused="history"
+                pathname={ history.location.pathname }
+                item={ { type: '', id: '' } }
+                testId="share-btn"
+              />
+              <button
+                type="button"
+                data-testid="favorite-btn"
+                onClick={ () => this.favoriteRecipe() }
+                src={ favoriteImg }
+              >
+                <img src={ favoriteImg } alt={ JSON.stringify(favorite) } />
+              </button>
+            </section>
             <button
+              data-testid="finish-recipe-btn"
               type="button"
-              data-testid="favorite-btn"
-              onClick={ () => this.favoriteRecipe() }
-              src={ favoriteImg }
+              disabled={ statusDisabled }
+              onClick={ () => history.push('/done-recipes') }
             >
-              <img src={ favoriteImg } alt={ JSON.stringify(favorite) } />
+              Finalizar receita
             </button>
           </section>
-          <button
-            data-testid="finish-recipe-btn"
-            type="button"
-            disabled={ statusDisabled }
-          >
-            Finalizar receita
-          </button>
-        </section>
-      </main>
-    );
+        </main>
+      );
+    }
+    return <> </>;
   }
 }
 
@@ -205,4 +214,18 @@ FoodsInProgress.propTypes = {
       pathname: PropTypes.string,
     }),
   }).isRequired,
+  mealRecipe: PropTypes.objectOf(
+    PropTypes.objectOf(PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string))),
+  ).isRequired,
+  payload: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  mealRecipe: state.recipeReducer,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  payload: (id) => dispatch(getRecipeMeals(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FoodsInProgress);
