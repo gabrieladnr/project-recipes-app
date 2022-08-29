@@ -45,5 +45,3 @@ Cocktails.propTypes = {
   searchButton: propTypes.bool.isRequired,
   history: propTypes.shape().isRequired,
 };
-
-// https://stackoverflow.com/questions/56168771/how-to-limit-for-10-results-the-array-filter
