@@ -4,6 +4,7 @@ import Cocktails from './Cocktails';
 import Meals from './Meals';
 import Footer from './Footer';
 import Header from './Header';
+import '../styles/FoodsAndDrinks.css';
 
 class Recipes extends React.Component {
   render() {

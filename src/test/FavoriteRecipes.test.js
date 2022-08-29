@@ -1,9 +1,12 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import copy from 'clipboard-copy';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import App from '../App';
 import favoriteRecipes from './helpers/favoritesLocalStorage';
+
+jest.mock('clipboard-copy');
 
 describe('Favorite Recipes Empty: ', () => {
   test('Testa se não tem nenhuma receita favoritada, aparece apenas uma mensagem', () => {
@@ -83,11 +86,21 @@ describe('Testes a página Favorite Recipes com receitas favoritadas', () => {
   test('Testa se, ao cliclar no botão de favoritos, ele desfavorita', () => {
     renderWithRouterAndRedux(<App />, favoriteRoute);
     const buttonFavorite = screen.getByTestId('0-horizontal-favorite-btn');
-
-    // userEvent.click(screen.getByTestId('0-horizontal-share-btn'));
-    userEvent.click();
+    userEvent.click(buttonFavorite);
     userEvent.click(screen.getByTestId('0-horizontal-image'));
   });
+
+  test('Testa se ao clicar no botão share ele exibe uma mensagem', () => {
+    renderWithRouterAndRedux(<App />, favoriteRoute);
+    copy.mockResolvedValue({});
+
+    const buttonShare = screen.getByTestId('0-horizontal-share-btn');
+    userEvent.click(buttonShare);
+
+    const copiedText = screen.getByTestId('link-copied');
+    expect(copiedText).toBeVisible();
+  });
+
   test('', () => {
     renderWithRouterAndRedux(<App />, favoriteRoute);
     userEvent.click(screen.getByTestId('0-horizontal-name'));

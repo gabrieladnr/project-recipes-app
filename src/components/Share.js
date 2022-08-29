@@ -32,7 +32,7 @@ class Share extends Component {
                 <img src={ shareIcon } alt="share" />
               </button>
               {
-                (copied) && <p>Link copied!</p>
+                (copied) && <p data-testid="link-copied">Link copied!</p>
               }
             </>
           ) : (
@@ -53,7 +53,7 @@ class Share extends Component {
                 <img src={ shareIcon } alt="share" />
               </button>
               {
-                (copied) && <p>Link copied!</p>
+                (copied) && <p data-testid="link-copied">Link copied!</p>
               }
             </>
           )
@@ -63,7 +63,7 @@ class Share extends Component {
   }
 }
 Share.propTypes = {
-  pathname: PropTypes.string.isRequired,
+  pathname: PropTypes.func.isRequired,
   item: PropTypes.shape({
     type: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
