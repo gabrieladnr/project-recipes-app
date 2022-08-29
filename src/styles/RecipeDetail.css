@@ -1,24 +1,24 @@
 .detail-page {
-    color: rgb(7, 7, 7);
-    margin: 5%;
-    width: 100%;
+  color: rgb(7, 7, 7);
+  margin: 5%;
+  width: 100%;
 }
 
 .recomendation-card {
-    display: flex;
-    list-style: none;
-    overflow-x: scroll;
-    padding: 0;
+  display: flex;
+  list-style: none;
+  overflow-x: scroll;
+  padding: 0;
 }
 
 .recomendation-card li {
-    border: 1px solid black;
-    border-radius: 8px;
-    margin: 10px;
-    text-align: center;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin: 10px;
+  text-align: center;
 }
 
 .recomendation-card img {
-    margin: 10px;
-    height: 160px;
+  height: 160px;
+  margin: 10px;
 }

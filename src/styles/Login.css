@@ -8,30 +8,18 @@
 }
 
 .login-page {
-  text-align: center;
   height: 100vh;
+  text-align: center;
   width: 100%;
 }
 
 .login-submit-btn {
-  bottom: 50px;    
+  bottom: 50px;
 }
 
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 40vh;
-}
-
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
-}
-
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
 }
 
 @keyframes shake {
@@ -65,13 +53,13 @@
 }
 
 .logo-trybe img {
-    bottom: 0;
-    height: 40px;
-    position: fixed;
-    right: 0;
+  bottom: 0;
+  height: 40px;
+  position: fixed;
+  right: 0;
 }
 
-.email-input , .password-input {
-    border-radius: 7px;
-    margin-bottom: 10px;
+.email-input, .password-input {
+  border-radius: 7px;
+  margin-bottom: 10px;
 }
