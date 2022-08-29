@@ -16,8 +16,8 @@ class Cocktails extends React.Component {
   render() {
     const { searchButton, history } = this.props;
     return (
-      <div>
-        <h3>Cocktail Recipes</h3>
+      <div className="cocktails-recipes recipes">
+        <h3 className="recipes-title">Cocktail Recipes</h3>
         {
           (searchButton)
             ? <SearchBar history={ history } />

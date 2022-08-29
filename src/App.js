@@ -13,7 +13,7 @@ import RecipeInProgress from './components/RecipeInProgress';
 
 function App() {
   return (
-    <div className="meals">
+    <div className="app">
       <Switch>
         <Route path="/" exact component={ Login } />
         <Route path="/foods/:id" exact component={ FoodDetails } />
