@@ -21,7 +21,7 @@ class SearchBar extends React.Component {
     const response = await fetch(`${url}${searchInput}`)
       .then((responseApi) => responseApi.json());
     if (!response.meals
-      ?.length) alert('Sorry, we haven\'t found any recipes for these filters.');
+      ?.length) global.alert('Sorry, we haven\'t found any recipes for these filters.');
     if (history.location.pathname === '/drinks') {
       // adiciona o filtro ao reducer drinks e altera a rota para a devida rota.
       dispatchFilteredDrinks(response);
@@ -80,7 +80,7 @@ class SearchBar extends React.Component {
           this.callFetchSearch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=');
           // else para chamada da api para a pagina de foods
         } else this.callFetchSearch('https://www.themealdb.com/api/json/v1/1/search.php?f=');
-      } else alert('Your search must have only 1 (one) character');
+      } else global.alert('Your search must have only 1 (one) character');
       break;
     }
   }
