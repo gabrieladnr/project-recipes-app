@@ -14,9 +14,11 @@ class Recipes extends React.Component {
     const title = pathname.includes('/foods') ? 'Foods' : 'Drinks';
     return (
       <div>
-        { <Header tittle={ title } searchBool="true" history={ history } />}
-        { (pathname === '/foods') && <Meals history={ history } /> }
-        { (pathname === '/drinks') && <Cocktails history={ history } />}
+        <Header tittle={ title } searchBool="true" history={ history } />
+        <section className="section-recipes">
+          { (pathname === '/foods') && <Meals history={ history } /> }
+          { (pathname === '/drinks') && <Cocktails history={ history } />}
+        </section>
         <Footer history={ history } />
       </div>
     );
