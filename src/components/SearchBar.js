@@ -82,7 +82,7 @@ class SearchBar extends React.Component {
           this.callFetchSearch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=');
           // else para chamada da api para a pagina de foods
         } else this.callFetchSearch('https://www.themealdb.com/api/json/v1/1/search.php?f=');
-      } else alert('Your search must have only 1 (one) character');
+      } else global.alert('Your search must have only 1 (one) character');
       break;
     }
   }
