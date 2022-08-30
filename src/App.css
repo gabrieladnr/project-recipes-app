@@ -1,10 +1,17 @@
 .start-recipe-btn {
+  background-color: rgb(123, 147, 181);
+  border: none;
+  border-radius: 5px;
   bottom: 0;
+  height: 40px;
+  margin-bottom: 5px;
   position: fixed;
-  right: 50%;
+  transition: background-color 0.7s;
+  width: 120px;
 }
 
-/* body {
-  background-image: linear-gradient(to top, #fcc5e4 0%, #fda34b 15%,
-  #ff7882 35%, #c8699e 52%, #7046aa 71%, #0c1db8 87%, #020f75 100%);
-} */
+.start-recipe-btn:hover {
+  background-color: rgb(43, 98, 174);
+  transition: background-color 0.7s;
+}
+

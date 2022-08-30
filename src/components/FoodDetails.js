@@ -119,10 +119,17 @@ class FoodDetails extends React.Component {
         const maxRecomendation = 5;
         if (index <= maxRecomendation) {
           return (
-            <li data-testid={ testId } key={ index }>
-              <img src={ item.strDrinkThumb } alt={ item.strDrink } />
-              <h3 data-testid={ titleTestId }>{item.strDrink}</h3>
-            </li>
+            <button
+              className="recomend-li"
+              type="button"
+              key={ index }
+              onClick={ () => history.push(`/drinks/${item.idDrink}`) }
+            >
+              <li data-testid={ testId }>
+                <img src={ item.strDrinkThumb } alt={ item.strDrink } />
+                <h3 data-testid={ titleTestId }>{item.strDrink}</h3>
+              </li>
+            </button>
           );
         }
         return <> </>;
@@ -130,66 +137,82 @@ class FoodDetails extends React.Component {
     // -----------------------------------------------------
     return (
       <main className="detail-page">
-        <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
-        <img
-          data-testid="recipe-photo"
-          src={ recipe.strMealThumb }
-          alt={ recipe.strTags }
-          tagname={ recipe.strTags }
-        />
-        <p data-testid="recipe-category">{ recipe.strCategory }</p>
-        <h3>Ingredients</h3>
-        <ul>
-          {
-            Object.keys(recipe).filter((key) => key.includes('strIngredient'))
-              .map((ingredient, index) => {
-                const testid = `${index}-ingredient-name-and-measure`;
-                if (recipe[ingredient] === '' || recipe[ingredient] === null) {
-                  return <div key={ index }> </div>;
-                }
-                const measure = `strMeasure${index + 1}`;
-                return (
-                  <li
-                    data-testid={ testid }
-                    key={ index }
-                  >
-                    {`${recipe[measure]} ${recipe[ingredient]}`}
-                  </li>
-                );
-              })
-          }
-        </ul>
-        <section>
+        <div className="detail-title-box">
+          <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
+          <img
+            className="recipe-photo"
+            data-testid="recipe-photo"
+            src={ recipe.strMealThumb }
+            alt={ recipe.strTags }
+            tagname={ recipe.strTags }
+          />
+        </div>
+        <div className="recipe-details-form">
+          <p
+            className="alcohol"
+            data-testid="recipe-category"
+          >
+            { recipe.strCategory }
+          </p>
+          <h3>Ingredients</h3>
+          <ul>
+            {
+              Object.keys(recipe).filter((key) => key.includes('strIngredient'))
+                .map((ingredient, index) => {
+                  const testid = `${index}-ingredient-name-and-measure`;
+                  if (recipe[ingredient] === '' || recipe[ingredient] === null) {
+                    return <div key={ index }> </div>;
+                  }
+                  const measure = `strMeasure${index + 1}`;
+                  return (
+                    <li
+                      data-testid={ testid }
+                      key={ index }
+                    >
+                      {`${recipe[measure]} ${recipe[ingredient]}`}
+                    </li>
+                  );
+                })
+            }
+          </ul>
           <h3>Instructions:</h3>
-          <p data-testid="instructions">{ recipe.strInstructions }</p>
+          <p
+            className="instructions"
+            data-testid="instructions"
+          >
+            { recipe.strInstructions }
+          </p>
           <iframe
             title={ recipe.strMeal }
             src={ recipe.strYoutube }
-            width="500"
-            height="500"
+            width="261"
+            height="160"
             data-testid="video"
           >
             <p>Your browser does not support iframes.</p>
           </iframe>
-          <section>
-            {
-              btn
-            }
-            <Share
-              keyused="history"
-              pathname={ history.location.pathname }
-              item={ { type: '', id: '' } }
-              testId="share-btn"
-            />
-            <button
-              type="button"
-              data-testid="favorite-btn"
-              onClick={ () => this.favoriteRecipe() }
-              src={ favoriteImg }
-            >
-              <img src={ favoriteImg } alt={ JSON.stringify(favorite) } />
-            </button>
-          </section>
+        </div>
+        <section className="shareComponent">
+          {
+            btn
+          }
+          <Share
+            keyused="history"
+            pathname={ history.location.pathname }
+            item=""
+            testId="share-btn"
+          />
+          <button
+            className="favorite-button"
+            type="button"
+            data-testid="favorite-btn"
+            onClick={ () => this.favoriteRecipe() }
+            src={ favoriteImg }
+          >
+            <img src={ favoriteImg } alt={ JSON.stringify(favorite) } />
+          </button>
+        </section>
+        <section className="recomendation-list">
           <h3>Recomendation list:</h3>
           <ul className="recomendation-card">
             {
