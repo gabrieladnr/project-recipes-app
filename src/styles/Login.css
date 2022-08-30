@@ -1,10 +1,14 @@
 .app {
   align-items: center;
+  background: var(--section-background);
   color: #313131;
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
-  justify-content: center;
+  justify-content: flex-start;
+  margin: 0 auto;
+  min-height: 100vh;
+  width: 360px;
 }
 
 .initial-page {

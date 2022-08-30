@@ -1,0 +1,8 @@
+.favorite-recipes-component {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  width: 360px;
+}
