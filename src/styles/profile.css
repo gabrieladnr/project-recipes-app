@@ -1,0 +1,40 @@
+.profile {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+  width: 300px;
+}
+
+.profile p {
+  align-items: center;
+  color: #212529;
+  display: flex;
+  font-family: var(--bebas-neue);
+  font-size: 30px;
+  height: 50px;
+  justify-content: center;
+  width: 300px;
+}
+
+.profile button {
+  background-color: rgb(123, 147, 181);
+  border: none;
+  border-image-slice: 1;
+  border-image-source: var(--color-rainbow-bottom);
+  border-top: 2px solid;
+  bottom: 50px;
+  color: white;
+  font-family: var(--roboto-condensed);
+  font-size: 20px;
+  height: 50px;
+  transition: background-color 0.7s;
+  width: 240px;
+}
+
+.profile button:hover {
+  background-color: rgb(43, 98, 174);
+  transition: background-color 0.7s;
+}

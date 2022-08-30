@@ -19,10 +19,13 @@
 .footer button {
   background-color: rgb(123, 147, 181);
   border: none;
-  border-image-slice: 1;
-  border-image-source: var(--color-rainbow-bottom);
-  border-top: 2px solid;
+  border-radius: 2px;
   padding: 5px 30px;
+}
+
+.footer button:hover {
+  background-color: rgb(43, 98, 174);
+  transition: background-color 0.7s;
 }
 
 .footer button img {
