@@ -35,14 +35,13 @@ class FoodsInProgress extends Component {
     const { meals: { meals } } = mealRecipe;
     const recipe = meals[0];
     const { favorite } = this.state;
-    // -----------------------------------------------------
+
     if (localStorage.getItem('favoriteRecipes') !== null
     && JSON.parse(localStorage.getItem('favoriteRecipes'))
       .some((item) => item.id === id)) {
       const oldFavorites = localStorage.getItem('favoriteRecipes');
       const newFavorites = JSON.parse(oldFavorites).filter((item) => item.id !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-      // -----------------------------------------------------
     } else {
       const oldFavorites = (JSON.parse(localStorage.getItem('favoriteRecipes')) !== null)
         ? JSON.parse(localStorage.getItem('favoriteRecipes'))
@@ -132,12 +131,11 @@ class FoodsInProgress extends Component {
     const favoriteImg = (favorite) ? blackHeartIcon : whiteHeartIcon;
     if (meals !== undefined) {
       const recipe = meals[0];
-      console.log(recipe);
       const avaliableIngrid = Object.keys(recipe)
         .filter((e) => e.includes('strIngredient'));
       const uncheckedIngrid = [];
       avaliableIngrid.forEach((ingredient, index) => {
-        if (recipe[ingredient] !== '') {
+        if (recipe[ingredient] !== '' && recipe[ingredient] !== null) {
           const measure = `strMeasure${index + 1}`;
           uncheckedIngrid.push(`${recipe[measure]} ${recipe[ingredient]}`);
         }
@@ -158,6 +156,7 @@ class FoodsInProgress extends Component {
             ingred={ uncheckedIngrid }
             statusDisabled={ statusDisabled }
             id={ id }
+            type="food"
           />
           <section>
             <h3>Instructions:</h3>

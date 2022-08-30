@@ -36,21 +36,42 @@ export default class CheckList extends Component {
   }
 
   changeLocalStorage = (index) => {
-    const { id, ingred } = this.props;
+    const { id, ingred, type } = this.props;
     const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    let helper = [];
-    if (storage.meals[id].some((element) => element === ingred[index])) {
-      helper = storage.meals[id].filter((item) => item !== ingred[index]);
+    let helperMeal = [];
+    let helperDrink = [];
+    let newStorage = {};
+    if (type === 'food') {
+      if (Object.keys(storage.meals).length > 0) {
+        if (storage.meals[id].some((element) => element === ingred[index])) {
+          helperMeal = storage.meals[id].filter((item) => item !== ingred[index]);
+        } else {
+          helperMeal = [...storage.meals[id], ingred[index]];
+        }
+      }
+      newStorage = {
+        ...storage,
+        meals: {
+          ...storage.meals,
+          [id]: helperMeal,
+        },
+      };
     } else {
-      helper = [...storage.meals[id], ingred[index]];
+      if (Object.keys(storage.cocktails).length > 0) {
+        if (storage.cocktails[id].some((element) => element === ingred[index])) {
+          helperDrink = storage.cocktails[id].filter((item) => item !== ingred[index]);
+        } else {
+          helperDrink = [...storage.cocktails[id], ingred[index]];
+        }
+      }
+      newStorage = {
+        ...storage,
+        cocktails: {
+          ...storage.cocktails,
+          [id]: helperDrink,
+        },
+      };
     }
-    const newStorage = {
-      ...storage,
-      meals: {
-        ...storage.meals,
-        [id]: helper,
-      },
-    };
     localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
   }
 
@@ -66,9 +87,50 @@ export default class CheckList extends Component {
   }
 
   inProgressInitial = () => {
+    const { type } = this.props;
+    if (type === 'food') {
+      this.mealsStorageAux();
+    } else {
+      this.drinksStorageAux();
+    }
+  }
+
+  drinksStorageAux = () => {
     const { id, ingred } = this.props;
     if (localStorage.getItem('inProgressRecipes')) {
-      const { meals } = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      const { cocktails, meals } = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      if (Object.keys(cocktails).some((item) => item === id)) {
+        ingred.forEach((item, index) => {
+          if (cocktails[id].some((element) => element === item)) {
+            const helper = { target: { name: index } };
+            this.handleChange(helper);
+          }
+        });
+      } else {
+        const inProgressRecipes = {
+          cocktails: {
+            ...cocktails,
+            [id]: [],
+          },
+          meals: { ...meals },
+        };
+        localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+      }
+    } else {
+      const inProgressRecipes = {
+        cocktails: {
+          [id]: [],
+        },
+        meals: {},
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    }
+  }
+
+  mealsStorageAux = () => {
+    const { id, ingred } = this.props;
+    if (localStorage.getItem('inProgressRecipes')) {
+      const { cocktails, meals } = JSON.parse(localStorage.getItem('inProgressRecipes'));
       if (Object.keys(meals).some((item) => item === id)) {
         ingred.forEach((item, index) => {
           if (meals[id].some((element) => element === item)) {
@@ -78,7 +140,7 @@ export default class CheckList extends Component {
         });
       } else {
         const inProgressRecipes = {
-          cocktails: {},
+          cocktails: { ...cocktails },
           meals: {
             ...meals,
             [id]: [],
@@ -107,11 +169,11 @@ export default class CheckList extends Component {
             <label
               key={ index }
               htmlFor="ingridients"
+              data-testid={ `${index}-ingredient-step` }
             >
               <input
                 type="checkbox"
                 name={ index }
-                data-testid={ `${index}-ingridient-step` }
                 onChange={ (e) => {
                   this.handleChange(e);
                   this.changeLocalStorage(index);
@@ -133,4 +195,5 @@ CheckList.propTypes = {
   statusDisabled: PropTypes.bool.isRequired,
   ingred: PropTypes.arrayOf(PropTypes.string).isRequired,
   id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };

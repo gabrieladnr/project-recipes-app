@@ -83,7 +83,6 @@ class DrinkDetails extends React.Component {
   render() {
     const { history, match: { params: { id } } } = this.props;
     const { recipe, favorite, recomendation } = this.state;
-    console.log(recomendation);
     const favoriteImg = (favorite) ? blackHeartIcon : whiteHeartIcon;
     let btn;
     if (localStorage.getItem('doneRecipes') !== null
