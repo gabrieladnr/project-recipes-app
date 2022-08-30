@@ -4,6 +4,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import Share from './Share';
 import '../styles/RecipeDetail.css';
+import RecipeDetails from './RecipeDetails';
 
 class DrinkDetails extends React.Component {
   constructor() {
@@ -115,6 +116,7 @@ class DrinkDetails extends React.Component {
         if (index <= maxRecomendation) {
           return (
             <button
+              data-testid="button-recomen-card"
               className="recomend-li"
               type="button"
               key={ item.idMeal }
@@ -197,7 +199,7 @@ class DrinkDetails extends React.Component {
           </button>
         </section>
         <section className="recomendation-list">
-          <h3>Recomendation list:</h3>
+          <RecipeDetails />
           <ul className="recomendation-card">
             {
               recomendList

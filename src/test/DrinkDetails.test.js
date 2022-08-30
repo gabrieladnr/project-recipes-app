@@ -6,6 +6,8 @@ import App from '../App';
 import { doneRecipes } from './helpers/favoritesLocalStorage';
 import oneDrink from '../../cypress/mocks/oneDrink';
 import meals from '../../cypress/mocks/meals';
+import drinks from '../../cypress/mocks/drinks';
+import oneMeal from '../../cypress/mocks/oneMeal';
 
 describe('Testando o componente Drink Details:', () => {
   beforeEach(() => {
@@ -15,6 +17,14 @@ describe('Testando o componente Drink Details:', () => {
       case 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=178319':
         return {
           json: jest.fn().mockResolvedValue(oneDrink),
+        };
+      case 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52977':
+        return {
+          json: jest.fn().mockResolvedValue(oneMeal),
+        };
+      case 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=':
+        return {
+          json: jest.fn().mockResolvedValue(drinks),
         };
       default:
         return {
@@ -26,11 +36,11 @@ describe('Testando o componente Drink Details:', () => {
   const drinksId = '/drinks/178319';
   test('testando o component sem start e continue', async () => {
     localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
-    localStorage.setItem('inProgressRecipes', '{"cocktails":{"178319":{"id":"178319"}}}');
     renderWithRouterAndRedux(<App />, drinksId);
     await waitFor(() => {
       screen.getByTestId('5-recomendation-card');
     });
+    userEvent.click(screen.getAllByTestId('button-recomendation-card')[0]);
     screen.logTestingPlaygroundURL();
   });
 
