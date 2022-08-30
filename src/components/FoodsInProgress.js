@@ -12,10 +12,6 @@ class FoodsInProgress extends Component {
     super();
     this.state = {
       favorite: false,
-      statusCheck: false,
-      statusClass: 'unchecked',
-      checked: false,
-      checkedIngredients: [],
       statusDisabled: true,
     };
   }
@@ -24,7 +20,6 @@ class FoodsInProgress extends Component {
     const { id, payload } = this.props;
     payload(id);
     this.getRecipeById(id);
-    this.maintainProgress();
   }
 
   getRecipeById = async (id) => {
@@ -36,40 +31,41 @@ class FoodsInProgress extends Component {
   }
 
   favoriteRecipe = () => {
-    const { id } = this.props;
-    const { mealRecipe, favorite } = this.state;
-    // -----------------------------------------------------
+    const { id, mealRecipe } = this.props;
+    const { meals: { meals } } = mealRecipe;
+    const recipe = meals[0];
+    const { favorite } = this.state;
+
     if (localStorage.getItem('favoriteRecipes') !== null
     && JSON.parse(localStorage.getItem('favoriteRecipes'))
       .some((item) => item.id === id)) {
       const oldFavorites = localStorage.getItem('favoriteRecipes');
       const newFavorites = JSON.parse(oldFavorites).filter((item) => item.id !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-      // -----------------------------------------------------
     } else {
-      const oldFavorites = (localStorage.getItem('favoriteRecipes') !== null)
+      const oldFavorites = (JSON.parse(localStorage.getItem('favoriteRecipes')) !== null)
         ? JSON.parse(localStorage.getItem('favoriteRecipes'))
         : null;
       const newFavorites = (oldFavorites !== null) ? [
         ...oldFavorites,
         {
-          id: mealRecipe.idMeal,
+          id: recipe.idMeal,
           type: 'food',
-          nationality: mealRecipe.strArea,
-          category: mealRecipe.strCategory,
+          nationality: recipe.strArea,
+          category: recipe.strCategory,
           alcoholicOrNot: '',
-          name: mealRecipe.strMeal,
-          image: mealRecipe.strMealThumb,
+          name: recipe.strMeal,
+          image: recipe.strMealThumb,
         },
       ] : [
         {
-          id: mealRecipe.idMeal,
+          id: recipe.idMeal,
           type: 'food',
-          nationality: mealRecipe.strArea,
-          category: mealRecipe.strCategory,
+          nationality: recipe.strArea,
+          category: recipe.strCategory,
           alcoholicOrNot: '',
-          name: mealRecipe.strMeal,
-          image: mealRecipe.strMealThumb,
+          name: recipe.strMeal,
+          image: recipe.strMealThumb,
         },
       ];
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
@@ -78,80 +74,72 @@ class FoodsInProgress extends Component {
     this.setState({ favorite: !favorite });
   }
 
-  recipeProgress = (ingredient) => {
-    const { checked, mealRecipe, checkedIngredients } = this.state;
-    if (!checked) {
-      this.setState({
-        checked: true,
-        statusClass: 'checked',
-        checkedIngredients: [...checkedIngredients, ingredient],
-      });
+  changeDisable = () => {
+    const { statusDisabled } = this.state;
+    this.setState({ statusDisabled: !statusDisabled });
+  }
+
+  doneRecipe = () => {
+    const { history, mealRecipe } = this.props;
+    const { meals: { meals } } = mealRecipe;
+    const recipe = meals[0];
+    const data = new Date();
+    const dataFormatada = `${data.getDate()}/${data.getMonth() + 1}/${
+      data.getFullYear()}`;
+    const tags = recipe.strTags.split(', ');
+    let newDoneRecipe = [];
+    if (JSON.parse(localStorage.getItem('doneRecipes'))) {
+      const dataDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+      newDoneRecipe = [
+        ...dataDoneRecipes,
+        {
+          id: recipe.idMeal,
+          type: 'food',
+          nationality: recipe.strArea,
+          category: recipe.strCategory,
+          alcoholicOrNot: '',
+          name: recipe.strMeal,
+          image: recipe.strMealThumb,
+          doneDate: dataFormatada,
+          tags,
+        }];
     } else {
-      this.setState({
-        checked: false,
-        statusClass: 'unchecked',
-        checkedIngredients: checkedIngredients.filter((item) => item !== ingredient),
-      });
+      newDoneRecipe = [
+        {
+          id: recipe.idMeal,
+          type: 'food',
+          nationality: recipe.strArea,
+          category: recipe.strCategory,
+          alcoholicOrNot: '',
+          name: recipe.strMeal,
+          image: recipe.strMealThumb,
+          doneDate: dataFormatada,
+          tags,
+        }];
     }
-    localStorage.setItem('inProgressRecipes', JSON.stringify({
-      ...JSON.parse(localStorage.getItem('inProgressRecipes')),
-      meals: {
-        [`${mealRecipe.idMeal}`]: checkedIngredients,
-      },
-    }));
-  }
-
-  maintainProgress = () => {
-    if (localStorage.getItem('inProgressRecipes') !== null) {
-      const progress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      this.setState({
-        checkedIngredients: progress,
-      });
-    } else {
-      this.setState({
-        checkedIngredients: [],
-      });
-    }
-  }
-
-  finalizeRecipe = () => {
-    const { mealRecipe } = this.props;
-    const { checkedIngredients, statusDisabled } = this.state;
-    const avaliableIngrid = Object.keys(mealRecipe)
-      .filter((e) => e.includes('strIngredient'));
-    if (avaliableIngrid.length === checkedIngredients.length) {
-      this.setState({
-        statusDisabled: !statusDisabled,
-      });
-    }
-  }
-
-  handleChange = ({ target }) => {
-    const { checked } = this.state;
-    const { value } = target.checked;
-    if (checked === false) {
-      this.setState({
-        statusCheck: value,
-      });
-    }
+    localStorage.setItem('doneRecipes', JSON.stringify(newDoneRecipe));
+    history.push('/done-recipes');
   }
 
   render() {
-    const { history, mealRecipe } = this.props;
+    const { history, mealRecipe, id } = this.props;
     const { meals: { meals } } = mealRecipe;
     const {
       favorite,
-      statusCheck,
       statusDisabled,
-      statusClass } = this.state;
+    } = this.state;
     const favoriteImg = (favorite) ? blackHeartIcon : whiteHeartIcon;
     if (meals !== undefined) {
       const recipe = meals[0];
-      const infoObj = {
-        recipe,
-        statusCheck,
-        statusClass,
-      };
+      const avaliableIngrid = Object.keys(recipe)
+        .filter((e) => e.includes('strIngredient'));
+      const uncheckedIngrid = [];
+      avaliableIngrid.forEach((ingredient, index) => {
+        if (recipe[ingredient] !== '' && recipe[ingredient] !== null) {
+          const measure = `strMeasure${index + 1}`;
+          uncheckedIngrid.push(`${recipe[measure]} ${recipe[ingredient]}`);
+        }
+      });
       return (
         <main>
           <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
@@ -163,14 +151,13 @@ class FoodsInProgress extends Component {
           />
           <p data-testid="recipe-category">{ recipe.strCategory }</p>
           <h3>Ingredients</h3>
-          {
-            Object.keys(recipe).length > 0 && <CheckList
-              infoObj={ infoObj }
-              handleChange={ this.handleChange }
-              recipeProgress={ this.recipeProgress }
-              finalizeRecipe={ this.finalizeRecipe }
-            />
-          }
+          <CheckList
+            changeDisable={ this.changeDisable }
+            ingred={ uncheckedIngrid }
+            statusDisabled={ statusDisabled }
+            id={ id }
+            type="food"
+          />
           <section>
             <h3>Instructions:</h3>
             <p data-testid="instructions">{ recipe.strInstructions }</p>
@@ -194,7 +181,7 @@ class FoodsInProgress extends Component {
               data-testid="finish-recipe-btn"
               type="button"
               disabled={ statusDisabled }
-              onClick={ () => history.push('/done-recipes') }
+              onClick={ () => this.doneRecipe() }
             >
               Finalizar receita
             </button>
