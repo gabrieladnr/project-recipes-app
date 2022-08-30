@@ -1,24 +1,217 @@
 .detail-page {
-  color: rgb(7, 7, 7);
-  margin: 5%;
-  width: 100%;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  margin: 0;
+  overflow: hidden;
+  width: 360px;
+}
+
+.detail-title-box {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 360px;
+}
+
+.detail-page h1 {
+  align-items: center;
+  background: var(--background-box-filters);
+  border: none;
+  border-bottom: 2px solid;
+  border-image-slice: 1;
+  border-image-source: var(--color-rainbow-bottom);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  flex-flow: row wrap;
+  font-family: var(--roboto-condensed);
+  font-size: 38px;
+  height: 52px;
+  justify-content: center;
+  margin: 20px 0 0;
+  padding: 0;
+  width: 340px;
+}
+
+.recipe-photo {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  width: 340px;
+}
+
+.recipe-details-form {
+  background: var(--background-box-filters);
+  border-radius: 5px;
+  margin-left: 20px;
+  padding: 20px 30px;
+  width: 320px;
+}
+
+.recipe-details-form li, .instructions {
+  font-family: var(--roboto-condensed);
+  text-align: justify;
+}
+
+.shareComponent {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: center;
+  width: 360px;
+}
+
+.share-button, .favorite-button {
+  background-color: rgb(123, 147, 181);
+  border: none;
+  border-radius: 2px;
+  height: 50px;
+  padding: 5px 30px;
+  transition: background-color 0.7s;
+  width: 100px;
+}
+
+.share-button:hover, .favorite-button:hover {
+  background-color: rgb(43, 98, 174);
+  transition: background-color 0.7s;
+}
+
+.alcohol {
+  border: none;
+  border-bottom: 1px solid;
+  border-image: var(--color-rainbow-bottom);
+  border-image-slice: 1;
+  font-family: var(--roboto-condensed);
+  margin: 0;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.recipe-details-form ul {
+  padding: 5px;
+}
+
+.recipe-details-form h3 {
+  font-family: var(--bebas-neue);
+  margin: 0;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .recomendation-card {
   display: flex;
+  flex-direction: row;
+  gap: 10px;
   list-style: none;
+  margin: 0 10px 60px;
   overflow-x: scroll;
   padding: 0;
+  padding-bottom: 20px;
+  width: 340px;
 }
 
-.recomendation-card li {
-  border: 1px solid black;
-  border-radius: 8px;
-  margin: 10px;
+.recomend-li {
+  background-color: rgb(123, 147, 181);
+  border: none;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
 .recomendation-card img {
-  height: 160px;
+  height: 140px;
   margin: 10px;
+}
+
+.recipes-cards {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 15px;
+  justify-content: center;
+  width: 360px;
+}
+
+.recipes-title {
+  align-items: flex-end;
+  background-image: url('https://cdn.iconscout.com/icon/free/png-256/fork-and-spoon-1960305-1655191.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 50px;
+  color: white;
+  display: flex;
+  font-family: var(--bebas-neue);
+  height: 50px;
+  justify-content: center;
+}
+
+.recipes-recipe-card {
+  align-items: center;
+  background: var(--background-box-filters);
+  border: none;
+  border-image-slice: 1;
+  border-image-source: var(--color-rainbow-left);
+  border-left: 10px solid;
+  border-width: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 250px;
+  justify-content: center;
+  padding: 10px;
+  width: 160px;
+}
+
+.recipes-recipe-card p {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--roboto-condensed);
+  font-size: 20px;
+  height: 90px;
+  justify-content: center;
+  margin: 0;
+  overflow: hidden;
+  width: 130px;
+}
+
+.section-recipes {
+  min-height: 80vh;
+  padding-bottom: 70px;
+  padding-top: 30px;
+}
+
+.filters-cards {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 5px 10px;
+  justify-content: center;
+  padding: 20px 0;
+  width: 360px;
+}
+
+.filterBtn {
+  background: var(--background-box-filters);
+  border: none;
+  border-bottom: 5px solid;
+  border-image-slice: 1;
+  border-image-source: var(--color-rainbow-bottom);
+  border-width: 5px;
+  color: rgb(26, 26, 26);
+  font-family: var(--bebas-neue);
+  font-size: 24px;
+  height: 50px;
+  width: 165px;
+}
+
+.recomendation-list h3 {
+  font-family: var(--bebas-neue);
+  text-align: center;
 }

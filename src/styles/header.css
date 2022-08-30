@@ -1,0 +1,23 @@
+.page-header {
+  align-items: center;
+  background: var(--background-box-filters);
+  border: none;
+  border-bottom: 2px solid;
+  border-image-slice: 1;
+  border-image-source: var(--color-rainbow-bottom);
+  display: flex;
+  flex-direction: row;
+  font-family: var(--roboto-condensed);
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  width: 360px;
+}
+
+.page-header h1 {
+  margin: 0;
+}
+
+.page-header input {
+  padding: 10px 20px;
+}

@@ -20,6 +20,7 @@ class Share extends Component {
           keyused === 'history' ? (
             <>
               <button
+                className="share-button"
                 type="button"
                 data-testid={ testId }
                 onClick={ () => {
@@ -38,6 +39,7 @@ class Share extends Component {
           ) : (
             <>
               <button
+                className="share-button"
                 type="button"
                 data-testid={ testId }
                 src={ shareIcon }
@@ -63,7 +65,7 @@ class Share extends Component {
   }
 }
 Share.propTypes = {
-  pathname: PropTypes.func.isRequired,
+  pathname: PropTypes.string.isRequired,
   item: PropTypes.shape({
     type: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
