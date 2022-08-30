@@ -1,5 +1,17 @@
 .start-recipe-btn {
+  background-color: rgb(123, 147, 181);
+  border: none;
+  border-radius: 5px;
   bottom: 0;
+  height: 40px;
+  margin-bottom: 5px;
   position: fixed;
-  right: 50%;
+  transition: background-color 0.7s;
+  width: 120px;
 }
+
+.start-recipe-btn:hover {
+  background-color: rgb(43, 98, 174);
+  transition: background-color 0.7s;
+}
+
