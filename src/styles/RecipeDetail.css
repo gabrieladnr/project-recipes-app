@@ -106,7 +106,7 @@
 .recomendation-card {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 20px;
   list-style: none;
   margin: 0 10px 60px;
   overflow-x: scroll;
