@@ -115,67 +115,89 @@ class DrinkDetails extends React.Component {
         const maxRecomendation = 5;
         if (index <= maxRecomendation) {
           return (
-            <li data-testid={ testId } key={ item.idMeal }>
-              <img src={ item.strMealThumb } alt={ item.strMeal } />
-              <h3 data-testid={ titleTestId }>{item.strMeal}</h3>
-            </li>
+            <button
+              className="recomend-li"
+              type="button"
+              key={ item.idMeal }
+              onClick={ () => history.push(`/foods/${item.idMeal}`) }
+            >
+              <li data-testid={ testId }>
+                <img src={ item.strMealThumb } alt={ item.strMeal } />
+                <h3 data-testid={ titleTestId }>{item.strMeal}</h3>
+              </li>
+            </button>
           );
         }
         return <> </>;
       });
     return (
       <main className="detail-page">
-        <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
-        <img
-          data-testid="recipe-photo"
-          src={ recipe.strDrinkThumb }
-          alt={ recipe.strTags }
-          tagname={ recipe.strTags }
-        />
-        <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
-        <h3>Ingredients</h3>
-        <ul>
-          {
-            Object.keys(recipe).filter((key) => key.includes('strIngredient'))
-              .map((ingredient, index) => {
-                const testid = `${index}-ingredient-name-and-measure`;
-                if (recipe[ingredient] === '' || recipe[ingredient] === null) {
-                  return <div key={ index }> </div>;
-                }
-                const measure = `strMeasure${index + 1}`;
-                return (
-                  <li
-                    data-testid={ testid }
-                    key={ index }
-                  >
-                    {`${recipe[measure]} ${recipe[ingredient]}`}
-                  </li>
-                );
-              })
-          }
-        </ul>
-        <section>
-          <h3>Instructions:</h3>
-          <p data-testid="instructions">{ recipe.strInstructions }</p>
-          <section>
+        <div className="detail-title-box">
+          <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
+          <img
+            className="recipe-photo"
+            data-testid="recipe-photo"
+            src={ recipe.strDrinkThumb }
+            alt={ recipe.strTags }
+            tagname={ recipe.strTags }
+          />
+        </div>
+        <div className="recipe-details-form">
+          <p
+            className="alcohol"
+            data-testid="recipe-category"
+          >
+            { recipe.strAlcoholic }
+          </p>
+          <h3>Ingredients</h3>
+          <ul>
             {
-              btn
+              Object.keys(recipe).filter((key) => key.includes('strIngredient'))
+                .map((ingredient, index) => {
+                  const testid = `${index}-ingredient-name-and-measure`;
+                  if (recipe[ingredient] === '' || recipe[ingredient] === null) {
+                    return <div key={ index }> </div>;
+                  }
+                  const measure = `strMeasure${index + 1}`;
+                  return (
+                    <li
+                      data-testid={ testid }
+                      key={ index }
+                    >
+                      {`${recipe[measure]} ${recipe[ingredient]}`}
+                    </li>
+                  );
+                })
             }
-            <Share
-              keyused="history"
-              pathname={ history.location.pathname }
-              item=""
-              testId="share-btn"
-            />
-            <button
-              type="button"
-              data-testid="favorite-btn"
-              onClick={ () => this.favoriteRecipe() }
-              src={ favoriteImg }
-            >
-              <img src={ favoriteImg } alt={ JSON.stringify(favorite) } />
-            </button>
+          </ul>
+          <section>
+            <h3>Instructions:</h3>
+            <p className="instructions" data-testid="instructions">
+              { recipe.strInstructions }
+            </p>
           </section>
+        </div>
+        <section className="shareComponent">
+          {
+            btn
+          }
+          <Share
+            keyused="history"
+            pathname={ history.location.pathname }
+            item=""
+            testId="share-btn"
+          />
+          <button
+            className="favorite-button"
+            type="button"
+            data-testid="favorite-btn"
+            onClick={ () => this.favoriteRecipe() }
+            src={ favoriteImg }
+          >
+            <img src={ favoriteImg } alt={ JSON.stringify(favorite) } />
+          </button>
+        </section>
+        <section className="recomendation-list">
           <h3>Recomendation list:</h3>
           <ul className="recomendation-card">
             {

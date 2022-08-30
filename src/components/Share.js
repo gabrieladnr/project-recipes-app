@@ -20,6 +20,7 @@ class Share extends Component {
           keyused === 'history' ? (
             <>
               <button
+                className="share-button"
                 type="button"
                 data-testid={ testId }
                 onClick={ () => {
@@ -38,6 +39,7 @@ class Share extends Component {
           ) : (
             <>
               <button
+                className="share-button"
                 type="button"
                 data-testid={ testId }
                 src={ shareIcon }
