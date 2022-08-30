@@ -4,6 +4,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import Share from './Share';
 import '../styles/RecipeDetail.css';
+import RecipeDetails from './RecipeDetails';
 
 class DrinkDetails extends React.Component {
   constructor() {
@@ -83,7 +84,6 @@ class DrinkDetails extends React.Component {
   render() {
     const { history, match: { params: { id } } } = this.props;
     const { recipe, favorite, recomendation } = this.state;
-    console.log(recomendation);
     const favoriteImg = (favorite) ? blackHeartIcon : whiteHeartIcon;
     let btn;
     if (localStorage.getItem('doneRecipes') !== null
@@ -116,6 +116,7 @@ class DrinkDetails extends React.Component {
         if (index <= maxRecomendation) {
           return (
             <button
+              data-testid="button-recomen-card"
               className="recomend-li"
               type="button"
               key={ item.idMeal }
@@ -198,7 +199,7 @@ class DrinkDetails extends React.Component {
           </button>
         </section>
         <section className="recomendation-list">
-          <h3>Recomendation list:</h3>
+          <RecipeDetails />
           <ul className="recomendation-card">
             {
               recomendList
