@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actionFilterDrinks, actionFilterFoods } from '../redux/actions/headerActions';
+import '../styles/searchbar.css';
 
 class SearchBar extends React.Component {
   constructor() {
@@ -20,8 +21,9 @@ class SearchBar extends React.Component {
     // fazendo a requisição na api
     const response = await fetch(`${url}${searchInput}`)
       .then((responseApi) => responseApi.json());
-    if (!response.meals
-      ?.length) alert('Sorry, we haven\'t found any recipes for these filters.');
+    if (!response.meals?.length && !response.cocktails?.length) {
+      alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
     if (history.location.pathname === '/drinks') {
       // adiciona o filtro ao reducer drinks e altera a rota para a devida rota.
       dispatchFilteredDrinks(response);
@@ -80,7 +82,7 @@ class SearchBar extends React.Component {
           this.callFetchSearch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=');
           // else para chamada da api para a pagina de foods
         } else this.callFetchSearch('https://www.themealdb.com/api/json/v1/1/search.php?f=');
-      } else alert('Your search must have only 1 (one) character');
+      } else global.alert('Your search must have only 1 (one) character');
       break;
     }
   }
@@ -98,6 +100,7 @@ class SearchBar extends React.Component {
       .map((meal, index) => (
         <button
           type="button"
+          className="recipes-recipe-card"
           onClick={ () => this.handleClickSendToDetails('foods', meal.idMeal) }
           key={ meal.idMeal }
           data-testid={ `${index}-recipe-card` }
@@ -121,6 +124,7 @@ class SearchBar extends React.Component {
       .map((cocktail, index) => (
         <button
           type="button"
+          className="recipes-recipe-card"
           onClick={ () => this.handleClickSendToDetails('drinks', cocktail.idDrink) }
           key={ cocktail.idDrink }
           data-testid={ `${index}-recipe-card` }
@@ -140,52 +144,58 @@ class SearchBar extends React.Component {
     const { searchInput, disabled } = this.state;
     return (
       <div className="search-bar">
-        <input
-          type="text"
-          data-testid="search-input"
-          value={ searchInput }
-          onChange={ this.changeInputSearch }
-        />
-        {/* renderização condicional abaixo */}
-        <label htmlFor="ingredient-search-radio">
-          ingredient
+        <div className="search-bar-content">
           <input
-            type="radio"
-            data-testid="ingredient-search-radio"
-            id="ingredient-search-radio"
-            name="filter-radio"
-            onClick={ () => this.changeTypeSearch('ingrediente') }
+            type="text"
+            className="searchbar-text-input"
+            data-testid="search-input"
+            value={ searchInput }
+            onChange={ this.changeInputSearch }
           />
-        </label>
-        <label htmlFor="name-search-radio">
-          name
-          <input
-            type="radio"
-            data-testid="name-search-radio"
-            id="name-search-radio"
-            name="filter-radio"
-            onClick={ () => this.changeTypeSearch('nome') }
-          />
-        </label>
-        <label htmlFor="first-letter-search-radio">
-          first letter
-          <input
-            type="radio"
-            data-testid="first-letter-search-radio"
-            id="first-letter-search-radio"
-            name="filter-radio"
-            onClick={ () => this.changeTypeSearch('primeira-letra') }
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="exec-search-btn"
-          disabled={ disabled }
-          onClick={ () => this.getListProducts() }
-        >
-          Search
-        </button>
-        <div>
+          <div className="searchbar-checkbox-content">
+
+            <label htmlFor="ingredient-search-radio">
+              ingredient
+              <input
+                type="radio"
+                data-testid="ingredient-search-radio"
+                id="ingredient-search-radio"
+                name="filter-radio"
+                onClick={ () => this.changeTypeSearch('ingrediente') }
+              />
+            </label>
+            <label htmlFor="name-search-radio">
+              name
+              <input
+                type="radio"
+                data-testid="name-search-radio"
+                id="name-search-radio"
+                name="filter-radio"
+                onClick={ () => this.changeTypeSearch('nome') }
+              />
+            </label>
+            <label htmlFor="first-letter-search-radio">
+              first letter
+              <input
+                type="radio"
+                data-testid="first-letter-search-radio"
+                id="first-letter-search-radio"
+                name="filter-radio"
+                onClick={ () => this.changeTypeSearch('primeira-letra') }
+              />
+            </label>
+          </div>
+          <button
+            type="button"
+            data-testid="exec-search-btn"
+            className="searchbar-button-seach"
+            disabled={ disabled }
+            onClick={ () => this.getListProducts() }
+          >
+            Search
+          </button>
+        </div>
+        <div className="recipes-cards">
           { (history.location.pathname === '/foods')
             ? this.renderSearchMeals() : this.renderSearchCocktails() }
         </div>
