@@ -50,3 +50,7 @@
   height: 50px;
   width: 240px;
 }
+
+.checked {
+  text-decoration: none solid black;
+}

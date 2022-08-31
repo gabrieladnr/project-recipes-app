@@ -11,6 +11,7 @@ export default class CheckList extends Component {
 
   componentDidMount() {
     this.trackCheckedIngrid();
+    this.inProgressInitial();
   }
 
   trackCheckedIngrid = () => {
@@ -21,7 +22,7 @@ export default class CheckList extends Component {
     }
     this.setState({
       checksIngri: uncheckedIngrid,
-    }, () => this.inProgressInitial());
+    });
   }
 
   finishedValidation = () => {
