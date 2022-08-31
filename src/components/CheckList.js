@@ -180,7 +180,7 @@ export default class CheckList extends Component {
                   this.changeLocalStorage(index);
                 } }
                 className={ (checksIngri[index]) ? 'checked' : 'unchecked' }
-                checked={ checksIngri[index] }
+                defaultChecked={ checksIngri[index] }
               />
               {ingredient}
             </label>
