@@ -148,26 +148,36 @@ class DrinksInProgress extends Component {
         }
       });
       return (
-        <main className="detail-page">
-          <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
-          <img
-            data-testid="recipe-photo"
-            src={ recipe.strDrinkThumb }
-            alt={ recipe.strTags }
-            tagname={ recipe.strTags }
-          />
-          <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
-          <h3>Ingredients</h3>
-          <CheckList
-            changeDisable={ this.changeDisable }
-            ingred={ uncheckedIngrid }
-            statusDisabled={ statusDisabled }
-            id={ id }
-            type="drink"
-          />
-          <section>
+        <main className="detail-page uashusahusah">
+          <div className="detail-title-box">
+            <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
+            <img
+              className="recipe-photo"
+              data-testid="recipe-photo"
+              src={ recipe.strDrinkThumb }
+              alt={ recipe.strTags }
+              tagname={ recipe.strTags }
+            />
+          </div>
+          <div className="recipe-details-form">
+            <p
+              className="alcohol"
+              data-testid="recipe-category"
+            >
+              { recipe.strAlcoholic }
+            </p>
+            <h3>Ingredients</h3>
+            <CheckList
+              changeDisable={ this.changeDisable }
+              ingred={ uncheckedIngrid }
+              statusDisabled={ statusDisabled }
+              id={ id }
+              type="drink"
+            />
             <h3>Instructions:</h3>
             <p data-testid="instructions">{ recipe.strInstructions }</p>
+          </div>
+          <section>
             <section className="shareComponent">
               <Share
                 keyused="history"
@@ -186,6 +196,7 @@ class DrinksInProgress extends Component {
               </button>
             </section>
             <button
+              className="start-recipe-btn finish-button"
               data-testid="finish-recipe-btn"
               type="button"
               disabled={ statusDisabled }
