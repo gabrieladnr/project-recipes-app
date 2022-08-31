@@ -54,3 +54,24 @@
 .checked {
   text-decoration: none solid black;
 }
+
+.finish-button {
+  margin-left: 120px;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--roboto-condensed);
+  font-size: 20px;
+}
+
+.checklist label {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.uashusahusah {
+  padding-bottom: 70px;
+}

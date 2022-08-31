@@ -164,7 +164,7 @@ export default class CheckList extends Component {
     const { ingred } = this.props;
     const { checksIngri } = this.state;
     return (
-      <ul>
+      <ul className="checklist">
         {
           ingred.map((ingredient, index) => (
             <label
