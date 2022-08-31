@@ -5,7 +5,7 @@ import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import App from '../App';
 
 describe('Testando o componente <FoodDetail />', () => {
-  it('Renderição é feiota corretamente', () => {
+  it('Renderição é feita corretamente', () => {
     const { history } = renderWithRouterAndRedux(App);
     history.push();
   });
