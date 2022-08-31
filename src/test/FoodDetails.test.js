@@ -45,7 +45,7 @@ describe('Testando o componente Drink Details:', () => {
       screen.getByTestId('4-recomendation-card');
     });
     userEvent.click(screen.getByTestId('start-recipe-btn'));
-    screen.logTestingPlaygroundURL();
+    // screen.logTestingPlaygroundURL();
   });
 
   test('receita feita', async () => {
@@ -57,7 +57,7 @@ describe('Testando o componente Drink Details:', () => {
       screen.getByTestId('4-recomendation-card');
     });
     userEvent.click(screen.getByTestId('favorite-btn'));
-    screen.logTestingPlaygroundURL();
+    // screen.logTestingPlaygroundURL();
   });
 
   test('recomendation click', async () => {
@@ -67,6 +67,6 @@ describe('Testando o componente Drink Details:', () => {
       screen.getByTestId('3-recomendation-card');
     });
     userEvent.click(screen.getAllByTestId('button-recomen-card')[0]);
-    screen.logTestingPlaygroundURL();
+    // screen.logTestingPlaygroundURL();
   });
 });
