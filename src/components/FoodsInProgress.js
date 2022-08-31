@@ -122,7 +122,7 @@ class FoodsInProgress extends Component {
   }
 
   render() {
-    const { history, mealRecipe, id } = this.props;
+    const { mealRecipe, id } = this.props;
     const { meals: { meals } } = mealRecipe;
     const {
       favorite,
@@ -141,7 +141,7 @@ class FoodsInProgress extends Component {
         }
       });
       return (
-        <main>
+        <main className="detail-page">
           <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
           <img
             data-testid="recipe-photo"
@@ -161,14 +161,15 @@ class FoodsInProgress extends Component {
           <section>
             <h3>Instructions:</h3>
             <p data-testid="instructions">{ recipe.strInstructions }</p>
-            <section>
+            <section className="shareComponent">
               <Share
                 keyused="history"
-                pathname={ history.location.pathname }
+                pathname={ `/foods/${id}` }
                 item={ { type: '', id: '' } }
                 testId="share-btn"
               />
               <button
+                className="favorite-button"
                 type="button"
                 data-testid="favorite-btn"
                 onClick={ () => this.favoriteRecipe() }

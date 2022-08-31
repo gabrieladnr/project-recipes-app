@@ -7,13 +7,9 @@ export default class RecipeInProgress extends Component {
   render() {
     const { history, match: { params: { id } } } = this.props;
     return (
-      <div>
-        {
-          (history.location.pathname.includes('food'))
-            ? (<FoodsInProgress history={ history } id={ id } />)
-            : (<DrinksInProgress history={ history } id={ id } />)
-        }
-      </div>
+      (history.location.pathname.includes('food'))
+        ? (<FoodsInProgress history={ history } id={ id } />)
+        : (<DrinksInProgress history={ history } id={ id } />)
     );
   }
 }
