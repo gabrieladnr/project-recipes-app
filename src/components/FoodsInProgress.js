@@ -137,7 +137,11 @@ class FoodsInProgress extends Component {
       avaliableIngrid.forEach((ingredient, index) => {
         if (recipe[ingredient] !== '' && recipe[ingredient] !== null) {
           const measure = `strMeasure${index + 1}`;
-          uncheckedIngrid.push(`${recipe[measure]} ${recipe[ingredient]}`);
+          if (recipe[measure] !== '' && recipe[measure] !== null) {
+            uncheckedIngrid.push(`${recipe[measure]} ${recipe[ingredient]}`);
+          } else {
+            uncheckedIngrid.push(`${recipe[ingredient]}`);
+          }
         }
       });
       return (
