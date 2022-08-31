@@ -174,6 +174,7 @@ export default class CheckList extends Component {
             >
               <input
                 type="checkbox"
+                data-testid={ `${index}-checkbox` }
                 name={ index }
                 onChange={ (e) => {
                   this.handleChange(e);
