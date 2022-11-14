@@ -8,6 +8,7 @@
   "dependencies": {
     "bootstrap": "^4.5.3",
     "clipboard-copy": "^4.0.1",
+    "gh-pages": "^4.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-bootstrap": "^2.4.0",
@@ -18,7 +19,10 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1"
   },
+  "homepage": "https://username.github.io/app-toot-name",
   "scripts": {
+    "predeploy": "npm run build",
+  "deploy": "gh-pages -d build",
     "cy": "cypress run",
     "cy:open": "cypress open",
     "start": "react-scripts start",
