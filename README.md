@@ -1774,3 +1774,4 @@ As telas sofrem variações dependendo do tipo da receita (se é comida ou bebid
   - Se a rota muda para a tela de login.
   - Verifica a cobertura de 90% do componente Profile.
 </details>
+# project-recipes-app
