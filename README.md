@@ -13,13 +13,13 @@ It is possible to list, search by name and ingredients, filter, favorite and fol
 
  In this project, the following skills were developed::
 
+  - Use _React_ to develop a web mobile page
   - Use _Redux_ to manage state
   - Use the _React-Redux_ library
-  - Use the _React_ Context API to manage state
-  - Using the _React Hook useState_
-  - Using the _React Hook useContext_
-  - Using the _React Hook useEffect_
-  - Create custom Hooks
+  - Use the _Redux_ to manage state
+  - Use _RTL_ do develop tests
+  - Use _CSS_ for styling
+  
 </details>
 
 <details>
