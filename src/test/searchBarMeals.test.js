@@ -3,7 +3,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
-// MOCKS DO CYPRESS PARA NÃO PRECISAR MONTAR OS MODULES:
+// MOCKS DO CYPRESS:
 import drinks from '../../cypress/mocks/drinks';
 import oneMeal from '../../cypress/mocks/oneMeal';
 import mealCategories from '../../cypress/mocks/mealCategories';
