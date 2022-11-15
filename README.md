@@ -1,5 +1,9 @@
 # Project Recipes App
 
+<details open>
+![img](demo-recipes-app.gif)
+</details>
+
 This project was developed in a group during the Trybe course for Full Stack Web Developers. 
 
 The application consists of a revenue website focused on mobile devices.
